@@ -6,9 +6,9 @@ const router = express.Router();
 // post
 router.get('/', postController.getAll);
 
-router.get('/:id', postController.getById);
-
 router.post('/', postController.create);
+
+router.get('/:id', postController.getById);
 
 router.post('/:id', postController.check);
 
