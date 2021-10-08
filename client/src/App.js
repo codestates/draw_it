@@ -4,6 +4,7 @@ import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import Mypage from './pages/Mypage';
 import { BrowserRouter, Route, Switch } from "react-router-dom"
+import Home from './pages/Home';
 
 function App() {
   return (
@@ -14,10 +15,12 @@ function App() {
         </Route>
         <Route exact path="/Signin">
           <Signin />  
-        </Route>  
+        </Route>
+        <Route exact path="/home">
+          <Home />
+        </Route>
       </Switch>
     </BrowserRouter>
-    
   );
 }
 

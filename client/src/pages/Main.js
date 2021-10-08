@@ -7,14 +7,19 @@ function Main() {
         <div className="MainContainer">
           <div className="MainContainer_in">
             <div className="ImageContainer">
-              <img className="MainContainer-img" alt="MainImage" src="/img/main_image.png" />
+              <img className="MainContainer-img" alt="MainImage" src="/img/logo.png" />
             </div>
-            <p>게임에 대한 소개 게임에 대한 소개흥미를 일으킬 만한 <br/> 문구게임에 대한 소개 시작하게 만들기</p>
             
+            <div className="MainContainer_comment">
+              <p>Draw it</p>
+              <p className="Main-comment">당신의 창의력을 보여주세요 !</p>
+            </div>
             <div className="MainContainer_button" >
-              <button className="Main-experience">체험</button><br/>
+              <Link to="/home">
+                <button className="Main-experience">게임 시작</button><br/>
+              </Link>
               <Link to="/Signin">
-              <button className="Main-signin">로그인</button>
+                <button className="Main-signin">로그인</button>
               </Link>
             </div>
           </div>
