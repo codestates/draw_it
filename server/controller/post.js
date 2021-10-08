@@ -1,6 +1,6 @@
 const { Post } = require('../models');
 
-module.exports.postController = {
+module.exports = {
   getAll: async (req, res) => {
     const posts = await Post.findAll();
     res.status(200).json(posts);
@@ -15,6 +15,7 @@ module.exports.postController = {
         .status(404)
         .json({ message: `원하는 post를 찾을 수 없습니다.` });
     }
+
     res.status(200).json(found);
   },
   create: async (req, res) => {
@@ -69,8 +70,8 @@ module.exports.postController = {
       const passedPosts = user_post_passed.count({ where: { userId } });
 
       return res.send(201).json({ data: '데이터' });
+      
       */
-
       // 임시 응답
       return res.status(201).json({ message: '정답입니다' });
     }
