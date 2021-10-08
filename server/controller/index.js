@@ -1,4 +1,4 @@
-module.exports= {
+module.exports = {
   userController: {
     signup: require('./user/signup'),
     signin: require('./user/signin'),
