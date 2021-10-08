@@ -1,5 +1,7 @@
 import React from "react"
+import { Link } from "react-router-dom";
 import "../styles/Main.css"
+
 function Main() {
     return (
         <div className="MainContainer">
@@ -11,7 +13,9 @@ function Main() {
             
             <div className="MainContainer_button" >
               <button className="Main-experience">체험</button><br/>
+              <Link to="/Signin">
               <button className="Main-signin">로그인</button>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,0 +1,79 @@
+@font-face {
+  font-family: "GongGothicMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+.SigninContainer {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f4e7d3;
+  padding: 65px 650px;
+  font-family: "GongGothicMedium";
+  position: relative;
+}
+
+.SigninContainer_in {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #c3b9a7;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px 5px rgb(163, 162, 162);
+}
+.Signin-form {
+  font-family: "GongGothicMedium";
+  width: 450px;
+  height: 45px;
+  margin: auto;
+  display: flex;
+  color: rgb(8, 129, 163);
+  transition-duration: 0.5s;
+  box-sizing: border-box;
+  position: relative;
+  margin-bottom: 10px;
+}
+.Signin-form div {
+  position: relative;
+}
+.Signin-form input {
+  border: 0;
+  background-color: #e0d9cf;
+  border-radius: 25px;
+}
+.Signin-btn {
+  font-family: "GongGothicMedium";
+  width: 450px;
+  height: 45px;
+  
+  
+  border: 1px solid rgb(163, 162, 162);
+  color: rgb(8, 129, 163);
+  box-shadow: 3px 3px 3px rgb(163, 162, 162);
+  transition-duration: 0.5s;
+  box-sizing: border-box;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.Signin-btn:hover {
+  box-sizing: border-box;
+  position: relative;
+  width: 450px;
+  height: 45px;
+  cursor: pointer;
+  color: white;
+  background-color: rgb(8, 129, 163);
+}
+
+.Signin-btn:active {
+  box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
+  position: relative;
+  top: 2px;
+}
+
+
+
