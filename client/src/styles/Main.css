@@ -1,17 +1,8 @@
-@font-face {
-  font-family: "SF_IceLemon";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_IceLemon.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
 .MainContainer {
   width: 100vw;
   height: 100vh;
   background-color: #f4e7d3;
   padding: 65px 150px;
-  font-family: "SF_IceLemon";
   position: relative;
 }
 
@@ -44,7 +35,6 @@
 .MainContainer_comment p {
   font-size: 50px;
   line-height: 1.8;
-  font-family: "SF_IceLemon";
   color: rgb(8, 129, 163);
 }
 
@@ -54,7 +44,6 @@
 }
 
 button {
-  font-family: "SF_IceLemon";
   width: 450px;
   height: 65px;
   margin: auto;

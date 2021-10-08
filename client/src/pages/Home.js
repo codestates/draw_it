@@ -1,13 +1,9 @@
 import React,{useEffect, useState} from 'react'
 import axios from 'axios'
 import Header_logo from '../components/Header_logo'
-
+import '../styles/Home.css'
 const Home = () => {
   const [quizs, setQuizs] = useState()
-  // axios.get('http://localhost:4000/post')
-  //   .then((res)=>{
-  //     setQuizs(res.data.data)
-  //   })
     useEffect(() => {
       axios.get('http://localhost:4000/post')
         .then((res)=>{
@@ -31,7 +27,7 @@ const Home = () => {
             </div>
             <div className="Post_Main">
             {quizs?.map((data)=>{
-              return <img src="https://i.pinimg.com/564x/69/40/76/694076a5bf6327b147fcc8ba953a246f.jpg"></img>
+              return <img className="Post-img" src="https://i.pinimg.com/564x/69/40/76/694076a5bf6327b147fcc8ba953a246f.jpg"></img>
             })}
             </div>
           </section>

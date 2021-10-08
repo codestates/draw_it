@@ -1,5 +1,5 @@
 import React from "react"
-import "../styles/Header_logo.css"
+
 const Header_logo = () => {
     return (
     	<div className="Container">

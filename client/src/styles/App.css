@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "SF_IceLemon";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_IceLemon.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,4 +13,5 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  font-family: "SF_IceLemon";
 }
