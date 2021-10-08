@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom";
 import "../styles/Main.css"
+
 function Main() {
     return (
         <div className="MainContainer">
@@ -17,8 +18,9 @@ function Main() {
               <Link to="/home">
                 <button className="Main-experience">게임 시작</button><br/>
               </Link>
-              
-              <button className="Main-signin">로그인</button>
+              <Link to="/Signin">
+                <button className="Main-signin">로그인</button>
+              </Link>
             </div>
           </div>
         </div>

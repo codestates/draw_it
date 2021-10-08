@@ -1,0 +1,9 @@
+.ImageContainer {
+  max-height: 150px;
+  padding: 0;
+}
+.HeaderContainer-img {
+  max-height: initial;
+  background-size: contain;
+  margin-bottom: 15px;
+}
