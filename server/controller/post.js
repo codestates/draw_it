@@ -1,6 +1,6 @@
 const { Post } = require('../models');
 
-module.exports.postController = {
+module.exports = {
   getAll: async (req, res) => {
     const posts = await Post.findAll();
     res.status(200).json(posts);
