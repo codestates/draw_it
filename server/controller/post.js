@@ -2,61 +2,92 @@ const { Post } = require('../models');
 
 module.exports = {
   getAll: async (req, res) => {
+    // ToDo 로그인 유무 확인하기
+    const userId = req.query['userid'];
+
+    if (userId) {
+      // query로 userId가 입력되었을 때,
+      const myPosts = await Post.findAll({ where: { userId } });
+      return res.status(200).json({
+        data: myPosts,
+        message: '모든 퀴즈를 조회하는데 성공했습니다.',
+      });
+    }
+
+    // 아무 입력을 받지 않아 모든 posts를 전달
     const posts = await Post.findAll();
-    res.status(200).json(posts);
+    return res
+      .status(200)
+      .json({ data: posts, message: '모든 퀴즈를 조회하는데 성공했습니다.' });
   },
   getById: async (req, res) => {
     const { id } = req.params;
 
-    const found = await Post.findOne({ where: { id } });
-
-    if (!found) {
+    const post = await Post.findAll({ where: { id } });
+    if (!post) {
       return res
         .status(404)
-        .json({ message: `원하는 post를 찾을 수 없습니다.` });
+        .json({ data: null, message: '원하는 post를 찾을 수 없습니다.' });
     }
-
-    res.status(200).json(found);
+    return res
+      .status(200)
+      .json({ data: post, message: '퀴즈 조회에 성공했습니다.' });
   },
   create: async (req, res) => {
-    const { id, image, answer } = req.body;
+    const { userId = 1, image, answer } = req.body;
 
     // ToDo 로그인 유무 확인하기
 
-    if (!(id && image && answer)) {
-      return res.status(404).json(`모든 항목을 입력해주세요`);
+    if (!(userId && image && answer)) {
+      return res.status(404).json({ message: '모든 항목을 입력해주세요' });
     }
 
-    const created = await Post.create({ userId: id, image, answer });
-    res.status(201).json(created);
+    try {
+      const created = await Post.create({ userId, image, answer });
+      res
+        .status(201)
+        .json({ data: created, message: '퀴즈 업로드에 성공했습니다.' });
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+    }
   },
   delete: async (req, res) => {
     const { id } = req.params;
 
     // ToDo 로그인 유무 확인하기
 
+    const post = await Post.findOne({ where: { id } });
+
+    if (!post) {
+      return res
+        .status(200)
+        .json({ data: null, message: '존재하지 않는 퀴즈입니다.' });
+    }
+
     try {
       await Post.destroy({ where: { id } });
+      return res
+        .status(200)
+        .json({ data: post, message: '퀴즈 삭제에 성공했습니다.' });
     } catch (err) {
       console.log(err);
       return res.sendStatus(500);
     }
-
-    res.sendStatus(204);
   },
   check: async (req, res) => {
-    const { id: postId } = req.params;
+    const { id } = req.params;
     const answer = req.body['answer'].replace(/ /g, '');
 
     // ToDo 로그인 유무 확인하기
 
     // postId로 해당 post 찾기
-    const post = await Post.findOne({ where: { id: postId } });
+    const post = await Post.findOne({ where: { id } });
 
     if (!post) {
       return res
         .status(404)
-        .json({ message: `원하는 post를 찾을 수 없습니다.` });
+        .json({ message: `원하는 퀴즈를 찾을 수 없습니다.` });
     }
 
     // post의 값과 전달받은 answer가 일치한지 확인
@@ -70,12 +101,12 @@ module.exports = {
       const passedPosts = user_post_passed.count({ where: { userId } });
 
       return res.send(201).json({ data: '데이터' });
-      
+
       */
       // 임시 응답
-      return res.status(201).json({ message: '정답입니다' });
+      return res.status(201).json({ /*data: ,*/ message: '정답입니다' });
     }
 
-    res.status(200).json({ message: '정답이 아닙니다' });
+    res.status(200).json({ data: null, message: '정답이 아닙니다' });
   },
 };
