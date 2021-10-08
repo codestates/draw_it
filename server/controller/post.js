@@ -1,4 +1,4 @@
-const { Post } = require('../models');
+const { Post, user_post_passed } = require('../models');
 const { isAuthorized } = require('./tokenFunctions');
 
 module.exports = {
@@ -98,6 +98,14 @@ module.exports = {
 
     // ToDo 로그인 유무 확인하기
 
+    const auth = isAuthorized(req);
+
+    if (!auth) {
+      return res
+        .status(401)
+        .json({ data: null, message: '권한이 없는 요청입니다.' });
+    }
+
     // postId로 해당 post 찾기
     const post = await Post.findOne({ where: { id } });
 
@@ -107,21 +115,32 @@ module.exports = {
         .json({ message: `원하는 퀴즈를 찾을 수 없습니다.` });
     }
 
+    const isPassed = await user_post_passed.findOne({
+      where: { userId: auth.id, postId: post.id },
+    });
+
+    if (isPassed) {
+      return res
+        .status(200)
+        .json({ data: null, message: '이미 정답을 맞힌 문제입니다.' });
+    }
+
     // post의 값과 전달받은 answer가 일치한지 확인
     if (post.answer === answer) {
       // 일치하므로 해당 유저와 연결된 user_post_passed를 생성
-      /*
-      const created = await user_post_passed.create({ userId, postId });
 
-      // 해당 유저와 연결된 user_post_passed count 조회
-
-      const passedPosts = user_post_passed.count({ where: { userId } });
-
-      return res.send(201).json({ data: '데이터' });
-
-      */
-      // 임시 응답
-      return res.status(201).json({ /*data: ,*/ message: '정답입니다' });
+      try {
+        const created = await user_post_passed.create({
+          userId: auth.id,
+          postId: id,
+        });
+        return res.status(201).json({ data: created, message: '정답입니다.' });
+      } catch (error) {
+        console.log(error);
+        return res
+          .status(500)
+          .json({ data: null, message: '알 수 없는 에러가 발생했습니다.' });
+      }
     }
 
     res.status(200).json({ data: null, message: '정답이 아닙니다' });
