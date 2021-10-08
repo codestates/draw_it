@@ -1,9 +1,18 @@
 const { Post } = require('../models');
+const { isAuthorized } = require('./tokenFunctions');
 
 module.exports = {
   getAll: async (req, res) => {
     // ToDo 로그인 유무 확인하기
     const userId = req.query['userid'];
+
+    const auth = isAuthorized(req);
+
+    if (!auth) {
+      return res
+        .status(401)
+        .json({ data: null, message: '권한이 없는 요청입니다.' });
+    }
 
     if (userId) {
       // query로 userId가 입력되었을 때,
@@ -34,16 +43,24 @@ module.exports = {
       .json({ data: post, message: '퀴즈 조회에 성공했습니다.' });
   },
   create: async (req, res) => {
-    const { userId = 1, image, answer } = req.body;
+    const { image, answer } = req.body;
 
     // ToDo 로그인 유무 확인하기
 
-    if (!(userId && image && answer)) {
+    const auth = isAuthorized(req);
+
+    if (!auth) {
+      return res
+        .status(401)
+        .json({ data: null, message: '권한이 없는 요청입니다.' });
+    }
+
+    if (!(image && answer)) {
       return res.status(404).json({ message: '모든 항목을 입력해주세요' });
     }
 
     try {
-      const created = await Post.create({ userId, image, answer });
+      const created = await Post.create({ userId: auth.id, image, answer });
       res
         .status(201)
         .json({ data: created, message: '퀴즈 업로드에 성공했습니다.' });
