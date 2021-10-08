@@ -5,7 +5,5 @@ module.exports = {
     signout: require('./user/signout'),
     mypage: require('./user/mypage'),
   },
-  postController: {
-    post: require('./post'),
-  },
+  postController: require('./post'),
 };
