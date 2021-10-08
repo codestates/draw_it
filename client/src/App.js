@@ -1,8 +1,8 @@
 import './styles/App.css';
-
+import  Main  from './pages/Main';
 function App() {
   return (
-    <h1> Draw it !</h1>
+    <Main />
   );
 }
 
