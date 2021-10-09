@@ -5,14 +5,7 @@
   font-weight: normal;
   font-style: normal;
 }
-/* .SigninContainer {
-  width: 100vw;
-  height: 100vh;
-  background-color: #f4e7d3;
-  padding: 65px 650px;
-  font-family: "GongGothicMedium";
-  position: relative;
-} */
+
 .SigninContainer {
   font-family: "GongGothicMedium";
   position: fixed;
@@ -26,77 +19,71 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
 }
-/* .SigninContainer_in {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid #c3b9a7;
-  border-radius: 20px;
-  box-shadow: 5px 5px 5px 5px rgb(163, 162, 162);
-} */
+
 .SigninContainer_in {
   width: 350px;
   height: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   border: 1px solid #c3b9a7;
   border-radius: 6px;
-  box-shadow: 5px 5px 5px 5px rgb(163, 162, 162);
-}
-
-.HeaderContainer-img {
+  background-color: #e2d6c3;
 }
 
 .Signin-form {
   font-family: "GongGothicMedium";
-  width: 450px;
+  width: 100%;
   height: 45px;
   margin: auto;
   display: flex;
+  justify-content: center;
+  align-items: center;
   color: rgb(8, 129, 163);
   transition-duration: 0.5s;
-  box-sizing: border-box;
-  position: relative;
   margin-bottom: 10px;
 }
 .Signin-form div {
-  position: relative;
+  width: 30%;
+  text-align: center;
 }
-.Signin-form input {
-  border: 0;
-  background-color: #e0d9cf;
+.Signin-email,
+.Signin-password {
+  width: 70%;
+  height: 35px;
   border-radius: 25px;
+  padding-left: 12px;
+  border-radius: 6px;
+  border: 1px solid rgb(189, 189, 189);
+  outline: none;
+  transition: 0.5s;
+  font-family: "GongGothicMedium";
 }
+
+.Signin-email:focus {
+  box-shadow: 0 0 0 2px rgb(211, 149, 14);
+  border: 1px solid rgba(189, 189, 189, 0);
+}
+
+.Signin-password:focus {
+  box-shadow: 0 0 0 2px rgb(211, 149, 14);
+  border: 1px solid rgba(189, 189, 189, 0);
+}
+
 .Signin-btn {
   font-family: "GongGothicMedium";
-  width: 450px;
-  height: 45px;
-
-  border: 1px solid rgb(163, 162, 162);
-  color: rgb(8, 129, 163);
-  box-shadow: 3px 3px 3px rgb(163, 162, 162);
-  transition-duration: 0.5s;
-  box-sizing: border-box;
-  position: relative;
+  width: 90%;
+  height: 40px;
   margin-bottom: 10px;
 }
 
 .Signin-btn:hover {
-  box-sizing: border-box;
-  position: relative;
-  width: 450px;
-  height: 45px;
-  cursor: pointer;
-  color: white;
-  background-color: rgb(8, 129, 163);
+  width: 90%;
+  height: 40px;
 }
 
 .Signin-btn:active {
   box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
-  position: relative;
   top: 2px;
 }
