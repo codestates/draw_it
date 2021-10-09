@@ -20,6 +20,11 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.Header-name {
+  font-size: 35px;
+  color: rgb(8, 129, 163);
+}
+
 .SigninContainer_in {
   width: 350px;
   height: 500px;
@@ -40,7 +45,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(8, 129, 163);
+  color: rgb(48, 48, 48);
   transition-duration: 0.5s;
   margin-bottom: 10px;
 }

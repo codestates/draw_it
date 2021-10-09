@@ -21,6 +21,7 @@ function Signin({ setIsOpen, isOpen, scrollStop }) {
       >
         <div className="SigninContainer_in">
           <Header />
+          <p className="Header-name">Draw it</p>
           <form>
             <div className='Signin-form'>
               <div>email</div>
