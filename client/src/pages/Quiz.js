@@ -19,6 +19,8 @@ const Quiz = () => {
     const context = canvas.getContext('2d');
     context.strokeStyle = 'black';
     context.lineWidth = 1;
+    context.lineJoin = 'round';
+    context.lineCap = 'round';
     ctxRef.current = context;
 
     brushRef.current.style.pointerEvents = 'none';
@@ -57,8 +59,24 @@ const Quiz = () => {
     brush.style.padding = event.target.value / 2 + 'px';
   };
 
-  const changeBrushColor = (event) => {
-    console.log(event);
+  const getColor = (ele) => {
+    return getComputedStyle(ele).backgroundColor;
+  };
+
+  const changeBrushColor = ({ nativeEvent }) => {
+    const color = getColor(nativeEvent.target);
+    ctx.strokeStyle = color;
+    brush.style.backgroundColor = color;
+  };
+
+  const fillCanvas = () => {
+    ctx.fillStyle = brush.style.backgroundColor;
+    ctx.fillRect(0, 0, 600, 600);
+  };
+
+  const uploadImage = () => {
+    const image = canvasRef.current.toDataURL('image/png');
+    console.log(image);
   };
 
   return (
@@ -70,14 +88,16 @@ const Quiz = () => {
           onMouseDown={startPainting}
           onMouseUp={stopPainting}
           onMouseMove={onDrawing}
+          onMouseLeave={stopPainting}
         />
-        <div ref={brushRef} id="brush"></div>
+        <div ref={brushRef} id="brush" />
       </div>
       <input placeholder="문제의 정답을 입력해주세요!"></input>
-      <button>제출</button>
+      <button onClick={uploadImage}>제출</button>
       <Palette
         changeLineWidth={changeLineWidth}
         changeBrushColor={changeBrushColor}
+        fillCanvas={fillCanvas}
       />
     </div>
   );
