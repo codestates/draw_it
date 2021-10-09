@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import axios from 'axios'
-import Header_logo from '../components/Header_logo'
+import Header from '../components/Header'
 import '../styles/Home.css'
 const Home = () => {
   const [quizs, setQuizs] = useState()
@@ -14,7 +14,7 @@ const Home = () => {
     return (
       <div className="HomeContainer">
         <header>
-          <Header_logo />
+          <Header />
         </header>
         <section>
           <section className="Post">
