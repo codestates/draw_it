@@ -4,13 +4,15 @@ import Header from '../components/Header'
 import '../styles/Home.css'
 const Home = () => {
   const [quizs, setQuizs] = useState()
+    // useEffect(() => {
+    //   axios.get('http://localhost:4000/post')
+    //     .then((res)=>{
+    //       setQuizs(res.data.data)
+    //   })
+    // }, []);
     useEffect(() => {
-      axios.get('http://localhost:4000/post')
-        .then((res)=>{
-          setQuizs(res.data.data)
-      })
+      setQuizs([1,2,3,4,5,6,7,8,9,10])
     }, []);
-
     return (
       <div className="HomeContainer">
         <header>
@@ -27,6 +29,7 @@ const Home = () => {
             </div>
             <div className="Post_Main">
             {quizs?.map((data)=>{
+              console.log(data)
               return <img className="Post-img" src="https://i.pinimg.com/564x/69/40/76/694076a5bf6327b147fcc8ba953a246f.jpg"></img>
             })}
             </div>

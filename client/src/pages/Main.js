@@ -11,7 +11,7 @@ function Main() {
     scrollStop();
   };
 
-  //! 로그인창 떳을 때 스크롤 안되게 하는 법!
+  //스크롤 안되게 하는 법!
   const scrollStop = () => {
     if (isOpen === false) {
       document.body.style.overflow = "hidden";
