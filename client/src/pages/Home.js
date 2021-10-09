@@ -1,6 +1,16 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
+import axios from 'axios'
 import Header_logo from '../components/Header_logo'
+import '../styles/Home.css'
 const Home = () => {
+  const [quizs, setQuizs] = useState()
+    useEffect(() => {
+      axios.get('http://localhost:4000/post')
+        .then((res)=>{
+          setQuizs(res.data.data)
+      })
+    }, []);
+
     return (
       <div className="HomeContainer">
         <header>
@@ -16,11 +26,9 @@ const Home = () => {
               </div>
             </div>
             <div className="Post_Main">
-              <ul>
-                <ui>
-                  
-                </ui>
-              </ul>
+            {quizs?.map((data)=>{
+              return <img className="Post-img" src="https://i.pinimg.com/564x/69/40/76/694076a5bf6327b147fcc8ba953a246f.jpg"></img>
+            })}
             </div>
           </section>
           <aside>

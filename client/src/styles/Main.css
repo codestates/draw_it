@@ -1,24 +1,8 @@
-/* @font-face {
-  font-family: "GongGothicMedium";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-} */
-@font-face {
-  font-family: "SF_IceLemon";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_IceLemon.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
 .MainContainer {
   width: 100vw;
   height: 100vh;
   background-color: #f4e7d3;
   padding: 65px 150px;
-  font-family: "SF_IceLemon";
   position: relative;
 }
 
@@ -51,7 +35,6 @@
 .MainContainer_comment p {
   font-size: 50px;
   line-height: 1.8;
-  font-family: "SF_IceLemon";
   color: rgb(8, 129, 163);
 }
 
@@ -60,8 +43,7 @@
   animation: scale1 0.7s infinite alternate;
 }
 
-.MainContainer_button button {
-  font-family: "SF_IceLemon";
+button {
   width: 450px;
   height: 65px;
   margin: auto;
@@ -76,7 +58,7 @@
   border-radius: 20px;
 }
 
-.MainContainer_button button:hover {
+button:hover {
   box-sizing: border-box;
   position: relative;
   width: 450px;
@@ -87,7 +69,7 @@
   border-radius: 20px;
 }
 
-.MainContainer_button button:active {
+button:active {
   box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
   position: relative;
   top: 2px;
@@ -95,14 +77,50 @@
 }
 
 @media screen and (max-width: 920px) {
-  p {
-    font-size: 25px;
+  .Main-comment {
+    font-size: 25px !important;
   }
   .MainContainer_button {
     height: 150px;
   }
   button {
     width: 250px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .Main-comment {
+    font-size: 25px !important;
+  }
+  .MainContainer_button {
+    height: 150px;
+  }
+  button {
+    width: 100px;
+    font-size: 20px !important;
+  }
+}
+
+@media screen and (max-width: 610px) {
+  .MainContainer-img {
+    width: auto;
+    height: auto;
+    max-width: 180px;
+    max-height: 180px;
+    margin-bottom: 15px;
+  }
+  .Main-comment {
+    font-size: 25px !important;
+  }
+}
+
+@media screen and (max-height: 880px) {
+  .MainContainer-img {
+    width: auto;
+    height: auto;
+    max-width: 220px;
+    max-height: 220px;
+    margin-bottom: 15px;
   }
 }
 
