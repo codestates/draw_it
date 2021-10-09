@@ -1,0 +1,53 @@
+.palette_color {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.palette_color:nth-child(2) {
+  background-color: black;
+}
+
+.palette_color:nth-child(3) {
+  background-color: white;
+}
+
+.palette_color:nth-child(4) {
+  background-color: red;
+}
+
+.palette_color:nth-child(5) {
+  background-color: violet;
+}
+
+.palette_color:nth-child(6) {
+  background-color: orange;
+}
+
+.palette_color:nth-child(7) {
+  background-color: yellow;
+}
+
+.palette_color:nth-child(8) {
+  background-color: yellowgreen;
+}
+
+.palette_color:nth-child(9) {
+  background-color: green;
+}
+
+.palette_color:nth-child(10) {
+  background-color: royalblue;
+}
+
+.palette_color:nth-child(11) {
+  background-color: blue;
+}
+
+.palette_color:nth-child(12) {
+  background-color: tomato;
+}
+
+.palette_color:nth-child(13) {
+  background-color: gray;
+}

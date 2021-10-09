@@ -1,10 +1,11 @@
 import './styles/App.css';
-import  Main  from './pages/Main';
+import Main from './pages/Main';
 import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import Mypage from './pages/Mypage';
-import { BrowserRouter, Route, Switch } from "react-router-dom"
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
+import Quiz from './pages/Quiz';
 
 function App() {
   return (
@@ -14,10 +15,13 @@ function App() {
           <Main />
         </Route>
         <Route exact path="/Signin">
-          <Signin />  
+          <Signin />
         </Route>
         <Route exact path="/home">
           <Home />
+        </Route>
+        <Route exact path="/quiz">
+          <Quiz />
         </Route>
       </Switch>
     </BrowserRouter>

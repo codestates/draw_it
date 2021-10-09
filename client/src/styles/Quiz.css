@@ -1,0 +1,10 @@
+#canvas {
+  border: 1px solid black;
+}
+
+#brush {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+}
