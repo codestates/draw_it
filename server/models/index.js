@@ -43,12 +43,13 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-/*
 const { User, Post, user_post_passed } = sequelize.models;
 
 // One To Many
 Post.belongsTo(User, { foreignKey: 'userId', tragetKey: 'id' });
 User.hasMany(Post, { foreignKey: 'userId' });
+
+/*
 
 // Many To Many
 User.belongsToMany(Post, {
