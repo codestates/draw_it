@@ -38,18 +38,37 @@ module.exports = {
   getById: async (req, res) => {
     const { id } = req.params;
 
-    const post = await Post.findAll({
+    const auth = isAuthorized(req);
+
+    if (!auth) {
+      return res
+        .status(401)
+        .json({ data: null, message: '권한이 없는 요청입니다.' });
+    }
+
+    const post = await Post.findOne({
       where: { id },
       include: [{ model: User, attributes: ['nickname', 'id'] }],
     });
+
     if (!post) {
       return res
         .status(404)
         .json({ data: null, message: '원하는 post를 찾을 수 없습니다.' });
     }
-    return res
-      .status(200)
-      .json({ data: post, message: '퀴즈 조회에 성공했습니다.' });
+
+    try {
+      const isPassed = await user_post_passed.findOne({
+        where: { userId: auth.id, postId: id },
+      });
+
+      return res.status(200).json({
+        data: { post, isPassed: isPassed ? true : false },
+        message: '퀴즈 조회에 성공했습니다.',
+      });
+    } catch (err) {
+      console.log(err);
+    }
   },
   create: async (req, res) => {
     // ToDo 임시 유저
@@ -93,15 +112,15 @@ module.exports = {
 
     // ToDo 로그인 유무 확인하기
 
-    // const auth = isAuthorized(req);
+    const auth = isAuthorized(req);
 
-    // if (!auth) {
-    //   return res
-    //     .status(401)
-    //     .json({ data: null, message: '권한이 없는 요청입니다.' });
-    // }
+    if (!auth) {
+      return res
+        .status(401)
+        .json({ data: null, message: '권한이 없는 요청입니다.' });
+    }
 
-    const post = await Post.findOne({ where: { id } });
+    const post = await Post.findOne({ where: { id, userId: auth.id } });
 
     if (!post) {
       return res
