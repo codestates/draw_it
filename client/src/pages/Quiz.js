@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import Palette from '../components/palette';
 import '../styles/Quiz.css';
 
@@ -76,7 +77,31 @@ const Quiz = () => {
 
   const uploadImage = () => {
     const image = canvasRef.current.toDataURL('image/png');
-    console.log(image);
+    const blob = atob(image.split(',')[1]);
+
+    const array = [];
+
+    for (let i = 0; i < blob.length; i++) {
+      array.push(blob.charCodeAt(i));
+    }
+
+    const file = new Blob([new Uint8Array(array)], { type: 'image' });
+    const formdata = new FormData();
+    formdata.append('file', file, '테스트');
+    formdata.append('answer', '테스트');
+
+    axios
+      .post('http://localhost:4000/post', formdata, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((result) => {
+        // 이미지 업로드 성공 메인 화면으로 이동
+      })
+      .catch((error) => {
+        // 이미지 업로드 실패
+      });
   };
 
   return (
