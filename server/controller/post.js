@@ -6,13 +6,13 @@ module.exports = {
     // ToDo 로그인 유무 확인하기
     const userId = req.query['userid'];
 
-    const auth = isAuthorized(req);
+    // const auth = isAuthorized(req);
 
-    if (!auth) {
-      return res
-        .status(401)
-        .json({ data: null, message: '권한이 없는 요청입니다.' });
-    }
+    // if (!auth) {
+    //   return res
+    //     .status(401)
+    //     .json({ data: null, message: '권한이 없는 요청입니다.' });
+    // }
 
     if (userId) {
       // query로 userId가 입력되었을 때,

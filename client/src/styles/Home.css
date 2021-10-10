@@ -8,14 +8,6 @@ header {
   width: 100%;
   display: flex;
 }
-/* Header_logo에 관한 CSS입니다 */
-.Container-img {
-  width: auto;
-  height: auto;
-  max-width: 120px;
-  max-height: 120px;
-}
-/* -------------------- */
 
 section {
   display: flex;
@@ -53,6 +45,7 @@ section {
   border: 1px solid black;
   width: 100%;
   height: 500px;
+  overflow: auto;
 }
 
 .Post-img {
