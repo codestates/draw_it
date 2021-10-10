@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Palette from '../components/palette';
 import '../styles/Quiz.css';
+import Quizheader from '../components/Quizheader';
 
 const canvasWidth = 900;
 const canvasHeight = 600;
@@ -112,17 +113,7 @@ const Quiz = () => {
 
   return (
     <div id="container">
-      <nav id="header">
-        <h1 className="title">Draw it</h1>
-        <div className="answer_nav">
-          <div className="answer_form">
-            <p>정답 글자 수 : </p>
-          </div>
-          <div className="answer_circle">
-            <div className="circle" />
-          </div>
-        </div>
-      </nav>
+      <Quizheader />
       <div id="main">
         <div id="canvas">
           <div ref={brushRef} id="brush" />
@@ -143,9 +134,9 @@ const Quiz = () => {
       </div>
       <div className="answer_input_form">
         <input className="input" placeholder="문제의 정답을 입력해주세요!" />
-        <button className="upload_button" onClick={uploadImage}>
+        <div className="upload_button" onClick={uploadImage}>
           제출
-        </button>
+        </div>
       </div>
     </div>
   );
