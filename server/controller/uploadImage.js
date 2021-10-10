@@ -19,5 +19,6 @@ module.exports.uploadImage = async (file, userId) => {
     Bucket: 'drawit',
     Key: fileName,
     ACL: 'public-read',
+    ContentType: 'image/png',
   }).promise();
 };
