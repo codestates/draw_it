@@ -1,15 +1,37 @@
+.palette_color_picker {
+  display: flex;
+  width: 200px;
+  flex-wrap: wrap;
+}
+
 .palette_color {
   width: 50px;
   height: 50px;
+  margin: 5px;
   border-radius: 50%;
+  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.1) inset;
+  transition: 0.25s;
+}
+
+.palette_color:hover {
+  cursor: pointer;
+}
+
+.palette_color:focus {
+  transform: scale(1.1);
+}
+
+.palette_color:nth-child(1) {
+  background-color: black;
 }
 
 .palette_color:nth-child(2) {
-  background-color: black;
+  background-color: gray;
 }
 
 .palette_color:nth-child(3) {
   background-color: white;
+  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.1) inset;
 }
 
 .palette_color:nth-child(4) {
@@ -46,8 +68,4 @@
 
 .palette_color:nth-child(12) {
   background-color: tomato;
-}
-
-.palette_color:nth-child(13) {
-  background-color: gray;
 }
