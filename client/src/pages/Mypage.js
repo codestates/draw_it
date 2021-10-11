@@ -1,9 +1,14 @@
 import React from "react"
+import axios from 'axios';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/Mypage.css"
 
-function Mypage() {
+axios.defaults.withCredentials = true;
+
+function Mypage(props) {
+
+  const { } = props;
     return (
         
         <div className="MypageContainer">
@@ -12,7 +17,7 @@ function Mypage() {
         <form >
         <div>
             <span>nickname</span>
-            <input type='password' />
+            <input type='text' />
           </div>
           <div>
             <span>password</span>

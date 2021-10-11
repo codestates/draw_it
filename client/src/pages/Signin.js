@@ -1,11 +1,12 @@
-import React,{useRef}  from "react"
-import { useState } from "react";
+import React,{useRef , useState}  from "react"
+// import { useDispatch } from "react-redux";
+import { useHistory, Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/Signin.css"
 import axios from "axios";
 
-function Signin({ setIsOpen, isOpen, scrollStop, handleResSuccess }) {
+function Signin({ setIsOpen, isOpen, scrollStop}) {
 
   const [login, setLogin] = useState({
     email:'',
@@ -13,18 +14,26 @@ function Signin({ setIsOpen, isOpen, scrollStop, handleResSuccess }) {
   });
 
   const [error, setError] = useState('');
+  const history =useHistory();
 
   const handleInputValue = (key) => (e) => {
     setLogin({ ...login, [key]: e.target.value });
   };
 
   const handleLogin = () => {
+    
     const { email, password} = login;
-
+    // console.log(email, password);
     if (email.length > 0 || password.length >0) {
-      axios.post("http://localhost:4000/user/signin" , {email: email, password: password}
-      .then((data) => {handleResSuccess(data);
-      }));
+      axios.post("http://localhost:4000/user/signin" , 
+      { email: email, password: password} ,
+      { withCredentials: true}
+      )
+       .then((res) =>{ 
+        // const token = res.data.accessToken;
+        
+      });
+      history.push("/quiz");
     } else {
       setError("이메일과 비밀번호가 틀렸습니다 다시 입력하세요");
     }
@@ -60,12 +69,11 @@ function Signin({ setIsOpen, isOpen, scrollStop, handleResSuccess }) {
               <button className="Signin-btn" type='submit' onClick={handleLogin}>
                 로그인
               </button>
-              <div className='alert-box' >{error}</div>
             </div>
           </form>
           <Footer />
         </div>
-      </div>
+       </div>
   )
 }
 export default Signin;

@@ -8,6 +8,8 @@ import Home from './pages/Home';
 import Quiz from './pages/Quiz';
 
 function App() {
+  // const [Login, setLogin] = useState(false);
+  // const [user, setUser] = useState(null);
   return (
     <BrowserRouter>
       <Switch>
