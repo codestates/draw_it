@@ -15,7 +15,7 @@ module.exports = {
         .json({ data: null, message: '권한이 없는 요청입니다.' });
     }
 
-    if (userId) {
+    if (auth.id) {
       // query로 userId가 입력되었을 때,
       const myPosts = await Post.findAll({
         where: { userId },
@@ -72,7 +72,6 @@ module.exports = {
   },
   create: async (req, res) => {
     // ToDo 임시 유저
-    const userid = 1;
 
     const answer = req.files.file.name;
     const image = req.files.file;
@@ -92,10 +91,10 @@ module.exports = {
     }
 
     try {
-      const imageUrl = await uploadImage(image, userid);
+      const imageUrl = await uploadImage(image, auth.id);
 
       const created = await Post.create({
-        userId: userid,
+        userId: auth.id,
         image: imageUrl.Location,
         answer,
       });
