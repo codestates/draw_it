@@ -6,6 +6,7 @@ import Mypage from './pages/Mypage';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Quiz from './pages/Quiz';
+import Loading from './pages/Loading';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
         </Route>
         <Route exact path="/quiz">
           <Quiz />
+        </Route>
+        <Route exact path="/loding">
+          <Loading />
         </Route>
       </Switch>
     </BrowserRouter>
