@@ -1,7 +1,8 @@
 import React from 'react';
 import '../styles/Quizheader.css';
 
-const Quizheader = () => {
+const Quizheader = ({ length }) => {
+  const l = Array(length).fill(1);
   return (
     <nav id="header">
       <h1 className="title">Draw it</h1>
@@ -10,7 +11,9 @@ const Quizheader = () => {
           <p>정답 글자 수 : </p>
         </div>
         <div className="answer_circle">
-          <div className="circle" />
+          {l.map((_, i) => (
+            <div key={i} className="circle" />
+          ))}
         </div>
       </div>
     </nav>

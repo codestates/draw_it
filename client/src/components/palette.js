@@ -10,7 +10,7 @@ const Palette = ({ changeLineWidth, changeBrushColor, fillCanvas }) => {
         <input
           type="range"
           min="0.1"
-          max="20"
+          max="30"
           step="0.1"
           onChange={changeLineWidth}
         />
