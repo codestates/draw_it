@@ -9,6 +9,8 @@ import Quiz from './pages/Quiz';
 import Loading from './pages/Loading';
 
 function App() {
+  // const [Login, setLogin] = useState(false);
+  // const [user, setUser] = useState(null);
   return (
     <BrowserRouter>
       <Switch>
@@ -17,6 +19,9 @@ function App() {
         </Route>
         <Route exact path="/Signin">
           <Signin />
+        </Route>
+        <Route exact path="/Signup">
+          <Signup />
         </Route>
         <Route exact path="/home">
           <Home />

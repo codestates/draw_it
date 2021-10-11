@@ -76,6 +76,17 @@ button:active {
   border-radius: 20px;
 }
 
+.Main-signup {
+  font-size: 20px;
+  line-height: 1.8;
+  color: rgb(8, 129, 163);
+}
+
+.Main-signup:hover {
+  
+  cursor: pointer;
+  color: blue;
+}
 @media screen and (max-width: 920px) {
   .Main-comment {
     font-size: 25px !important;
