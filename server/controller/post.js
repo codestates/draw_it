@@ -15,7 +15,7 @@ module.exports = {
         .json({ data: null, message: '권한이 없는 요청입니다.' });
     }
 
-    if (auth.id) {
+    if (userId) {
       // query로 userId가 입력되었을 때,
       const myPosts = await Post.findAll({
         where: { userId },
