@@ -3,6 +3,7 @@ import axios from 'axios';
 import Palette from '../components/palette';
 import '../styles/Quiz.css';
 import Quizheader from '../components/Quizheader';
+import { useHistory, useLocation } from 'react-router';
 
 const canvasWidth = 900;
 const canvasHeight = 600;
@@ -11,6 +12,10 @@ const Quiz = () => {
   const canvasRef = useRef();
   const ctxRef = useRef();
   const brushRef = useRef();
+
+  const history = useHistory();
+
+  const [token, setToken] = useState(useLocation());
 
   const [ctx, setCtx] = useState();
   const [brush, setBrush] = useState();
@@ -100,11 +105,13 @@ const Quiz = () => {
     axios
       .post('http://localhost:4000/post', formdata, {
         headers: {
+          authorization: `Bearer ${token.state.state}`,
           'Content-Type': 'multipart/form-data',
         },
       })
       .then((result) => {
         // 이미지 업로드 성공 메인 화면으로 이동
+        history.push('/home');
       })
       .catch((error) => {
         // 이미지 업로드 실패
