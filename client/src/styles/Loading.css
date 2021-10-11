@@ -1,47 +1,130 @@
-@keyframes ldio-tblh4ofo6i8 {
-  0%,
-  100% {
-    animation-timing-function: cubic-bezier(0.45, 0, 0.9, 0.55);
-  }
+@keyframes ldio-92qnniqtgd-1 {
   0% {
-    transform: translate(0, 0);
+    top: 36px;
+    height: 128px;
   }
   50% {
-    transform: translate(0, 107.52000000000001px);
-    animation-timing-function: cubic-bezier(0, 0.45, 0.55, 0.9);
+    top: 60px;
+    height: 80px;
   }
   100% {
-    transform: translate(0, 0);
+    top: 60px;
+    height: 80px;
+  }
+}
+@keyframes ldio-92qnniqtgd-2 {
+  0% {
+    top: 41.99999999999999px;
+    height: 116.00000000000001px;
+  }
+  50% {
+    top: 60px;
+    height: 80px;
+  }
+  100% {
+    top: 60px;
+    height: 80px;
+  }
+}
+@keyframes ldio-92qnniqtgd-3 {
+  0% {
+    top: 48px;
+    height: 104px;
+  }
+  50% {
+    top: 60px;
+    height: 80px;
+  }
+  100% {
+    top: 60px;
+    height: 80px;
   }
 }
 
-.ldio-tblh4ofo6i8 div {
+.ldio-92qnniqtgd div {
   position: absolute;
-  font-size: 40px;
+  font-size: 80px;
   font-weight: 600;
-  color: rgb(196, 196, 196);
-  left: 76.16000000000001px;
-  top: 22.400000000000002px;
-  animation: ldio-tblh4ofo6i8 1s linear infinite;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: var(--deep--grey--color);
 }
-.loadingio-spinner-ball-27v6zncakii {
-  width: 224px;
-  height: 224px;
+
+.ldio-92qnniqtgd div:nth-child(1) {
+  left: 15px;
+  animation: ldio-92qnniqtgd-1 1s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  animation-delay: -0.6s;
+}
+
+.ldio-92qnniqtgd div:nth-child(2) {
+  left: 70px;
+  animation: ldio-92qnniqtgd-2 1s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  animation-delay: -0.5s;
+}
+
+.ldio-92qnniqtgd div:nth-child(3) {
+  left: 125px;
+  animation: ldio-92qnniqtgd-3 1s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  animation-delay: -0.4s;
+}
+
+.ldio-92qnniqtgd div:nth-child(4) {
+  left: 180px;
+  animation: ldio-92qnniqtgd-3 1s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  animation-delay: -0.3s;
+}
+
+.ldio-92qnniqtgd div:nth-child(5) {
+  left: 285px;
+  animation: ldio-92qnniqtgd-3 1s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  animation-delay: -0.2s;
+}
+
+.ldio-92qnniqtgd div:nth-child(6) {
+  left: 325px;
+  animation: ldio-92qnniqtgd-3 1s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  animation-delay: undefineds;
+}
+
+.loadingio-spinner-pulse-h7kngj9d4p {
+  width: 450px;
+  height: 200px;
   display: inline-block;
   overflow: hidden;
-  background: #f1f2f3;
+  background: #ffffff;
 }
-.ldio-tblh4ofo6i8 {
+
+.ldio-92qnniqtgd {
   width: 100%;
   height: 100%;
   position: relative;
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
-  transform-origin: 0 0; /* see note above */
+  transform-origin: 0 0;
 }
-.ldio-tblh4ofo6i8 div {
+
+.ldio-92qnniqtgd div {
   box-sizing: content-box;
+}
+
+#Loading {
+  position: absolute;
+  z-index: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(255, 255, 255);
+}
+
+.close {
+  margin-left: 20px;
+  transition: all 1s;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.close:hover {
+  transform: rotate(45deg);
 }
