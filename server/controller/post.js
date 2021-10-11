@@ -80,6 +80,8 @@ module.exports = {
 
     const auth = isAuthorized(req, res);
 
+    // console.log(auth);
+
     if (!auth) {
       return res
         .status(401)

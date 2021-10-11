@@ -9,9 +9,15 @@ const Home = () => {
   const [token, setToken] = useState(useLocation());
   const history = useHistory();
   useEffect(() => {
-    axios.get('http://localhost:4000/post').then((res) => {
-      setQuizs(res.data.data);
-    });
+    axios
+      .get('http://localhost:4000/post', {
+        headers: {
+          authorization: `Bearer ${token.state}`,
+        },
+      })
+      .then((res) => {
+        setQuizs(res.data.data);
+      });
   }, []); //uerid
 
   useEffect(() => {
@@ -28,7 +34,10 @@ const Home = () => {
   console.log('userinfo', userinfo);
 
   const draw = () => {
-    history.push('/quiz');
+    history.push({
+      pathname: '/quiz',
+      state: token,
+    });
   };
 
   const logoutHandler = () => {
@@ -89,19 +98,6 @@ const Home = () => {
           </div>
         </aside>
       </section>
-      <aside>
-        <div className="Mypage">
-          <h2>My Page</h2>
-          <div>나의 정답 개수</div>
-          <div className="Mypage_button">
-            <button>회원 정보 수정</button>
-            <button>로그아웃</button>
-          </div>
-        </div>
-        <div className="Post_Draw">
-          <button>Draw it</button>
-        </div>
-      </aside>
     </div>
   );
 };
