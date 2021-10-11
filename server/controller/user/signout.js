@@ -1,9 +1,5 @@
 module.exports = (req, res) => {
-  res.set({
-    'Set-Cookie': 'refreshToken=null',
-    Path: '/',
-    HttpOnly: 'true',
-  });
+  res.cookie('refreshToken', '', { path: '/', httpOnly: true });
   // res.set(
   //   'Set-Cookie',
   //   'refreshToken=null; accessToken=null; Domain=localhost; Path=/; Secure; HttpOnly; SameSite=None;'

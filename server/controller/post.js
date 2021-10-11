@@ -7,7 +7,7 @@ module.exports = {
     // ToDo 로그인 유무 확인하기
     const userId = req.query['userid'];
 
-    const auth = isAuthorized(req);
+    const auth = isAuthorized(req, res);
 
     if (!auth) {
       return res
@@ -38,7 +38,7 @@ module.exports = {
   getById: async (req, res) => {
     const { id } = req.params;
 
-    const auth = isAuthorized(req);
+    const auth = isAuthorized(req, res);
 
     if (!auth) {
       return res
@@ -78,7 +78,7 @@ module.exports = {
 
     // ToDo 로그인 유무 확인하기
 
-    const auth = isAuthorized(req);
+    const auth = isAuthorized(req, res);
 
     if (!auth) {
       return res
@@ -111,7 +111,7 @@ module.exports = {
 
     // ToDo 로그인 유무 확인하기
 
-    const auth = isAuthorized(req);
+    const auth = isAuthorized(req, res);
 
     if (!auth) {
       return res
@@ -143,7 +143,7 @@ module.exports = {
 
     // ToDo 로그인 유무 확인하기
 
-    const auth = isAuthorized(req);
+    const auth = isAuthorized(req, res);
 
     if (!auth) {
       return res
