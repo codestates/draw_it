@@ -19,20 +19,26 @@ function Signin({ setIsOpen, isOpen, scrollStop }) {
     setLogin({ ...login, [key]: e.target.value });
   };
 
-  const handleLogin = () => {
-    const { email, password } = login;
+  const handleLogin = (e) => {
+    e.preventDefault()
+    const { email, password} = login;
     // console.log(email, password);
-    if (email.length > 0 || password.length > 0) {
-      axios
-        .post(
-          'http://localhost:4000/user/signin',
-          { email: email, password: password },
-          { withCredentials: true }
-        )
-        .then((res) => {
-          // const token = res.data.accessToken;
-        });
-      history.push('/quiz');
+    if (email.length > 0 && password.length >0) {
+      axios.post("http://localhost:4000/user/signin" , 
+      { email: email, password: password} ,
+      { withCredentials: true}
+      )
+       .then((res) =>{ 
+        const token = res.data.data.accessToken;
+        
+        history.push({
+          pathname : '/home',
+          state : token
+        });  
+        // history.push('/home')
+      }).catch(err=>{
+        console.log(err)
+      });
     } else {
       setError('이메일과 비밀번호가 틀렸습니다 다시 입력하세요');
     }
