@@ -31,9 +31,8 @@ function Signin({ setIsOpen, isOpen, scrollStop}) {
       )
        .then((res) =>{ 
         // const token = res.data.accessToken;
-        
+        history.push("/quiz");
       });
-      history.push("/quiz");
     } else {
       setError("이메일과 비밀번호가 틀렸습니다 다시 입력하세요");
     }
