@@ -7,13 +7,13 @@ module.exports = {
     // ToDo 로그인 유무 확인하기
     const userId = req.query['userid'];
 
-    // const auth = isAuthorized(req);
+    const auth = isAuthorized(req, res);
 
-    // if (!auth) {
-    //   return res
-    //     .status(401)
-    //     .json({ data: null, message: '권한이 없는 요청입니다.' });
-    // }
+    if (!auth) {
+      return res
+        .status(401)
+        .json({ data: null, message: '권한이 없는 요청입니다.' });
+    }
 
     if (userId) {
       // query로 userId가 입력되었을 때,
@@ -38,7 +38,7 @@ module.exports = {
   getById: async (req, res) => {
     const { id } = req.params;
 
-    const auth = isAuthorized(req);
+    const auth = isAuthorized(req, res);
 
     if (!auth) {
       return res
@@ -79,13 +79,13 @@ module.exports = {
 
     // ToDo 로그인 유무 확인하기
 
-    // const auth = isAuthorized(req);
+    const auth = isAuthorized(req, res);
 
-    // if (!auth) {
-    //   return res
-    //     .status(401)
-    //     .json({ data: null, message: '권한이 없는 요청입니다.' });
-    // }
+    if (!auth) {
+      return res
+        .status(401)
+        .json({ data: null, message: '권한이 없는 요청입니다.' });
+    }
 
     if (!(image && answer)) {
       return res.status(404).json({ message: '모든 항목을 입력해주세요' });
@@ -112,7 +112,7 @@ module.exports = {
 
     // ToDo 로그인 유무 확인하기
 
-    const auth = isAuthorized(req);
+    const auth = isAuthorized(req, res);
 
     if (!auth) {
       return res
@@ -144,7 +144,7 @@ module.exports = {
 
     // ToDo 로그인 유무 확인하기
 
-    const auth = isAuthorized(req);
+    const auth = isAuthorized(req, res);
 
     if (!auth) {
       return res

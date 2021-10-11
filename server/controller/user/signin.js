@@ -22,7 +22,8 @@ module.exports = (req, res) => {
           message: '로그인에 실패했습니다.',
         });
       } else {
-        //? 토큰 발행
+        //? 토큰 발행(토큰 발행 시 데이터에서 비밀번호 삭제 후 페이로드에 담아줌)
+        delete data.dataValues.password;
         const accessToken = generateAccessToken(data.dataValues);
         const refreshToken = generateRefreshToken(data.dataValues);
 
