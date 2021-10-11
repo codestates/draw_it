@@ -7,15 +7,15 @@ module.exports = {
     // ToDo 로그인 유무 확인하기
     const userId = req.query['userid'];
 
-    // const auth = isAuthorized(req);
+    const auth = isAuthorized(req, res);
 
-    // if (!auth) {
-    //   return res
-    //     .status(401)
-    //     .json({ data: null, message: '권한이 없는 요청입니다.' });
-    // }
+    if (!auth) {
+      return res
+        .status(401)
+        .json({ data: null, message: '권한이 없는 요청입니다.' });
+    }
 
-    if (userId) {
+    if (auth.id) {
       // query로 userId가 입력되었을 때,
       const myPosts = await Post.findAll({
         where: { userId },
@@ -38,7 +38,7 @@ module.exports = {
   getById: async (req, res) => {
     const { id } = req.params;
 
-    const auth = isAuthorized(req);
+    const auth = isAuthorized(req, res);
 
     if (!auth) {
       return res
@@ -72,30 +72,29 @@ module.exports = {
   },
   create: async (req, res) => {
     // ToDo 임시 유저
-    const userid = 1;
 
     const answer = req.files.file.name;
     const image = req.files.file;
 
     // ToDo 로그인 유무 확인하기
 
-    // const auth = isAuthorized(req);
+    const auth = isAuthorized(req, res);
 
-    // if (!auth) {
-    //   return res
-    //     .status(401)
-    //     .json({ data: null, message: '권한이 없는 요청입니다.' });
-    // }
+    if (!auth) {
+      return res
+        .status(401)
+        .json({ data: null, message: '권한이 없는 요청입니다.' });
+    }
 
     if (!(image && answer)) {
       return res.status(404).json({ message: '모든 항목을 입력해주세요' });
     }
 
     try {
-      const imageUrl = await uploadImage(image, userid);
+      const imageUrl = await uploadImage(image, auth.id);
 
       const created = await Post.create({
-        userId: userid,
+        userId: auth.id,
         image: imageUrl.Location,
         answer,
       });
@@ -112,7 +111,7 @@ module.exports = {
 
     // ToDo 로그인 유무 확인하기
 
-    const auth = isAuthorized(req);
+    const auth = isAuthorized(req, res);
 
     if (!auth) {
       return res
@@ -144,7 +143,7 @@ module.exports = {
 
     // ToDo 로그인 유무 확인하기
 
-    const auth = isAuthorized(req);
+    const auth = isAuthorized(req, res);
 
     if (!auth) {
       return res

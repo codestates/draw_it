@@ -6,12 +6,10 @@ module.exports = {
       {
         userId: 1,
         postId: 1,
-        
       },
       {
         userId: 2,
         postId: 2,
-        
       },
     ]);
   },

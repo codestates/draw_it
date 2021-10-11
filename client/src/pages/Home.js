@@ -85,8 +85,22 @@ const Home = () => {
             </div>
           </aside>
         </section>
-      </div>
-    )
-}
+        <aside>
+          <div className="Mypage">
+            <h2>My Page</h2>
+            <div>나의 정답 개수</div>
+            <div className="Mypage_button">
+              <button>회원 정보 수정</button>
+              <button>로그아웃</button>
+            </div>
+          </div>
+          <div className="Post_Draw">
+            <button>Draw it</button>
+          </div>
+        </aside>
+      </section>
+    </div>
+  );
+};
 
-export default Home
+export default Home;
