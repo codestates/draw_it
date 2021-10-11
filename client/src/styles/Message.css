@@ -1,0 +1,48 @@
+.modal_background {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal_background,
+.modal_close:hover {
+  cursor: pointer;
+}
+
+.modal_container {
+  display: flex;
+  width: 35vw;
+  height: 15vh;
+  background-color: #447474;
+  box-shadow: 0px 0px 6px 3px rgba(0, 0, 0, 0.3);
+  justify-content: center;
+  align-items: center;
+  border-radius: 14px;
+  position: relative;
+  z-index: 9999;
+}
+
+.modal_container:hover {
+  cursor: default;
+}
+
+.modal_close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 24px;
+}
+
+.message {
+  width: 100%;
+  font-size: 28px;
+  color: rgba(255, 255, 255, 0.719);
+  text-align: center;
+}
