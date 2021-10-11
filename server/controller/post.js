@@ -1,22 +1,26 @@
-const { Post, user_post_passed } = require('../models');
+const { User, Post, user_post_passed } = require('../models');
 const { isAuthorized } = require('./tokenFunctions');
+const { uploadImage } = require('./uploadImage');
 
 module.exports = {
   getAll: async (req, res) => {
     // ToDo 로그인 유무 확인하기
     const userId = req.query['userid'];
 
-    const auth = isAuthorized(req);
+    // const auth = isAuthorized(req);
 
-    if (!auth) {
-      return res
-        .status(401)
-        .json({ data: null, message: '권한이 없는 요청입니다.' });
-    }
+    // if (!auth) {
+    //   return res
+    //     .status(401)
+    //     .json({ data: null, message: '권한이 없는 요청입니다.' });
+    // }
 
     if (userId) {
       // query로 userId가 입력되었을 때,
-      const myPosts = await Post.findAll({ where: { userId } });
+      const myPosts = await Post.findAll({
+        where: { userId },
+        include: [{ model: User, attributes: ['nickname', 'id'] }],
+      });
       return res.status(200).json({
         data: myPosts,
         message: '모든 퀴즈를 조회하는데 성공했습니다.',
@@ -24,28 +28,15 @@ module.exports = {
     }
 
     // 아무 입력을 받지 않아 모든 posts를 전달
-    const posts = await Post.findAll();
+    const posts = await Post.findAll({
+      include: [{ model: User, attributes: ['nickname', 'id'] }],
+    });
     return res
       .status(200)
       .json({ data: posts, message: '모든 퀴즈를 조회하는데 성공했습니다.' });
   },
   getById: async (req, res) => {
     const { id } = req.params;
-
-    const post = await Post.findAll({ where: { id } });
-    if (!post) {
-      return res
-        .status(404)
-        .json({ data: null, message: '원하는 post를 찾을 수 없습니다.' });
-    }
-    return res
-      .status(200)
-      .json({ data: post, message: '퀴즈 조회에 성공했습니다.' });
-  },
-  create: async (req, res) => {
-    const { image, answer } = req.body;
-
-    // ToDo 로그인 유무 확인하기
 
     const auth = isAuthorized(req);
 
@@ -55,12 +46,59 @@ module.exports = {
         .json({ data: null, message: '권한이 없는 요청입니다.' });
     }
 
+    const post = await Post.findOne({
+      where: { id },
+      include: [{ model: User, attributes: ['nickname', 'id'] }],
+    });
+
+    if (!post) {
+      return res
+        .status(404)
+        .json({ data: null, message: '원하는 post를 찾을 수 없습니다.' });
+    }
+
+    try {
+      const isPassed = await user_post_passed.findOne({
+        where: { userId: auth.id, postId: id },
+      });
+
+      return res.status(200).json({
+        data: { post, isPassed: isPassed ? true : false },
+        message: '퀴즈 조회에 성공했습니다.',
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  create: async (req, res) => {
+    // ToDo 임시 유저
+    const userid = 1;
+
+    const answer = req.files.file.name;
+    const image = req.files.file;
+
+    // ToDo 로그인 유무 확인하기
+
+    // const auth = isAuthorized(req);
+
+    // if (!auth) {
+    //   return res
+    //     .status(401)
+    //     .json({ data: null, message: '권한이 없는 요청입니다.' });
+    // }
+
     if (!(image && answer)) {
       return res.status(404).json({ message: '모든 항목을 입력해주세요' });
     }
 
     try {
-      const created = await Post.create({ userId: auth.id, image, answer });
+      const imageUrl = await uploadImage(image, userid);
+
+      const created = await Post.create({
+        userId: userid,
+        image: imageUrl.Location,
+        answer,
+      });
       res
         .status(201)
         .json({ data: created, message: '퀴즈 업로드에 성공했습니다.' });
@@ -74,7 +112,15 @@ module.exports = {
 
     // ToDo 로그인 유무 확인하기
 
-    const post = await Post.findOne({ where: { id } });
+    const auth = isAuthorized(req);
+
+    if (!auth) {
+      return res
+        .status(401)
+        .json({ data: null, message: '권한이 없는 요청입니다.' });
+    }
+
+    const post = await Post.findOne({ where: { id, userId: auth.id } });
 
     if (!post) {
       return res

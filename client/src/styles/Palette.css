@@ -1,11 +1,52 @@
+#palette {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+}
+
+.input_range {
+  text-align: center;
+}
+
+.text {
+  font-size: 20px;
+  margin: 20px 0;
+  font-weight: 500;
+}
+
+.palette_color_picker {
+  display: flex;
+  max-width: 200px;
+  font-size: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .palette_color {
   width: 50px;
   height: 50px;
+  margin: 5px;
   border-radius: 50%;
+  box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25) inset;
+  transition: 0.25s;
+}
+
+.palette_color:hover {
+  cursor: pointer;
+}
+
+.palette_color:focus {
+  transform: scale(1.1);
+}
+
+.palette_color:nth-child(1) {
+  background-color: black;
+  box-shadow: 0px 0px 4px 3px rgba(255, 255, 255, 0.35) inset;
 }
 
 .palette_color:nth-child(2) {
-  background-color: black;
+  background-color: gray;
 }
 
 .palette_color:nth-child(3) {
@@ -48,6 +89,12 @@
   background-color: tomato;
 }
 
-.palette_color:nth-child(13) {
-  background-color: gray;
+.palette_fill {
+  width: 80px;
+  height: 40px;
+  padding: 13px;
+  margin: 20px auto;
+  background-color: tomato;
+  border-radius: 16px;
+  text-align: center;
 }

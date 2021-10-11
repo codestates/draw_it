@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import Palette from '../components/palette';
 import '../styles/Quiz.css';
+import Quizheader from '../components/Quizheader';
+
+const canvasWidth = 900;
+const canvasHeight = 600;
 
 const Quiz = () => {
   const canvasRef = useRef();
@@ -13,12 +18,16 @@ const Quiz = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    canvas.width = 600;
-    canvas.height = 600;
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
 
     const context = canvas.getContext('2d');
+    context.fillStyle = 'white';
+    context.fillRect(0, 0, canvasWidth, canvasHeight);
     context.strokeStyle = 'black';
     context.lineWidth = 1;
+    context.lineJoin = 'round';
+    context.lineCap = 'round';
     ctxRef.current = context;
 
     brushRef.current.style.pointerEvents = 'none';
@@ -39,8 +48,9 @@ const Quiz = () => {
   const onDrawing = ({ nativeEvent }) => {
     const x = nativeEvent.offsetX;
     const y = nativeEvent.offsetY;
-    brush.style.top = y - ctx.lineWidth / 2 + 'px';
-    brush.style.left = x - ctx.lineWidth / 2 + 'px';
+
+    brush.style.top = nativeEvent.clientY - ctx.lineWidth / 2 + 'px';
+    brush.style.left = nativeEvent.clientX - ctx.lineWidth / 2 + 'px';
     if (ctx) {
       if (!isDrawing) {
         ctx.beginPath();
@@ -57,28 +67,77 @@ const Quiz = () => {
     brush.style.padding = event.target.value / 2 + 'px';
   };
 
-  const changeBrushColor = (event) => {
-    console.log(event);
+  const getColor = (ele) => {
+    return getComputedStyle(ele).backgroundColor;
+  };
+
+  const changeBrushColor = ({ nativeEvent }) => {
+    const color = getColor(nativeEvent.target);
+    ctx.strokeStyle = color;
+    brush.style.backgroundColor = color;
+  };
+
+  const fillCanvas = () => {
+    ctx.fillStyle = brush.style.backgroundColor;
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+  };
+
+  const uploadImage = () => {
+    const image = canvasRef.current.toDataURL('image/png');
+    const blob = atob(image.split(',')[1]);
+
+    const array = [];
+
+    for (let i = 0; i < blob.length; i++) {
+      array.push(blob.charCodeAt(i));
+    }
+
+    const file = new Blob([new Uint8Array(array)], { type: 'image' });
+    const formdata = new FormData();
+    formdata.append('file', file, '테스트');
+    formdata.append('answer', '테스트');
+
+    axios
+      .post('http://localhost:4000/post', formdata, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((result) => {
+        // 이미지 업로드 성공 메인 화면으로 이동
+      })
+      .catch((error) => {
+        // 이미지 업로드 실패
+      });
   };
 
   return (
-    <div>
-      <div className="canvas">
-        <canvas
-          ref={canvasRef}
-          id="canvas"
-          onMouseDown={startPainting}
-          onMouseUp={stopPainting}
-          onMouseMove={onDrawing}
+    <div id="container">
+      <Quizheader />
+      <div id="main">
+        <div id="canvas">
+          <div ref={brushRef} id="brush" />
+          <canvas
+            ref={canvasRef}
+            className="canvas"
+            onMouseDown={startPainting}
+            onMouseUp={stopPainting}
+            onMouseMove={onDrawing}
+            onMouseLeave={stopPainting}
+          />
+        </div>
+        <Palette
+          changeLineWidth={changeLineWidth}
+          changeBrushColor={changeBrushColor}
+          fillCanvas={fillCanvas}
         />
-        <div ref={brushRef} id="brush"></div>
       </div>
-      <input placeholder="문제의 정답을 입력해주세요!"></input>
-      <button>제출</button>
-      <Palette
-        changeLineWidth={changeLineWidth}
-        changeBrushColor={changeBrushColor}
-      />
+      <div className="answer_input_form">
+        <input className="input" placeholder="문제의 정답을 입력해주세요!" />
+        <div className="upload_button" onClick={uploadImage}>
+          제출
+        </div>
+      </div>
     </div>
   );
 };
