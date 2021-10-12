@@ -1,50 +1,74 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 import '../styles/Home.css';
 import { URL } from '../Url';
 import Useredit from './Useredit';
+import UserContext from './Context';
 
 const Home = () => {
+  
   const [quizs, setQuizs] = useState();
   const [userinfo, setUserInfo] = useState('');
-  const [token, setToken] = useState(useLocation());
   const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
-
+  const { token, setToken } = useContext(UserContext);
+  const [answer, setAnswer] = useState();
+  
   useEffect(() => {
-    axios
-      .get(`${URL}/post`, {
-        headers: {
-          authorization: `Bearer ${token.state}`,
-        },
-      })
-      .then((res) => {
-        setQuizs(res.data.data);
-      });
-  }, []); //uerid
+    allQuizs()
+  }, []); //userid
 
   useEffect(() => {
     axios
       .get(`${URL}/user/mypage`, {
         headers: {
-          authorization: `Bearer ${token.state}`,
+          authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
         setUserInfo(res.data.data);
       });
-  }, []); //state=id
-  console.log('userinfo', userinfo);
+  }, []); //state.id
 
   const draw = () => {
-    history.push({
-      pathname: '/quiz',
-      state: token,
-    });
+    history.push('/quiz');
   };
 
+  const imgDelete = (index) =>{
+    axios.delete(`${URL}/post/${index}`,{
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }).then((res)=>{
+      const deleted = quizs.filter((quiz) => quiz.id !== index)
+      setQuizs([...deleted])
+    })
+  }
+  const allQuizs = () => {
+    axios.get(`${URL}/post`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setQuizs(res.data.data);
+    }).catch((err) =>{
+      throw err
+    });
+  }
+  const myQuizs = () =>{
+    axios.get(`${URL}/post?userid=${userinfo.id}`,{
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }).then((res)=>{
+      setQuizs(res.data.data);
+    }).catch((err)=>{
+      throw err
+    })
+  }
   const logoutHandler = () => {
     axios
       .post(`${URL}/user/signout`)
@@ -71,6 +95,20 @@ const Home = () => {
     }
   };
 
+  const detailQuizHandler = (index) =>{
+    axios.get(`${URL}/post/${index}`,{
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }).then((res)=>{
+      const quizData = res.data.data
+      setAnswer(quizData.post.answer)
+      history.push('/postQuiz');
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+  
   return (
     <div className='HomeContainer'>
       <header>
@@ -80,21 +118,21 @@ const Home = () => {
         <section className='Post'>
           <div className='Post_Header'>
             <p>Community</p>
-            <div className='Post-button'>
-              <button>내가 낸 문제</button>
-              <button>전체 문제</button>
+            <div className="Post-button">
+              <button onClick={myQuizs}>내가 낸 문제</button>
+              <button onClick={allQuizs}>전체 문제</button>
             </div>
           </div>
           <div className='Post_Main'>
             {quizs?.map((data) => {
               return (
-                <div key={data.id} className='QuizContainer'>
-                  <div className='Post-img'>
-                    <img src={data.image}></img>
+                <div key={data.id} className="QuizContainer">
+                  <div className="Post-img">
+                    <img src={data.image} onClick={() => detailQuizHandler(data.id)}></img>
                   </div>
                   <div className='QuizContainer_bottom'>
                     <p>{data.User?.nickname}님의 문제</p>
-                    {data.userId === userinfo?.id ? <div>X</div> : null}
+                    {data.userId === userinfo?.id ? <div onClick={()=>imgDelete(data.id)}>X</div> : null}
                   </div>
                 </div>
               );

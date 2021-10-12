@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 // import { useDispatch } from "react-redux";
 import { useHistory, Link } from 'react-router-dom';
 import Header from '../components/Header';
@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import '../styles/Signin.css';
 import axios from 'axios';
 import { URL } from '../Url';
+import UserContext from './Context';
 
 function Signin({ setIsOpen, isOpen, scrollStop }) {
   const [login, setLogin] = useState({
@@ -15,6 +16,7 @@ function Signin({ setIsOpen, isOpen, scrollStop }) {
 
   const [error, setError] = useState('');
   const history = useHistory();
+  const { setToken } = useContext(UserContext);
 
   const handleInputValue = (key) => (e) => {
     setLogin({ ...login, [key]: e.target.value });
@@ -32,13 +34,12 @@ function Signin({ setIsOpen, isOpen, scrollStop }) {
           { withCredentials: true }
         )
         .then((res) => {
-          const token = res.data.data.accessToken;
-
-          history.push({
-            pathname: '/home',
-            state: token,
-          });
-          // history.push('/home')
+        
+          const { accessToken } = res.data.data;
+        
+          localStorage.setItem('token', accessToken);
+          setToken(accessToken.slice());
+          history.push('/home');
         })
         .catch((err) => {
           console.log(err);
