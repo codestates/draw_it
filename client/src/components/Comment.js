@@ -13,7 +13,6 @@ const Comment = ({ comments, uploadComment }) => {
     setText('');
   };
 
-  console.log(comments);
   return (
     <div id="Container">
       <h2 className="title">코멘트 리스트</h2>
@@ -31,7 +30,7 @@ const Comment = ({ comments, uploadComment }) => {
         {comments?.map((comment) => {
           return (
             <li key={comment.id} className="comment">
-              <span className="nickname">닉네임</span>
+              <span className="nickname">{comment.nickname}</span>
               <span>{comment.text}</span>
             </li>
           );

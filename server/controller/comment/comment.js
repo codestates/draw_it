@@ -50,8 +50,6 @@ module.exports = {
         .json({ message: `원하는 퀴즈를 찾을 수 없습니다.` });
     }
 
-    console.log(user.nickname);
-
     const created = await Comment.create({
       text,
       nickname: user.nickname,
