@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import Palette from '../components/palette';
+import Palette from '../components/Palette';
 import '../styles/Quiz.css';
 import Quizheader from '../components/Quizheader';
 import { useHistory, useLocation } from 'react-router';
@@ -25,6 +25,9 @@ const Quiz = () => {
   const [answer, setAnswer] = useState();
 
   useEffect(() => {
+    if (!token?.state?.state) {
+      history.push('/');
+    }
     const canvas = canvasRef.current;
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
@@ -128,13 +131,19 @@ const Quiz = () => {
   };
 
   const changeAnswer = (e) => {
-    setAnswer(e.target.value);
+    const { value } = e.target;
+
+    if (value && value.length > 8) {
+      setError('정답은 8글자 이하로 입력해주세요!');
+      return;
+    }
+    setAnswer(value.replace(/ /g, ''));
   };
 
   return (
     <div id="container">
       {error && <Message message={error} setError={setError} />}
-      <Quizheader />
+      <Quizheader length={answer?.length} />
       <div id="main">
         <div id="canvas">
           <div ref={brushRef} id="brush" />
@@ -158,6 +167,7 @@ const Quiz = () => {
           className="input"
           placeholder="문제의 정답을 입력해주세요!"
           onChange={changeAnswer}
+          value={answer}
         />
         <div className="upload_button" onClick={uploadImage}>
           제출
