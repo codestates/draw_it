@@ -6,6 +6,7 @@ import Quizheader from '../components/Quizheader';
 import { useHistory, useLocation } from 'react-router';
 import { URL } from '../Url';
 import Message from '../components/Message';
+import Comment from '../components/Comment';
 
 const canvasWidth = 900;
 const canvasHeight = 600;
@@ -24,7 +25,7 @@ const Drawit = () => {
   const [brush, setBrush] = useState();
   const [isDrawing, setIsDrawing] = useState(false);
   const [answer, setAnswer] = useState();
-
+  const [comment, setComment] = useState();
   useEffect(() => {
     // if (!token?.state?.state) {
     //   history.push('/');
@@ -47,6 +48,11 @@ const Drawit = () => {
 
     setCtx(context);
     setBrush(brushRef.current);
+
+    // To Do PostId 변경하기
+    axios.get(`${URL}/comment/${1}`).then((result) => {
+      setComment(result.data.data);
+    });
   }, []);
 
   const startPainting = () => {
@@ -144,6 +150,17 @@ const Drawit = () => {
     setAnswer(value.replace(/ /g, ''));
   };
 
+  const uploadComment = (text) => {
+    // To Do PostId 변경하기
+    // axios.post(`${URL}/comment/${1}`,{text},{
+    //   headers: {
+    //     authorization: `Bearer ${token}`,
+    //   }
+    // }).then((result) => {
+    //   result
+    // })
+  };
+
   return (
     <div id="container">
       {error && <Message message={error} setError={setError} />}
@@ -172,6 +189,7 @@ const Drawit = () => {
           정답확인
         </div>
       </div>
+      {comment && <Comment comments={comment} uploadComment={uploadComment} />}
     </div>
   );
 };
