@@ -4,6 +4,7 @@ import Palette from '../components/Palette';
 import '../styles/Quiz.css';
 import Quizheader from '../components/Quizheader';
 import { useHistory, useLocation } from 'react-router';
+import { URL } from '../Url';
 import Message from '../components/Message';
 
 const canvasWidth = 900;
@@ -114,7 +115,7 @@ const Quiz = () => {
     formdata.append('answer', answer);
 
     axios
-      .post('http://localhost:4000/post', formdata, {
+      .post(`${ URL }/post`, formdata, {
         headers: {
           authorization: `Bearer ${token.state.state}`,
           'Content-Type': 'multipart/form-data',

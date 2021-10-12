@@ -30,7 +30,7 @@ section {
 }
 
 .Post_Header p {
-  font-size: 25px;
+  font-size: 45px;
 }
 
 .Post-button button {
@@ -79,6 +79,11 @@ section {
   align-items: center;
 }
 
+.QuizContainer_bottom p {
+  margin-top: 5px;
+  font-size: 20px;
+}
+
 .QuizContainer_bottom div {
   width: auto;
   height: auto;
@@ -89,6 +94,7 @@ section {
   font-size: 16px;
   font-weight: lighter;
   padding: 5px;
+  margin-top: 5px;
 }
 
 .QuizContainer_bottom div:hover {

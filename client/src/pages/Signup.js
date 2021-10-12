@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/Signup.css"
 import { useHistory } from "react-router";
+import { URL } from '../Url';
 
 function Signup({ setIsOpensignup, isOpensignup, scrollStopsignup }) {
   const [user, setuser] =useState({
@@ -28,7 +29,7 @@ function Signup({ setIsOpensignup, isOpensignup, scrollStopsignup }) {
     }
     if ( email.length > 0 && password.length > 0 && nickname.length > 0 ) 
     {
-      axios.post("http://localhost:4000/user/signup", {
+      axios.post(`${URL}/user/signup`, {
         email: email,
         nickname: nickname,
         password: password
