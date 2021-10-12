@@ -1,7 +1,6 @@
 import React,{useRef, useState} from "react"
 import axios from 'axios';
 import Header from "../components/Header";
-import Footer from "../components/Footer";
 import "../styles/Signup.css"
 import { useHistory } from "react-router";
 import { URL } from '../Url';
@@ -13,7 +12,7 @@ function Signup({ setIsOpensignup, isOpensignup, scrollStopsignup }) {
     password: '',
     passwordcheck: ''
   });
-  const [error , setError] = useState('');
+  const [message , setMessage] = useState('');
   const history = useHistory();
 
   const handleInputValue = (key) => (e) => {
@@ -21,11 +20,11 @@ function Signup({ setIsOpensignup, isOpensignup, scrollStopsignup }) {
   };
 
 
-  const handlesignup =() => {
+  const handleSignup =() => {
     const { email, nickname, password , passwordcheck } =user;
 
     if (password !== passwordcheck){
-      return setError("비밀번호가 맞지않습니다")
+      return setMessage("비밀번호가 맞지않습니다")
     }
     if ( email.length > 0 && password.length > 0 && nickname.length > 0 ) 
     {
@@ -43,12 +42,11 @@ function Signup({ setIsOpensignup, isOpensignup, scrollStopsignup }) {
           pathname : '/signin',
           state : token
         });  
-        // history.push('/home')
       }).catch(err=>{
         console.log(err)
       });
     } else {
-      setError("모든 항목은 필수입니다");
+      setMessage("모든 항목은 필수입니다");
     }
   };
 
@@ -70,7 +68,7 @@ function Signup({ setIsOpensignup, isOpensignup, scrollStopsignup }) {
         <div className="SignupContainer_in">
           <Header />
           <p className="Header-name">Draw it</p>
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form >
             <div className='Signup-form'>
               <div>email</div>
                 <input className="Signup-email" type='email' onChange={handleInputValue('email')} placeholder="email"/>
@@ -88,14 +86,12 @@ function Signup({ setIsOpensignup, isOpensignup, scrollStopsignup }) {
                 <input className="Signup-password-check" type='password' onChange={handleInputValue('passwordcheck')} placeholder="password 확인"/>
             </div>
             <div className='Signup-form'>
-              <button className="Signup-btn" type='submit' onClick={handlesignup} >
+              <button className="Signup-btn" type='submit' onClick={handleSignup} >
                 회원가입
               </button>
-              
             </div>
-            <div className='alert-box'>{error}</div>
+            <div className='alert-box'>{message}</div>
           </form>
-          <Footer />
         </div>
       </div>
   )

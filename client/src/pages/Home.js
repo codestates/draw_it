@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
+import Mypage from './Mypage';
 import '../styles/Home.css';
 import { URL } from '../Url';
 const Home = () => {
   const [quizs, setQuizs] = useState();
   const [userinfo, setUserInfo] = useState('');
   const [token, setToken] = useState(useLocation());
+  const [isOpenMypage, setIsOpenMypage] = useState(false);
   const history = useHistory();
   useEffect(() => {
     axios
@@ -52,6 +54,21 @@ const Home = () => {
         console.log(err);
       });
   };
+
+  const MypageHandler = () => {
+    setIsOpenMypage(!isOpenMypage);
+    scrollStopMypage();
+    };
+
+  const scrollStopMypage = () => {
+    if (isOpenMypage === false) {
+      document.body.style.overflow = "hidden";
+      }
+    if (isOpenMypage === true) {
+      document.body.style.overflow = "unset";
+      }
+    };
+
   return (
     <div className="HomeContainer">
       <header>
@@ -89,7 +106,7 @@ const Home = () => {
               {userinfo?.nickname}의 정답 개수 : {userinfo?.passedPosts}
             </div>
             <div className="Mypage_button">
-              <button>회원 정보 수정</button>
+              <button onClick={MypageHandler}>회원 정보 수정</button>
               <button onClick={logoutHandler}>로그아웃</button>
             </div>
           </div>
@@ -98,6 +115,13 @@ const Home = () => {
           </div>
         </aside>
       </section>
+      {isOpenMypage ? (
+       <Mypage
+          scrollStopMypage={scrollStopMypage}
+          setIsOpenMypage={setIsOpenMypage}
+          isOpenMypage={isOpenMypage}
+        />
+        ) : null}
     </div>
   );
 };
