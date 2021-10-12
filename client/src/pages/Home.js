@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
+import Mypage from './Mypage';
 import '../styles/Home.css';
 import { URL } from '../Url';
 import Useredit from './Useredit';
@@ -80,7 +81,7 @@ const Home = () => {
         console.log(err);
       });
   };
-
+  
   const openHandler = () => {
     setIsOpen(!isOpen);
     scrollStop();
@@ -163,6 +164,7 @@ const Home = () => {
           isOpen={isOpen}
         />
       ) : null}
+
     </div>
   );
 };

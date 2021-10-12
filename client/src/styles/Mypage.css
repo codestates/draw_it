@@ -24,3 +24,7 @@
   border-radius: 20px;
   box-shadow: 5px 5px 5px 5px rgb(163, 162, 162);
 }
+.Mypage-Header-name {
+  font-size: 35px;
+  color: rgb(8, 129, 163);
+}

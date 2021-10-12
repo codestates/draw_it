@@ -1,19 +1,30 @@
-import React from "react"
+import React, { useRef } from 'react';
 import axios from 'axios';
 import Header from "../components/Header";
-import Footer from "../components/Footer";
 import "../styles/Mypage.css"
 
 axios.defaults.withCredentials = true;
 
-function Mypage(props) {
+function Mypage(props, {setIsOpenMypage, isOpenMypage, scrollStopMypage}) {
 
-  const { } = props;
+  const {email, nickname } = props;
+
+  const backgroundEl = useRef(null);
+
+  const backgroundClick = (e) => {
+    if (e.target === backgroundEl.current) {
+      setIsOpenMypage(!isOpenMypage);
+      scrollStopMypage();
+    }
+  };
     return (
-        
-        <div className="MypageContainer">
+        <div 
+        onClick={(e) => backgroundClick(e)}
+        ref={backgroundEl} 
+        className="MypageContainer">
           <div className="MypageContainer_in">
           <Header />
+          <p className="Mypage-Header-name">Draw it</p>
         <form >
         <div>
             <span>nickname</span>
@@ -31,7 +42,7 @@ function Mypage(props) {
              수정
           </button>
         </form>
-            <Footer />
+           
           </div>
         </div>
     )

@@ -92,3 +92,22 @@
   box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
   top: 2px;
 }
+.Signin-span {
+  font-size: 20px;
+  color: rgb(8, 129, 163);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Signin-span:hover {
+  cursor: pointer;
+  color: blue;
+}
+
+.Signin-alert-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:red;
+  font-size: 20px;
+}
