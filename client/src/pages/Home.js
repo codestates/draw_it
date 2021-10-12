@@ -71,7 +71,7 @@ const Home = () => {
               return (
                 <div key={data.id} className="QuizContainer">
                   <div className="Post-img">
-                    <img  src={data.image}></img>
+                    <img src={data.image}></img>
                   </div>
                   <div className="QuizContainer_bottom">
                     <p>{data.User?.nickname}님의 문제</p>

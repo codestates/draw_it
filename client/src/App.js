@@ -4,9 +4,9 @@ import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import Mypage from './pages/Mypage';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import Home from './pages/Home';
-import Quiz from './pages/Quiz';
+import Drawit from './pages/Drawit';
 import Loading from './components/Loading';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
-    {isLoading ? <Loading /> : null}
+      {isLoading ? <Loading /> : null}
       <Switch>
         <Route exact path="/">
           <Main />
@@ -35,9 +35,8 @@ function App() {
           <Home />
         </Route>
         <Route exact path="/quiz">
-          <Quiz />
+          <Drawit />
         </Route>
-        
       </Switch>
     </BrowserRouter>
   );
