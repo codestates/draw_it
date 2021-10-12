@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/ubuntu/drawit/server
+cd /home/ubuntu/draw_it/server
 npm install
 npm install pm2@latest -g
 sudo apt-get update
