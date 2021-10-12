@@ -16,7 +16,7 @@ function Signin({ setIsOpen, isOpen, scrollStop }) {
 
   const [error, setError] = useState('');
   const history = useHistory();
-  const { token, setToken } = useContext(UserContext);
+  const { setToken } = useContext(UserContext);
 
   const handleInputValue = (key) => (e) => {
     setLogin({ ...login, [key]: e.target.value });
@@ -35,6 +35,7 @@ function Signin({ setIsOpen, isOpen, scrollStop }) {
         )
         .then((res) => {
           const { accessToken } = res.data.data;
+          localStorage.setItem('token', accessToken);
           setToken(accessToken.slice());
           history.push('/home');
         })
