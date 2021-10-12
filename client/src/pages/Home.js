@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory, useLocation, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 import '../styles/Home.css';
 import { URL } from '../Url';
 import UserContext from './Context';
+
 const Home = () => {
+  
   const [quizs, setQuizs] = useState();
   const [userinfo, setUserInfo] = useState('');
   const { token, setToken } = useContext(UserContext);
