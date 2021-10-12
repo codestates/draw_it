@@ -43,21 +43,18 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-const { User, Post, user_post_passed } = sequelize.models;
+const { User, Post, user_post_passed, Comment } = sequelize.models;
 
 // One To Many
 Post.belongsTo(User, { foreignKey: 'userId', tragetKey: 'id' });
 User.hasMany(Post, { foreignKey: 'userId' });
 
-/*
-
 // Many To Many
 User.belongsToMany(Post, {
-  as: 'Post',
-  through: 'user_post_passed',
-  foreignKey: 'postId',
-  otherKey: 'userId',
+  through: 'Comments',
 });
-*/
+Post.belongsToMany(User, {
+  through: 'Comments',
+});
 
 module.exports = db;

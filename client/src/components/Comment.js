@@ -12,6 +12,8 @@ const Comment = ({ comments, uploadComment }) => {
     uploadComment(text.slice(0, 24));
     setText('');
   };
+
+  console.log(comments);
   return (
     <div id="Container">
       <h2 className="title">코멘트 리스트</h2>
