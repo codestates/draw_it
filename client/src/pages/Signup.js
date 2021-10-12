@@ -35,8 +35,18 @@ function Signup({ setIsOpensignup, isOpensignup, scrollStopsignup }) {
         password: password
       },
       { withCredentials: true}
-      );
-      history.push("/signin");
+      )
+      .then((res) =>{ 
+        const token = res.data.data.accessToken;
+        
+        history.push({
+          pathname : '/signin',
+          state : token
+        });  
+        // history.push('/home')
+      }).catch(err=>{
+        console.log(err)
+      });
     } else {
       setError("모든 항목은 필수입니다");
     }
