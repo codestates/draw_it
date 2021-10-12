@@ -10,22 +10,29 @@
 
 #header .answer_nav {
   display: flex;
-  width: 300px;
+  width: 500px;
   height: inherit;
   align-items: center;
 }
 
 #header .answer_form {
-  margin: 0 30px;
-  font-size: 32px;
+  margin: 0 20px;
+  margin-left: 40px;
+  font-size: 24px;
   color: rgb(8, 129, 163);
   font-weight: 600;
 }
 
+#header .answer_circle {
+  width: 260px;
+  display: flex;
+}
+
 #header .circle {
-  width: 32px;
-  height: 32px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background-color: white;
+  margin: 0 2px;
+  background-color: gray;
   box-shadow: 0px 0px 2px 3px rgba(0, 0, 0, 0.1);
 }

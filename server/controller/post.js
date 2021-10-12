@@ -9,12 +9,6 @@ module.exports = {
 
     const auth = isAuthorized(req, res);
 
-    if (!auth) {
-      return res
-        .status(401)
-        .json({ data: null, message: '권한이 없는 요청입니다.' });
-    }
-
     if (userId) {
       // query로 userId가 입력되었을 때,
       const myPosts = await Post.findAll({
@@ -39,12 +33,6 @@ module.exports = {
     const { id } = req.params;
 
     const auth = isAuthorized(req, res);
-
-    if (!auth) {
-      return res
-        .status(401)
-        .json({ data: null, message: '권한이 없는 요청입니다.' });
-    }
 
     const post = await Post.findOne({
       where: { id },
@@ -71,22 +59,10 @@ module.exports = {
     }
   },
   create: async (req, res) => {
-    // ToDo 임시 유저
-
-    const answer = req.files.file.name;
+    const answer = req.files.file.name.replace(/ /g, '');
     const image = req.files.file;
 
-    // ToDo 로그인 유무 확인하기
-
     const auth = isAuthorized(req, res);
-
-    // console.log(auth);
-
-    if (!auth) {
-      return res
-        .status(401)
-        .json({ data: null, message: '권한이 없는 요청입니다.' });
-    }
 
     if (!(image && answer)) {
       return res.status(404).json({ message: '모든 항목을 입력해주세요' });
@@ -115,12 +91,6 @@ module.exports = {
 
     const auth = isAuthorized(req, res);
 
-    if (!auth) {
-      return res
-        .status(401)
-        .json({ data: null, message: '권한이 없는 요청입니다.' });
-    }
-
     const post = await Post.findOne({ where: { id, userId: auth.id } });
 
     if (!post) {
@@ -147,13 +117,6 @@ module.exports = {
 
     const auth = isAuthorized(req, res);
 
-    if (!auth) {
-      return res
-        .status(401)
-        .json({ data: null, message: '권한이 없는 요청입니다.' });
-    }
-
-    // postId로 해당 post 찾기
     const post = await Post.findOne({ where: { id } });
 
     if (!post) {

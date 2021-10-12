@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import Palette from '../components/palette';
+import Palette from '../components/Palette';
 import '../styles/Quiz.css';
 import Quizheader from '../components/Quizheader';
 import { useHistory, useLocation } from 'react-router';
 import { URL } from '../Url';
+import Message from '../components/Message';
 
 const canvasWidth = 900;
 const canvasHeight = 600;
@@ -17,12 +18,17 @@ const Quiz = () => {
   const history = useHistory();
 
   const [token, setToken] = useState(useLocation());
+  const [error, setError] = useState();
 
   const [ctx, setCtx] = useState();
   const [brush, setBrush] = useState();
   const [isDrawing, setIsDrawing] = useState(false);
+  const [answer, setAnswer] = useState();
 
   useEffect(() => {
+    if (!token?.state?.state) {
+      history.push('/');
+    }
     const canvas = canvasRef.current;
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
@@ -89,6 +95,11 @@ const Quiz = () => {
   };
 
   const uploadImage = () => {
+    if (!answer || answer.length < 2) {
+      setError('정답은 2글자 이상이어야 합니다.');
+      return;
+    }
+
     const image = canvasRef.current.toDataURL('image/png');
     const blob = atob(image.split(',')[1]);
 
@@ -100,8 +111,8 @@ const Quiz = () => {
 
     const file = new Blob([new Uint8Array(array)], { type: 'image' });
     const formdata = new FormData();
-    formdata.append('file', file, '테스트');
-    formdata.append('answer', '테스트');
+    formdata.append('file', file, answer);
+    formdata.append('answer', answer);
 
     axios
       .post(`${ URL }/post`, formdata, {
@@ -116,12 +127,24 @@ const Quiz = () => {
       })
       .catch((error) => {
         // 이미지 업로드 실패
+        setError('정답을 입력해주세요!');
       });
+  };
+
+  const changeAnswer = (e) => {
+    const { value } = e.target;
+
+    if (value && value.length > 8) {
+      setError('정답은 8글자 이하로 입력해주세요!');
+      return;
+    }
+    setAnswer(value.replace(/ /g, ''));
   };
 
   return (
     <div id="container">
-      <Quizheader />
+      {error && <Message message={error} setError={setError} />}
+      <Quizheader length={answer?.length} />
       <div id="main">
         <div id="canvas">
           <div ref={brushRef} id="brush" />
@@ -141,7 +164,12 @@ const Quiz = () => {
         />
       </div>
       <div className="answer_input_form">
-        <input className="input" placeholder="문제의 정답을 입력해주세요!" />
+        <input
+          className="input"
+          placeholder="문제의 정답을 입력해주세요!"
+          onChange={changeAnswer}
+          value={answer}
+        />
         <div className="upload_button" onClick={uploadImage}>
           제출
         </div>
