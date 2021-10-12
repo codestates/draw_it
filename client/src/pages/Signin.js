@@ -21,25 +21,28 @@ function Signin({ setIsOpen, isOpen, scrollStop }) {
   };
 
   const handleLogin = (e) => {
-    e.preventDefault()
-    const { email, password} = login;
+    e.preventDefault();
+    const { email, password } = login;
     // console.log(email, password);
-    if (email.length > 0 && password.length >0) {
-      axios.post(`${ URL }/user/signin` , 
-      { email: email, password: password} ,
-      { withCredentials: true}
-      )
-       .then((res) =>{ 
-        const token = res.data.data.accessToken;
-        
-        history.push({
-          pathname : '/home',
-          state : token
-        });  
-        // history.push('/home')
-      }).catch(err=>{
-        console.log(err)
-      });
+    if (email.length > 0 && password.length > 0) {
+      axios
+        .post(
+          `${URL}/user/signin`,
+          { email: email, password: password },
+          { withCredentials: true }
+        )
+        .then((res) => {
+          const token = res.data.data.accessToken;
+
+          history.push({
+            pathname: '/home',
+            state: token,
+          });
+          // history.push('/home')
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       setError('이메일과 비밀번호가 틀렸습니다 다시 입력하세요');
     }
@@ -56,32 +59,32 @@ function Signin({ setIsOpen, isOpen, scrollStop }) {
     <div
       onClick={(e) => backgroundClick(e)}
       ref={backgroundEl}
-      className="SigninContainer"
+      className='SigninContainer'
     >
-      <div className="SigninContainer_in">
+      <div className='SigninContainer_in'>
         <Header />
-        <p className="Header-name">Draw it</p>
+        <p className='Header-name'>Draw it</p>
         <form>
-          <div className="Signin-form">
+          <div className='Signin-form'>
             <div>email</div>
             <input
-              className="Signin-email"
-              type="email"
+              className='Signin-email'
+              type='email'
               onChange={handleInputValue('email')}
-              placeholder="email"
+              placeholder='email'
             />
           </div>
-          <div className="Signin-form">
+          <div className='Signin-form'>
             <div>password</div>
             <input
-              className="Signin-password"
-              type="password"
+              className='Signin-password'
+              type='password'
               onChange={handleInputValue('password')}
-              placeholder="password"
+              placeholder='password'
             />
           </div>
-          <div className="Signin-form">
-            <button className="Signin-btn" type="submit" onClick={handleLogin}>
+          <div className='Signin-form'>
+            <button className='Signin-btn' type='submit' onClick={handleLogin}>
               로그인
             </button>
           </div>
