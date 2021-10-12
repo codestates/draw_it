@@ -125,7 +125,7 @@ const Drawit = () => {
         // 이미지 업로드 성공 메인 화면으로 이동
         history.push({
           pathname: '/home',
-          state: token,
+          state: token.state.state,
         });
       })
       .catch((error) => {

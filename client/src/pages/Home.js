@@ -10,15 +10,7 @@ const Home = () => {
   const [token, setToken] = useState(useLocation());
   const history = useHistory();
   useEffect(() => {
-    axios
-      .get(`${URL}/post`, {
-        headers: {
-          authorization: `Bearer ${token.state}`,
-        },
-      })
-      .then((res) => {
-        setQuizs(res.data.data);
-      });
+    allQuizs()
   }, []); //uerid
 
   useEffect(() => {
@@ -32,7 +24,6 @@ const Home = () => {
         setUserInfo(res.data.data);
       });
   }, []); //state=id
-  console.log('userinfo', userinfo);
 
   const draw = () => {
     history.push({
@@ -42,8 +33,6 @@ const Home = () => {
   };
 
   const imgDelete = (index) =>{
-    
-    console.log(index)
     axios.delete(`${URL}/post/${index}`,{
       headers: {
         authorization: `Bearer ${token.state}`,
@@ -53,7 +42,29 @@ const Home = () => {
       setQuizs([...deleted])
     })
   }
-
+  const allQuizs = () => {
+    axios.get(`${URL}/post`, {
+      headers: {
+        authorization: `Bearer ${token.state}`,
+        },
+      })
+      .then((res) => {
+        setQuizs(res.data.data);
+    }).catch((err) =>{
+      throw err
+    });
+  }
+  const myQuizs = () =>{
+    axios.get(`${URL}/post?userid=${userinfo.id}`,{
+      headers: {
+        authorization: `Bearer ${token.state}`,
+      },
+    }).then((res)=>{
+      setQuizs(res.data.data);
+    }).catch((err)=>{
+      throw err
+    })
+  }
   const logoutHandler = () => {
     axios
       .post(`${URL}/user/signout`)
@@ -65,6 +76,7 @@ const Home = () => {
         console.log(err);
       });
   };
+  console.log(token)
   return (
     <div className="HomeContainer">
       <header>
@@ -75,8 +87,8 @@ const Home = () => {
           <div className="Post_Header">
             <p>Community</p>
             <div className="Post-button">
-              <button>내가 낸 문제</button>
-              <button>전체 문제</button>
+              <button onClick={myQuizs}>내가 낸 문제</button>
+              <button onClick={allQuizs}>전체 문제</button>
             </div>
           </div>
           <div className="Post_Main">
