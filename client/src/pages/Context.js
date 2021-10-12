@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useMemo, useState } from 'react';
 
 const UserContext = createContext({
   token: null,
@@ -8,10 +8,14 @@ const UserContext = createContext({
 const UserProvider = ({ children }) => {
   const [token, setToken] = useState();
 
-  const value = {
+  const value = useMemo(() => ({
     token,
     setToken,
-  };
+  }));
+
+  useEffect(() => {
+    setToken(localStorage.getItem('token'));
+  }, []);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

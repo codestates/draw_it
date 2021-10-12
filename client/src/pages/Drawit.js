@@ -28,7 +28,7 @@ const Drawit = () => {
 
   useEffect(() => {
     if (!token) {
-      history.push('/');
+      history.push('/home');
     }
     const canvas = canvasRef.current;
     canvas.width = canvasWidth;
