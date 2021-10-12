@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 // import { useDispatch } from "react-redux";
 import { useHistory, Link } from 'react-router-dom';
 import Header from '../components/Header';
@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import '../styles/Signin.css';
 import axios from 'axios';
 import { URL } from '../Url';
+import UserContext from './Context';
 
 function Signin({ setIsOpen, isOpen, scrollStop }) {
   const [login, setLogin] = useState({
@@ -15,31 +16,31 @@ function Signin({ setIsOpen, isOpen, scrollStop }) {
 
   const [error, setError] = useState('');
   const history = useHistory();
+  const { token, setToken } = useContext(UserContext);
 
   const handleInputValue = (key) => (e) => {
     setLogin({ ...login, [key]: e.target.value });
   };
 
   const handleLogin = (e) => {
-    e.preventDefault()
-    const { email, password} = login;
+    e.preventDefault();
+    const { email, password } = login;
     // console.log(email, password);
-    if (email.length > 0 && password.length >0) {
-      axios.post(`${ URL }/user/signin` , 
-      { email: email, password: password} ,
-      { withCredentials: true}
-      )
-       .then((res) =>{ 
-        const token = res.data.data.accessToken;
-        
-        history.push({
-          pathname : '/home',
-          state : token
-        });  
-        // history.push('/home')
-      }).catch(err=>{
-        console.log(err)
-      });
+    if (email.length > 0 && password.length > 0) {
+      axios
+        .post(
+          `${URL}/user/signin`,
+          { email: email, password: password },
+          { withCredentials: true }
+        )
+        .then((res) => {
+          const { accessToken } = res.data.data;
+          setToken(accessToken.slice());
+          history.push('/home');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       setError('이메일과 비밀번호가 틀렸습니다 다시 입력하세요');
     }
