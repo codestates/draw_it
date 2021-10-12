@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Palette from '../components/Palette';
-import '../styles/Quiz.css';
+import '../styles/Drawit.css';
 import Quizheader from '../components/Quizheader';
 import { useHistory, useLocation } from 'react-router';
 import { URL } from '../Url';
@@ -10,7 +10,7 @@ import Message from '../components/Message';
 const canvasWidth = 900;
 const canvasHeight = 600;
 
-const Quiz = () => {
+const Drawit = () => {
   const canvasRef = useRef();
   const ctxRef = useRef();
   const brushRef = useRef();
@@ -115,7 +115,7 @@ const Quiz = () => {
     formdata.append('answer', answer);
 
     axios
-      .post(`${ URL }/post`, formdata, {
+      .post(`${URL}/post`, formdata, {
         headers: {
           authorization: `Bearer ${token.state.state}`,
           'Content-Type': 'multipart/form-data',
@@ -123,7 +123,10 @@ const Quiz = () => {
       })
       .then((result) => {
         // 이미지 업로드 성공 메인 화면으로 이동
-        history.push('/home');
+        history.push({
+          pathname: '/home',
+          state: token,
+        });
       })
       .catch((error) => {
         // 이미지 업로드 실패
@@ -178,4 +181,4 @@ const Quiz = () => {
   );
 };
 
-export default Quiz;
+export default Drawit;
