@@ -3,6 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 import '../styles/Home.css';
+import { URL } from '../Url';
 const Home = () => {
   const [quizs, setQuizs] = useState();
   const [userinfo, setUserInfo] = useState('');
@@ -10,7 +11,7 @@ const Home = () => {
   const history = useHistory();
   useEffect(() => {
     axios
-      .get('http://localhost:4000/post', {
+      .get(`${URL}/post`, {
         headers: {
           authorization: `Bearer ${token.state}`,
         },
@@ -22,7 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4000/user/mypage', {
+      .get(`${URL}/user/mypage`, {
         headers: {
           authorization: `Bearer ${token.state}`,
         },
@@ -42,7 +43,7 @@ const Home = () => {
 
   const logoutHandler = () => {
     axios
-      .post('http://localhost:4000/user/signout')
+      .post(`${URL}/user/signout`)
       .then((res) => {
         setToken(null);
         history.push('/');
@@ -59,7 +60,7 @@ const Home = () => {
       <section>
         <section className="Post">
           <div className="Post_Header">
-            <p>Draw it Community</p>
+            <p>Community</p>
             <div className="Post-button">
               <button>내가 낸 문제</button>
               <button>전체 문제</button>
@@ -67,15 +68,14 @@ const Home = () => {
           </div>
           <div className="Post_Main">
             {quizs?.map((data) => {
-              // console.log(data)
               return (
-                <div className="QuizContainer">
+                <div key={data.id} className="QuizContainer">
                   <div className="Post-img">
-                    <img key={data.id} src={data.image}></img>
+                    <img  src={data.image}></img>
                   </div>
                   <div className="QuizContainer_bottom">
-                    <p>{data.User?.nickname}</p>
-                    {data.userId === userinfo?.id ? <div>삭제</div> : null}
+                    <p>{data.User?.nickname}님의 문제</p>
+                    {data.userId === userinfo?.id ? <div>X</div> : null}
                   </div>
                 </div>
               );

@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../styles/Signin.css';
 import axios from 'axios';
+import { URL } from '../Url';
 
 function Signin({ setIsOpen, isOpen, scrollStop }) {
   const [login, setLogin] = useState({
@@ -24,7 +25,7 @@ function Signin({ setIsOpen, isOpen, scrollStop }) {
     const { email, password} = login;
     // console.log(email, password);
     if (email.length > 0 && password.length >0) {
-      axios.post("http://localhost:4000/user/signin" , 
+      axios.post(`${ URL }/user/signin` , 
       { email: email, password: password} ,
       { withCredentials: true}
       )

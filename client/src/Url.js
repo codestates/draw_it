@@ -1,0 +1,1 @@
+export const URL = process.env.URL || 'http://localhost:4000';

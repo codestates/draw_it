@@ -45,7 +45,7 @@
   position: absolute;
   font-size: 80px;
   font-weight: 600;
-  color: var(--deep--grey--color);
+  color: rgb(8, 129, 163);
 }
 
 .ldio-92qnniqtgd div:nth-child(1) {
@@ -89,7 +89,7 @@
   height: 200px;
   display: inline-block;
   overflow: hidden;
-  background: #ffffff;
+  background: #f4e7d3;
 }
 
 .ldio-92qnniqtgd {
@@ -115,7 +115,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgb(255, 255, 255);
+  background-color: #f4e7d3;
 }
 
 .close {
