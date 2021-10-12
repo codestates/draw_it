@@ -1,13 +1,13 @@
 @font-face {
-  font-family: "GongGothicMedium";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff")
-    format("woff");
+  font-family: 'GongGothicMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
-.SignupContainer {
-  font-family: "GongGothicMedium";
+.UsereditContainer {
+  font-family: 'GongGothicMedium';
   position: fixed;
   left: 0px;
   bottom: 0px;
@@ -25,7 +25,7 @@
   color: rgb(8, 129, 163);
 }
 
-.SignupContainer_in {
+.UsereditContainer_in {
   width: 350px;
   height: 500px;
   display: flex;
@@ -37,8 +37,8 @@
   background-color: #e2d6c3;
 }
 
-.Signup-form {
-  font-family: "GongGothicMedium";
+.Useredit-form {
+  font-family: 'GongGothicMedium';
   width: 100%;
   height: 45px;
   margin: auto;
@@ -49,66 +49,63 @@
   transition-duration: 0.5s;
   margin-bottom: 10px;
 }
-.Signup-form div {
+.Useredit-form div {
   width: 30%;
   text-align: center;
+  padding-right: 20px;
 }
-.Signup-email,
-.Signup-nickname,
-.Signup-password,
-.Signup-password-check {
+.Useredit-email,
+.Useredit-password {
   width: 70%;
   height: 35px;
   border-radius: 25px;
-  padding-left: 12px;
+  padding-left: 3px;
   border-radius: 6px;
   border: 1px solid rgb(189, 189, 189);
   outline: none;
   transition: 0.5s;
-  font-family: "GongGothicMedium";
+  font-family: 'GongGothicMedium';
 }
 
-.Signup-email:focus {
+.Useredit-email:focus {
   box-shadow: 0 0 0 2px rgb(211, 149, 14);
   border: 1px solid rgba(189, 189, 189, 0);
 }
 
-.Signup-nickname:focus {
+.Useredit-password:focus {
   box-shadow: 0 0 0 2px rgb(211, 149, 14);
   border: 1px solid rgba(189, 189, 189, 0);
 }
 
-.Signup-password:focus {
-  box-shadow: 0 0 0 2px rgb(211, 149, 14);
-  border: 1px solid rgba(189, 189, 189, 0);
-}
-
-.Signup-password-check:focus {
-  box-shadow: 0 0 0 2px rgb(211, 149, 14);
-  border: 1px solid rgba(189, 189, 189, 0);
-}
-
-.Signup-btn {
-  font-family: "GongGothicMedium";
+.Useredit-btn {
+  font-family: 'GongGothicMedium';
   width: 90%;
   height: 40px;
   margin-bottom: 10px;
 }
 
-.Signup-btn:hover {
+.Useredit-btn:hover {
   width: 90%;
   height: 40px;
 }
 
-.Signup-btn:active {
+.Useredit-btn:active {
   box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
   top: 2px;
 }
 
-.alert-box {
+.Useredit-alert-box-red {
   display: flex;
   justify-content: center;
   align-items: center;
-  color:red;
+  color: red;
+  font-size: 20px;
+}
+
+.Useredit-alert-box-blue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: blue;
   font-size: 20px;
 }
