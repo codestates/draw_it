@@ -76,7 +76,18 @@ const Home = () => {
         console.log(err);
       });
   };
-  console.log(token)
+
+  const quizBook = (index) =>{
+    axios.get(`${URL}/post/${index}`,{
+      headers: {
+        authorization: `Bearer ${token.state}`,
+      },
+    }).then((res)=>{
+      console.log(res)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
   return (
     <div className="HomeContainer">
       <header>
@@ -96,7 +107,7 @@ const Home = () => {
               return (
                 <div key={data.id} className="QuizContainer">
                   <div className="Post-img">
-                    <img src={data.image}></img>
+                    <img src={data.image} onClick={()=>quizBook(data.id)}></img>
                   </div>
                   <div className="QuizContainer_bottom">
                     <p>{data.User?.nickname}님의 문제</p>

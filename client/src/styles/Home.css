@@ -74,6 +74,7 @@ section {
   transform: scale(1.2);
   width: 200px;
   height: 200px;
+  cursor: pointer;
 }
 
 .QuizContainer_bottom {
