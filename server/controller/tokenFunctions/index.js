@@ -1,5 +1,6 @@
 require('dotenv').config();
 const { sign, verify } = require('jsonwebtoken');
+const { User } = require('../../models');
 
 module.exports = {
   generateAccessToken: (data) => {
@@ -21,17 +22,40 @@ module.exports = {
   resendAccessToken: (res, accessToken, data) => {
     res.json({ data: { accessToken, userInfo: data }, message: 'ok' });
   },
-  isAuthorized: (req) => {
+  isAuthorized: (req, res) => {
     const authorization = req.headers['authorization'];
     if (!authorization) {
-      return null;
+      res.status(401).send({
+        data: null,
+        message: '로그인이 되어있지 않은 사용자입니다.',
+      });
     }
+
     const token = authorization.split(' ')[1];
     try {
       return verify(token, process.env.ACCESS_SECRET);
     } catch (err) {
       // return null if invalid token
-      return null;
+      const refreshToken = req.cookies.refreshToken;
+
+      if (!refreshToken) {
+        res.status(401).send({
+          data: null,
+          message: '로그인이 되어있지 않은 사용자입니다.',
+        });
+      }
+
+      const refreshTokenData = verify(refreshToken, process.env.REFRESH_SECRET);
+
+      if (!refreshTokenData) {
+        res.status(401).send({
+          data: null,
+          message: '로그인이 되어있지 않은 사용자입니다.',
+        });
+      }
+      const newAccessToken = sign(refreshTokenData, process.env.ACCESS_SECRET);
+
+      return verify(newAccessToken, process.env.ACCESS_SECRET);
     }
   },
   checkRefeshToken: (refreshToken) => {

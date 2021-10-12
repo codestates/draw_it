@@ -24,6 +24,10 @@ function Signin({ setIsOpen, isOpen, scrollStop}) {
     
     const { email, password} = login;
     // console.log(email, password);
+
+    if (password !== passwordcheck){
+      return setError("비밀번호가 맞지않습니다")
+    }
     if (email.length > 0 || password.length >0) {
       axios.post("http://localhost:4000/user/signin" , 
       { email: email, password: password} ,

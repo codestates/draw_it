@@ -1,55 +1,105 @@
-import React,{useEffect, useState} from 'react'
-import axios from 'axios'
-import Header from '../components/Header'
-import '../styles/Home.css'
+import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import Header from '../components/Header';
+import '../styles/Home.css';
+import { URL } from '../Url';
 const Home = () => {
-  const [quizs, setQuizs] = useState()
-    // useEffect(() => {
-    //   axios.get('http://localhost:4000/post')
-    //     .then((res)=>{
-    //       setQuizs(res.data.data)
-    //   })
-    // }, []);
-    useEffect(() => {
-      setQuizs([1,2,3,4,5,6,7,8,9,10])
-    }, []);
-    return (
-      <div className="HomeContainer">
-        <header>
-          <Header />
-        </header>
-        <section>
-          <section className="Post">
-            <div className = "Post_Header">
-              <p>Draw it Community</p>
-              <div className = "Post-button">
-                <button>내가 낸 문제</button>
-                <button>전체 문제</button>
-              </div>
-            </div>
-            <div className="Post_Main">
-            {quizs?.map((data)=>{
-              console.log(data)
-              return <img className="Post-img" src="https://i.pinimg.com/564x/69/40/76/694076a5bf6327b147fcc8ba953a246f.jpg"></img>
-            })}
-            </div>
-          </section>
-          <aside>
-            <div className="Mypage">
-              <h2>My Page</h2>
-              <div>나의 정답 개수</div>
-              <div className="Mypage_button">
-                <button>회원 정보 수정</button>
-                <button>로그아웃</button>
-              </div>
-            </div>
-            <div className="Post_Draw">
-              <button>Draw it</button>
-            </div>
-          </aside>
-        </section>
-      </div>
-    )
-}
+  const [quizs, setQuizs] = useState();
+  const [userinfo, setUserInfo] = useState('');
+  const [token, setToken] = useState(useLocation());
+  const history = useHistory();
+  useEffect(() => {
+    axios
+      .get(`${URL}/post`, {
+        headers: {
+          authorization: `Bearer ${token.state}`,
+        },
+      })
+      .then((res) => {
+        setQuizs(res.data.data);
+      });
+  }, []); //uerid
 
-export default Home
+  useEffect(() => {
+    axios
+      .get(`${URL}/user/mypage`, {
+        headers: {
+          authorization: `Bearer ${token.state}`,
+        },
+      })
+      .then((res) => {
+        setUserInfo(res.data.data);
+      });
+  }, []); //state=id
+  console.log('userinfo', userinfo);
+
+  const draw = () => {
+    history.push({
+      pathname: '/quiz',
+      state: token,
+    });
+  };
+
+  const logoutHandler = () => {
+    axios
+      .post(`${URL}/user/signout`)
+      .then((res) => {
+        setToken(null);
+        history.push('/');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  return (
+    <div className="HomeContainer">
+      <header>
+        <Header />
+      </header>
+      <section>
+        <section className="Post">
+          <div className="Post_Header">
+            <p>Community</p>
+            <div className="Post-button">
+              <button>내가 낸 문제</button>
+              <button>전체 문제</button>
+            </div>
+          </div>
+          <div className="Post_Main">
+            {quizs?.map((data) => {
+              return (
+                <div key={data.id} className="QuizContainer">
+                  <div className="Post-img">
+                    <img  src={data.image}></img>
+                  </div>
+                  <div className="QuizContainer_bottom">
+                    <p>{data.User?.nickname}님의 문제</p>
+                    {data.userId === userinfo?.id ? <div>X</div> : null}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+        <aside>
+          <div className="Mypage">
+            <h2>My Page</h2>
+            <div>
+              {userinfo?.nickname}의 정답 개수 : {userinfo?.passedPosts}
+            </div>
+            <div className="Mypage_button">
+              <button>회원 정보 수정</button>
+              <button onClick={logoutHandler}>로그아웃</button>
+            </div>
+          </div>
+          <div className="Post_Draw">
+            <button onClick={draw}>Draw it</button>
+          </div>
+        </aside>
+      </section>
+    </div>
+  );
+};
+
+export default Home;

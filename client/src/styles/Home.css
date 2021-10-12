@@ -20,7 +20,6 @@ section {
   height: auto;
   display: flex;
   flex-direction: column;
-
   margin-right: 15px;
 }
 
@@ -31,7 +30,7 @@ section {
 }
 
 .Post_Header p {
-  font-size: 25px;
+  font-size: 45px;
 }
 
 .Post-button button {
@@ -42,16 +41,66 @@ section {
 }
 
 .Post_Main {
-  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
   width: 100%;
   height: 500px;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.QuizContainer {
+  padding: 10px;
 }
 
 .Post-img {
   width: 200px;
   height: 200px;
-  padding: 10px;
+  overflow: hidden;
+  border: 3px solid rgb(8, 129, 163);
+  border-radius: 6px;
+}
+
+.Post-img img {
+  transform: scale(1);
+  width: 200px;
+  height: 200px;
+  transition: all 0.3s ease-in-out;
+}
+
+.Post-img img:hover {
+  transform: scale(1.2);
+  width: 200px;
+  height: 200px;
+}
+
+.QuizContainer_bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.QuizContainer_bottom p {
+  margin-top: 5px;
+  font-size: 20px;
+}
+
+.QuizContainer_bottom div {
+  width: auto;
+  height: auto;
+  font-family: "GongGothicMedium";
+  border: 1px solid black;
+  border-radius: 6px;
+  transition-duration: 0.5s;
+  font-size: 16px;
+  font-weight: lighter;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.QuizContainer_bottom div:hover {
+  color: rgb(8, 129, 163);
+  border: 1px solid rgb(8, 129, 163);
+  cursor: pointer;
 }
 
 aside {

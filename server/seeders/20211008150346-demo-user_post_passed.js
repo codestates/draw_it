@@ -6,14 +6,10 @@ module.exports = {
       {
         userId: 1,
         postId: 1,
-        createdAt: new Date(),
-        updatedAt: new Date(),
       },
       {
         userId: 2,
         postId: 2,
-        createdAt: new Date(),
-        updatedAt: new Date(),
       },
     ]);
   },
