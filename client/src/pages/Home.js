@@ -41,6 +41,19 @@ const Home = () => {
     });
   };
 
+  const imgDelete = (index) =>{
+    
+    console.log(index)
+    axios.delete(`${URL}/post/${index}`,{
+      headers: {
+        authorization: `Bearer ${token.state}`,
+      },
+    }).then((res)=>{
+      const deleted = quizs.filter((quiz) => quiz.id !== index)
+      setQuizs([...deleted])
+    })
+  }
+
   const logoutHandler = () => {
     axios
       .post(`${URL}/user/signout`)
@@ -75,7 +88,7 @@ const Home = () => {
                   </div>
                   <div className="QuizContainer_bottom">
                     <p>{data.User?.nickname}님의 문제</p>
-                    {data.userId === userinfo?.id ? <div>X</div> : null}
+                    {data.userId === userinfo?.id ? <div onClick={()=>imgDelete(data.id)}>X</div> : null}
                   </div>
                 </div>
               );

@@ -85,6 +85,7 @@ module.exports = {
     }
   },
   delete: async (req, res) => {
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",req.params)
     const { id } = req.params;
 
     // ToDo 로그인 유무 확인하기
