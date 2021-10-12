@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 import '../styles/Home.css';
 import { URL } from '../Url';
+import UserContext from './Context';
 const Home = () => {
   const [quizs, setQuizs] = useState();
   const [userinfo, setUserInfo] = useState('');
-  const [token, setToken] = useState(useLocation());
+  const { token, setToken } = useContext(UserContext);
   const history = useHistory();
   useEffect(() => {
     axios
       .get(`${URL}/post`, {
         headers: {
-          authorization: `Bearer ${token.state}`,
+          authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
@@ -25,7 +26,7 @@ const Home = () => {
     axios
       .get(`${URL}/user/mypage`, {
         headers: {
-          authorization: `Bearer ${token.state}`,
+          authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
@@ -35,10 +36,7 @@ const Home = () => {
   console.log('userinfo', userinfo);
 
   const draw = () => {
-    history.push({
-      pathname: '/quiz',
-      state: token,
-    });
+    history.push('/quiz');
   };
 
   const logoutHandler = () => {
