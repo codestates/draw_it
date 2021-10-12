@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 import '../styles/Home.css';
 import { URL } from '../Url';
+import UserContext from './Context';
 const Home = () => {
   const [quizs, setQuizs] = useState();
   const [userinfo, setUserInfo] = useState('');
-  const [token, setToken] = useState(useLocation());
+  const { token, setToken } = useContext(UserContext);
   const history = useHistory();
+  const [answer, setAnswer] = useState();
   useEffect(() => {
     allQuizs()
   }, []); //uerid
@@ -17,7 +19,7 @@ const Home = () => {
     axios
       .get(`${URL}/user/mypage`, {
         headers: {
-          authorization: `Bearer ${token.state}`,
+          authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
@@ -26,16 +28,13 @@ const Home = () => {
   }, []); //state=id
 
   const draw = () => {
-    history.push({
-      pathname: '/quiz',
-      state: token,
-    });
+    history.push('/quiz');
   };
 
   const imgDelete = (index) =>{
     axios.delete(`${URL}/post/${index}`,{
       headers: {
-        authorization: `Bearer ${token.state}`,
+        authorization: `Bearer ${token}`,
       },
     }).then((res)=>{
       const deleted = quizs.filter((quiz) => quiz.id !== index)
@@ -45,7 +44,7 @@ const Home = () => {
   const allQuizs = () => {
     axios.get(`${URL}/post`, {
       headers: {
-        authorization: `Bearer ${token.state}`,
+        authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
@@ -57,7 +56,7 @@ const Home = () => {
   const myQuizs = () =>{
     axios.get(`${URL}/post?userid=${userinfo.id}`,{
       headers: {
-        authorization: `Bearer ${token.state}`,
+        authorization: `Bearer ${token}`,
       },
     }).then((res)=>{
       setQuizs(res.data.data);
@@ -77,13 +76,15 @@ const Home = () => {
       });
   };
 
-  const quizBook = (index) =>{
+  const detailQuizHandler = (index) =>{
     axios.get(`${URL}/post/${index}`,{
       headers: {
-        authorization: `Bearer ${token.state}`,
+        authorization: `Bearer ${token}`,
       },
     }).then((res)=>{
-      console.log(res)
+      const quizData = res.data.data
+      setAnswer(quizData.post.answer)
+      history.push('/postQuiz');
     }).catch((err)=>{
       console.log(err)
     })
@@ -107,7 +108,7 @@ const Home = () => {
               return (
                 <div key={data.id} className="QuizContainer">
                   <div className="Post-img">
-                    <img src={data.image} onClick={()=>quizBook(data.id)}></img>
+                    <img src={data.image} onClick={() => detailQuizHandler(data.id)}></img>
                   </div>
                   <div className="QuizContainer_bottom">
                     <p>{data.User?.nickname}님의 문제</p>

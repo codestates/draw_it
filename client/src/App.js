@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Drawit from './pages/Drawit';
 import Loading from './components/Loading';
 import Quiz from './pages/Quiz';
+import { UserProvider } from './pages/Context';
 
 function App() {
   // const [Login, setLogin] = useState(false);
@@ -20,29 +21,31 @@ function App() {
     }, 2000);
   }, []);
   return (
-    <BrowserRouter>
-      {isLoading ? <Loading /> : null}
-      <Switch>
-        <Route exact path="/">
-          <Main />
-        </Route>
-        <Route exact path="/Signin">
-          <Signin />
-        </Route>
-        <Route exact path="/Signup">
-          <Signup />
-        </Route>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/quiz">
-          <Drawit />
-        </Route>
-        <Route exact path="/postQuiz">
-          <Quiz />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        {isLoading ? <Loading /> : null}
+        <Switch>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          <Route exact path="/Signin">
+            <Signin />
+          </Route>
+          <Route exact path="/Signup">
+            <Signup />
+          </Route>
+          <Route exact path="/home">
+            <Home />
+          </Route>
+          <Route exact path="/quiz">
+            <Drawit />
+          </Route>
+          <Route exact path="/postQuiz">
+            <Quiz />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </UserProvider>
   );
 }
 

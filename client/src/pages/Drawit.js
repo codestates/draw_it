@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Palette from '../components/Palette';
 import '../styles/Drawit.css';
 import Quizheader from '../components/Quizheader';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory } from 'react-router';
 import { URL } from '../Url';
 import Message from '../components/Message';
+import UserContext from './Context';
 
 const canvasWidth = 900;
 const canvasHeight = 600;
@@ -17,7 +18,7 @@ const Drawit = () => {
 
   const history = useHistory();
 
-  const [token, setToken] = useState(useLocation());
+  const { token } = useContext(UserContext);
   const [error, setError] = useState();
 
   const [ctx, setCtx] = useState();
@@ -26,7 +27,7 @@ const Drawit = () => {
   const [answer, setAnswer] = useState();
 
   useEffect(() => {
-    if (!token?.state?.state) {
+    if (!token) {
       history.push('/');
     }
     const canvas = canvasRef.current;
@@ -117,16 +118,13 @@ const Drawit = () => {
     axios
       .post(`${URL}/post`, formdata, {
         headers: {
-          authorization: `Bearer ${token.state.state}`,
+          authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
         },
       })
       .then((result) => {
         // 이미지 업로드 성공 메인 화면으로 이동
-        history.push({
-          pathname: '/home',
-          state: token.state.state,
-        });
+        history.push('/home');
       })
       .catch((error) => {
         // 이미지 업로드 실패
@@ -171,7 +169,7 @@ const Drawit = () => {
           className="input"
           placeholder="문제의 정답을 입력해주세요!"
           onChange={changeAnswer}
-          value={answer}
+          value={answer || ''}
         />
         <div className="upload_button" onClick={uploadImage}>
           제출
