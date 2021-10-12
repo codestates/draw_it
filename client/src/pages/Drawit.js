@@ -171,7 +171,7 @@ const Drawit = () => {
           className="input"
           placeholder="문제의 정답을 입력해주세요!"
           onChange={changeAnswer}
-          value={answer}
+          value={answer || ''}
         />
         <div className="upload_button" onClick={uploadImage}>
           제출
