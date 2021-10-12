@@ -6,4 +6,5 @@ module.exports = {
     mypage: require('./user/mypage'),
   },
   postController: require('./post'),
+  commentController: require('./comment/comment'),
 };
