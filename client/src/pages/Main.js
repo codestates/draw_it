@@ -2,8 +2,9 @@ import React, {useState} from "react"
 import { Link } from "react-router-dom";
 import Signin from './Signin';
 import "../styles/Main.css"
-
+import { URL } from '../Url';
 function Main() {
+  console.log(URL)
   const [isOpen, setIsOpen] = useState(false);
 
 
