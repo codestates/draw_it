@@ -7,13 +7,11 @@ import { URL } from '../Url';
 import Message from '../components/Message';
 import Comment from '../components/Comment';
 
-const Quiz = () => {
+const Quiz = ({ token }) => {
   const history = useHistory();
 
-  const [token, setToken] = useState(useLocation());
-  const [error, setError] = useState();
-
   const [answer, setAnswer] = useState();
+  const [error, setError] = useState();
   const postId = useParams();
   const [detailId, setDetailId] = useState(postId);
   const [image, setImage] = useState();

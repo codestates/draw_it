@@ -1,26 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 import '../styles/Home.css';
 import { URL } from '../Url';
 import Useredit from './Useredit';
-import UserContext from './Context';
 
-const Home = () => {
+const Home = ({ token, setToken }) => {
   const [quizs, setQuizs] = useState();
   const [userinfo, setUserInfo] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
-  const { token, setToken } = useContext(UserContext);
   const [answer, setAnswer] = useState();
   const [imageUrl, setImageUrl] = useState();
 
   useEffect(() => {
-    setToken(localStorage.getItem('token'));
     allQuizs();
   }, []); //userid
-
   useEffect(() => {
     axios
       .get(`${URL}/user/mypage`, {

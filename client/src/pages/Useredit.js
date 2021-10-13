@@ -4,11 +4,9 @@ import Header from '../components/Header';
 import '../styles/Useredit.css';
 import axios from 'axios';
 import { URL } from '../Url';
-import UserContext from './Context';
 
-function Useredit({ setIsOpen, isOpen, scrollStop }) {
+function Useredit({ setIsOpen, isOpen, scrollStop, token }) {
   const history = useHistory();
-  const { token, setToken } = useContext(UserContext);
   const [message, setMessage] = useState('');
   const [edit, setEdit] = useState({
     nickname: '',
