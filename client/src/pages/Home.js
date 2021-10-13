@@ -16,6 +16,7 @@ const Home = () => {
   const [answer, setAnswer] = useState();
   const [imageUrl, setImageUrl] = useState();
   console.log("@@@@@@@@@@@@",localStorage.getItem('token'))
+  console.log("토큰입니다",token)
   useEffect(() => {
     setToken(localStorage.getItem('token'));
     allQuizs();
