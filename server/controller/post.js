@@ -106,7 +106,6 @@ module.exports = {
     }
   },
   delete: async (req, res) => {
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",req.params)
     const { id } = req.params;
 
     const auth = checkRefeshToken(req.cookies['refreshToken']);

@@ -31,7 +31,8 @@ function Useredit({ setIsOpen, isOpen, scrollStop }) {
 
   const handleSubmit = (e) => {
     console.log('hello world');
-    e.preventDefault();
+
+    // e.preventDefault();
 
     const { nickname } = edit;
 
@@ -49,9 +50,11 @@ function Useredit({ setIsOpen, isOpen, scrollStop }) {
         }
       )
       .then((res) => {
-        history.push('/home');
+        console.log('성공');
+        console.log(res.data.data);
       })
       .catch((err) => {
+        console.log('실패');
         console.log(err);
       });
   };
@@ -66,11 +69,11 @@ function Useredit({ setIsOpen, isOpen, scrollStop }) {
         <Header />
         <p className="Header-name">Draw it</p>
         <form>
-          <div className="Useredit-form">
+          <div className='Useredit-form'>
             <div>nickname</div>
             <input
-              className="Useredit-email"
-              type="nickname"
+              className='Useredit-email'
+              type='nickname'
               onChange={handleInputValue('nickname')}
               placeholder="nickname"
             />
@@ -93,16 +96,17 @@ function Useredit({ setIsOpen, isOpen, scrollStop }) {
               placeholder="password check"
             />
           </div>
-          <div className="Useredit-form">
+
+          <div className='Useredit-form'>
             <button
-              className="Useredit-btn"
-              type="submit"
+              className='Useredit-btn'
+              type='submit'
               onClick={handleSubmit}
             >
               수정 완료
             </button>
           </div>
-          <div className="Useredit-alert-box-red">{message}</div>
+          <div className='Useredit-alert-box-red'>{message}</div>
         </form>
       </div>
     </div>

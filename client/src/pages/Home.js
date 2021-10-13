@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
-import Mypage from './Mypage';
 import '../styles/Home.css';
 import { URL } from '../Url';
 import Useredit from './Useredit';
@@ -28,6 +27,7 @@ const Home = () => {
         },
       })
       .then((res) => {
+        console.log(res);
         setUserInfo(res.data.data);
       });
   }, []); //state.id
@@ -129,7 +129,7 @@ const Home = () => {
         <section className="Post">
           <div className="Post_Header">
             <p>Community</p>
-            <div className="Post-button">
+            <div className='Post-button'>
               <button onClick={myQuizs}>내가 낸 문제</button>
               <button onClick={allQuizs}>전체 문제</button>
             </div>
@@ -137,6 +137,7 @@ const Home = () => {
           <div className="Post_Main">
             {quizs?.map((data) => {
               return (
+
                 <div key={data.id} className="QuizContainer">
                   <div className="Post-img">
                     <img
