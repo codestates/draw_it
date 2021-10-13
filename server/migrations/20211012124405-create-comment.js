@@ -11,10 +11,6 @@ module.exports = {
       text: {
         type: Sequelize.STRING,
       },
-      nickname: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
       userId: {
         allowNull: true,
         type: Sequelize.INTEGER,

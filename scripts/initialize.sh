@@ -9,6 +9,7 @@ export DATABASE_PASSWORD=$(aws ssm get-parameters --region ap-northeast-2 --name
 export DATABASE_PORT=$(aws ssm get-parameters --region ap-northeast-2 --names DATABASE_PORT --query Parameters[0].Value | sed 's/"//g')
 export DATABASE_HOST=$(aws ssm get-parameters --region ap-northeast-2 --names DATABASE_HOST --query Parameters[0].Value | sed 's/"//g')
 export HTTP_PORT=$(aws ssm get-parameters --region ap-northeast-2 --names HTTP_PORT --query Parameters[0].Value | sed 's/"//g')
+npx sequelize-cli db:migrate:undo:all
 npx sequelize-cli db:migrate
 sudo apt-get update
 sudo apt-get install authbind

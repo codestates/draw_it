@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Palette from '../components/Palette';
 import '../styles/Drawit.css';
@@ -6,25 +6,25 @@ import Quizheader from '../components/Quizheader';
 import { useHistory } from 'react-router';
 import { URL } from '../Url';
 import Message from '../components/Message';
-import UserContext from './Context';
 
 const canvasWidth = 900;
 const canvasHeight = 600;
 
-const Drawit = () => {
+const Drawit = ({ token }) => {
   const canvasRef = useRef();
   const ctxRef = useRef();
   const brushRef = useRef();
 
   const history = useHistory();
 
-  const { token } = useContext(UserContext);
   const [error, setError] = useState();
 
   const [ctx, setCtx] = useState();
   const [brush, setBrush] = useState();
   const [isDrawing, setIsDrawing] = useState(false);
   const [answer, setAnswer] = useState();
+
+  console.log(token);
 
   useEffect(() => {
     const canvas = canvasRef.current;
