@@ -91,7 +91,7 @@ section {
 .QuizContainer_bottom div {
   width: auto;
   height: auto;
-  font-family: "GongGothicMedium";
+  font-family: 'GongGothicMedium';
   border: 1px solid black;
   border-radius: 6px;
   transition-duration: 0.5s;

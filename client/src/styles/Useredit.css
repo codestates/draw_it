@@ -47,17 +47,17 @@
   align-items: center;
   color: rgb(48, 48, 48);
   transition-duration: 0.5s;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
 }
 .Useredit-form div {
   width: 30%;
   text-align: center;
-  padding-right: 20px;
+  padding-right: 50px;
+  font-size: 17px;
 }
-.Useredit-email,
-.Useredit-password {
+.Useredit-nickname {
   width: 70%;
-  height: 35px;
+  height: 100%;
   border-radius: 25px;
   padding-left: 3px;
   border-radius: 6px;
@@ -107,5 +107,5 @@
   justify-content: center;
   align-items: center;
   color: blue;
-  font-size: 20px;
+  font-size: 40px;
 }

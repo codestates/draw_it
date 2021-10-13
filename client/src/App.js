@@ -1,7 +1,5 @@
 import './styles/App.css';
 import Main from './pages/Main';
-import Signup from './pages/Signup';
-import Signin from './pages/Signin';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Home from './pages/Home';
@@ -14,8 +12,9 @@ axios.defaults.withCredentials = true;
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
-
+  const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
@@ -25,16 +24,21 @@ function App() {
     <BrowserRouter>
       {isLoading ? <Loading /> : null}
       <Switch>
-        <Route exact path="/">
+        <Route exact path='/'>
           <Main setToken={setToken} />
         </Route>
-        <Route exact path="/home">
-          <Home token={token} setToken={setToken} />
+        <Route exact path='/home'>
+          <Home
+            userInfo={userInfo}
+            setUserInfo={setUserInfo}
+            token={token}
+            setToken={setToken}
+          />
         </Route>
-        <Route exact path="/quiz">
+        <Route exact path='/quiz'>
           <Drawit token={token} />
         </Route>
-        <Route exact path="/postQuiz/:postId">
+        <Route exact path='/postQuiz/:postId'>
           <Quiz token={token} />
         </Route>
       </Switch>
