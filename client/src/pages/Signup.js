@@ -192,7 +192,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
       ) : null}
     
       </div>
-    </div>
+    
   );
 }
 export default Signup;

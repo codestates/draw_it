@@ -6,6 +6,8 @@ import axios from 'axios';
 import { URL } from '../Url';
 import UserContext from './Context';
 
+axios.defaults.withCredentials = true;
+
 function Useredit({ setIsOpen, isOpen, scrollStop }) {
   const history = useHistory();
   const { token, setToken } = useContext(UserContext);

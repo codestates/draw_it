@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Palette from '../components/Palette';
-import '../styles/Drawit.css';
+import '../styles/Quiz.css';
 import Quizheader from '../components/Quizheader';
 import { useHistory, useLocation, useParams } from 'react-router';
 import { URL } from '../Url';
@@ -117,7 +117,7 @@ const Quiz = () => {
       <div id="main">
         <div id="canvas">
           <div ref={brushRef} id="brush" />
-          <img src ={image} />
+          <img className="canvas-img" src ={image} />
         </div>
       </div>
       <div className="answer_input_form">
