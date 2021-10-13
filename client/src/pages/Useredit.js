@@ -1,8 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import '../styles/Useredit.css';
+import axios from 'axios';
+import { URL } from '../Url';
+import UserContext from './Context';
 
 function Useredit({ setIsOpen, isOpen, scrollStop }) {
+  const history = useHistory();
+  const { token, setToken } = useContext(UserContext);
   const [message, setMessage] = useState('');
   const [edit, setEdit] = useState({
     nickname: '',
@@ -24,13 +30,32 @@ function Useredit({ setIsOpen, isOpen, scrollStop }) {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    console.log('hello world');
+    // e.preventDefault();
 
-    const { nickname, password } = edit;
+    const { nickname } = edit;
 
-    if (nickname && password) {
-      console.log('API');
-    }
+    axios
+      .put(
+        `${URL}/user/mypage`,
+        {
+          nickname: nickname,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+            withCredentials: true,
+          },
+        }
+      )
+      .then((res) => {
+        console.log('성공');
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log('실패');
+        console.log(err);
+      });
   };
 
   return (
@@ -44,10 +69,10 @@ function Useredit({ setIsOpen, isOpen, scrollStop }) {
         <p className='Header-name'>Draw it</p>
         <form>
           <div className='Useredit-form'>
-            <div>닉네임</div>
+            <div>nickname</div>
             <input
               className='Useredit-email'
-              type='email'
+              type='nickname'
               onChange={handleInputValue('nickname')}
               placeholder='nickname'
             />
@@ -71,15 +96,15 @@ function Useredit({ setIsOpen, isOpen, scrollStop }) {
             />
           </div>
           <div className='Useredit-form'>
-            <button className='Useredit-btn' type='submit'>
+            <button
+              className='Useredit-btn'
+              type='submit'
+              onClick={handleSubmit}
+            >
               수정 완료
             </button>
           </div>
-          {message === '닉네임이 수정되었습니다.' ? (
-            <div className='Useredit-alert-box-blue'>{message}</div>
-          ) : (
-            <div className='Useredit-alert-box-red'>{message}</div>
-          )}
+          <div className='Useredit-alert-box-red'>{message}</div>
         </form>
       </div>
     </div>
