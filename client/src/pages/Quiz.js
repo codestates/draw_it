@@ -1,4 +1,4 @@
-import React, { useContext,useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/Quiz.css';
 import Quizheader from '../components/Quizheader';
@@ -6,7 +6,6 @@ import { useHistory, useParams } from 'react-router';
 import { URL } from '../Url';
 import Message from '../components/Message';
 import Comment from '../components/Comment';
-import UserContext from './Context';
 
 const Quiz = ({ token }) => {
   const history = useHistory();
@@ -44,7 +43,6 @@ const Quiz = ({ token }) => {
         setComment(result.data.data);
       });
   }, []);
-   
 
   const changeAnswer = (e) => {
     const { value } = e.target;
@@ -57,10 +55,9 @@ const Quiz = ({ token }) => {
   };
 
   const uploadComment = (text) => {
-    const { postId } = postId;
     axios
       .post(
-        `${URL}/comment/${postId}`,
+        `${URL}/comment/${postId.postId}`,
         { text },
         {
           headers: {
@@ -69,7 +66,8 @@ const Quiz = ({ token }) => {
         }
       )
       .then((result) => {
-        console.log(result);
+        const { data } = result.data;
+        setComment([...comment, data]);
       });
   };
 
@@ -81,7 +79,7 @@ const Quiz = ({ token }) => {
       <Quizheader length={answer?.length} />
       <div id="main">
         <div id="canvas">
-          <img className="canvas-img" src ={image} />
+          <img className="canvas-img" src={image} />
         </div>
       </div>
       <div className="answer_input_form">
@@ -91,9 +89,7 @@ const Quiz = ({ token }) => {
           onChange={changeAnswer}
           // value={answer}
         />
-        <div className="upload_button">
-          정답확인
-        </div>
+        <div className="upload_button">정답확인</div>
       </div>
       {comment && <Comment comments={comment} uploadComment={uploadComment} />}
     </div>

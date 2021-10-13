@@ -8,6 +8,7 @@ module.exports = {
     try {
       const comments = await Comment.findAll({
         where: { postId: id },
+        include: [{ model: User, attributes: ['nickname'] }],
       });
 
       res
@@ -52,13 +53,17 @@ module.exports = {
 
     const created = await Comment.create({
       text,
-      nickname: user.nickname,
       userId: user.id,
       postId: post.id,
     });
 
+    const comment = await Comment.findOne({
+      where: { id: created.id },
+      include: [{ model: User, attributes: ['nickname'] }],
+    });
+
     res
       .status(201)
-      .json({ data: created, message: '댓글 작성 완료하였습니다.' });
+      .json({ data: comment, message: '댓글 작성 완료하였습니다.' });
   },
 };

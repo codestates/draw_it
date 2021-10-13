@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import '../styles/Comment.css';
 
 const Comment = ({ comments, uploadComment }) => {
   const [text, setText] = useState();
+  const inputRef = useRef();
 
-  const changeText = (e) => {
-    setText(e.target.value);
+  const changeText = () => {
+    setText(inputRef.current.value);
   };
 
   const handleUpload = () => {
     uploadComment(text.slice(0, 24));
+    inputRef.current.value = '';
     setText('');
   };
 
@@ -18,6 +20,7 @@ const Comment = ({ comments, uploadComment }) => {
       <h2 className="title">코멘트 리스트</h2>
       <div className="comment_input_form">
         <input
+          ref={inputRef}
           className="comment_input"
           placeholder="댓글을 입력해주세요!"
           onChange={changeText}
@@ -30,7 +33,7 @@ const Comment = ({ comments, uploadComment }) => {
         {comments?.map((comment) => {
           return (
             <li key={comment.id} className="comment">
-              <span className="nickname">{comment.nickname}</span>
+              <span className="nickname">{comment.User.nickname}</span>
               <span>{comment.text}</span>
             </li>
           );
