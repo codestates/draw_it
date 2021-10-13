@@ -41,7 +41,7 @@ const Quiz = ({ token }) => {
         setComment(result.data.data);
         // containerRef.current.style.overflowY = '';
       });
-  }, [data]);
+  }, []);
 
   const changeAnswer = (e) => {
     setValue(e.target.value);
