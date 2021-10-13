@@ -13,8 +13,9 @@ axios.defaults.withCredentials = true;
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
-
+  const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
@@ -24,16 +25,21 @@ function App() {
     <BrowserRouter>
       {isLoading ? <Loading /> : null}
       <Switch>
-        <Route exact path="/">
+        <Route exact path='/'>
           <Main setToken={setToken} />
         </Route>
-        <Route exact path="/home">
-          <Home token={token} setToken={setToken} />
+        <Route exact path='/home'>
+          <Home
+            userInfo={userInfo}
+            setUserInfo={setUserInfo}
+            token={token}
+            setToken={setToken}
+          />
         </Route>
-        <Route exact path="/quiz">
+        <Route exact path='/quiz'>
           <Drawit token={token} />
         </Route>
-        <Route exact path="/postQuiz/:postId">
+        <Route exact path='/postQuiz/:postId'>
           <Quiz token={token} />
         </Route>
         <Route exact path="/test">
