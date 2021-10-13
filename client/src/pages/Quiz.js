@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Palette from '../components/Palette';
 import '../styles/Drawit.css';
 import Quizheader from '../components/Quizheader';
 import { useHistory, useLocation, useParams } from 'react-router';
@@ -8,53 +7,51 @@ import { URL } from '../Url';
 import Message from '../components/Message';
 import Comment from '../components/Comment';
 
-const canvasWidth = 900;
-const canvasHeight = 600;
-
 const Quiz = () => {
-  const canvasRef = useRef();
-  const ctxRef = useRef();
-  const brushRef = useRef();
-
   const history = useHistory();
 
   const [token, setToken] = useState(useLocation());
   const [error, setError] = useState();
 
-  const [ctx, setCtx] = useState();
-  const [brush, setBrush] = useState();
-  const [isDrawing, setIsDrawing] = useState(false);
   const [answer, setAnswer] = useState();
-  const postId = useParams()
-  const [detailId, setDetailId] = useState(postId)
-  const [image, setImage] = useState()
-  const [value, setValue] = useState()
+  const postId = useParams();
+  const [detailId, setDetailId] = useState(postId);
+  const [image, setImage] = useState();
+  const [value, setValue] = useState();
   const [comment, setComment] = useState();
-  
+
   useEffect(() => {
-    axios.get(`${URL}/post/${detailId.postId}`,{
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    }).then((res)=>{
-      // console.log(res.data.data.post)
-      const detailData = res.data.data.post
-      setAnswer(detailData.answer)
-      setImage(detailData.image)
-    })
-    
-        // To Do PostId 변경하기
-    axios.get(`${URL}/comment/${1}`).then((result) => {
-      setComment(result.data.data);
-    });
+    axios
+      .get(`${URL}/post/${detailId.postId}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        // console.log(res.data.data.post)
+        const detailData = res.data.data.post;
+        setAnswer(detailData.answer);
+        setImage(detailData.image);
+      });
+
+    // To Do PostId 변경하기
+    axios
+      .get(`${URL}/comment/${postId.postId}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        setComment(result.data.data);
+      });
   }, []);
-   
+
   const uploadImage = () => {
     if (!answer || answer.length < 2) {
       setError('정답은 2글자 이상이어야 합니다.');
       return;
     }
-
+    /*
     const image = canvasRef.current.toDataURL('image/png');
     const blob = atob(image.split(',')[1]);
 
@@ -87,6 +84,7 @@ const Quiz = () => {
         // 이미지 업로드 실패
         setError('정답을 입력해주세요!');
       });
+      */
   };
 
   const changeAnswer = (e) => {
@@ -100,15 +98,23 @@ const Quiz = () => {
   };
 
   const uploadComment = (text) => {
-    // To Do PostId 변경하기
-    // axios.post(`${URL}/comment/${1}`,{text},{
-    //   headers: {
-    //     authorization: `Bearer ${token}`,
-    //   }
-    // }).then((result) => {
-    //   result
-    // })
+    const { postId } = postId;
+    axios
+      .post(
+        `${URL}/comment/${postId}`,
+        { text },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((result) => {
+        console.log(result);
+      });
   };
+
+  console.log(image);
 
   return (
     <div id="container">
@@ -116,8 +122,7 @@ const Quiz = () => {
       <Quizheader length={answer?.length} />
       <div id="main">
         <div id="canvas">
-          <div ref={brushRef} id="brush" />
-          <img src ={image} />
+          <img src={image} />
         </div>
       </div>
       <div className="answer_input_form">

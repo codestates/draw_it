@@ -2,7 +2,6 @@ import './styles/App.css';
 import Main from './pages/Main';
 import Signup from './pages/Signup';
 import Signin from './pages/Signin';
-import Mypage from './pages/Mypage';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Home from './pages/Home';
@@ -10,6 +9,9 @@ import Drawit from './pages/Drawit';
 import Loading from './components/Loading';
 import Quiz from './pages/Quiz';
 import { UserProvider } from './pages/Context';
+import axios from 'axios';
+
+axios.defaults.withCredentials = true;
 
 function App() {
   // const [Login, setLogin] = useState(false);

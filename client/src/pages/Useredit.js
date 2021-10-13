@@ -35,7 +35,7 @@ function Useredit({ setIsOpen, isOpen, scrollStop }) {
     // e.preventDefault();
 
     const { nickname } = edit;
-    
+
     axios
       .put(
         `${URL}/user/mypage`,
@@ -69,11 +69,11 @@ function Useredit({ setIsOpen, isOpen, scrollStop }) {
         <Header />
         <p className="Header-name">Draw it</p>
         <form>
-          <div className='Useredit-form'>
+          <div className="Useredit-form">
             <div>nickname</div>
             <input
-              className='Useredit-email'
-              type='nickname'
+              className="Useredit-email"
+              type="nickname"
               onChange={handleInputValue('nickname')}
               placeholder="nickname"
             />
@@ -97,16 +97,16 @@ function Useredit({ setIsOpen, isOpen, scrollStop }) {
             />
           </div>
 
-          <div className='Useredit-form'>
+          <div className="Useredit-form">
             <button
-              className='Useredit-btn'
-              type='submit'
+              className="Useredit-btn"
+              type="submit"
               onClick={handleSubmit}
             >
               수정 완료
             </button>
           </div>
-          <div className='Useredit-alert-box-red'>{message}</div>
+          <div className="Useredit-alert-box-red">{message}</div>
         </form>
       </div>
     </div>

@@ -7,14 +7,7 @@ module.exports = {
     // ToDo 로그인 유무 확인하기
     const userId = req.query['userid'];
 
-    const auth = checkRefeshToken(req.cookies['refreshToken']);
-
-    if (!auth) {
-      return res.status(401).json({
-        data: null,
-        message: '권한이 없는 요청입니다.',
-      });
-    }
+    const auth = isAuthorized(req, res);
 
     if (userId) {
       // query로 userId가 입력되었을 때,
@@ -39,14 +32,7 @@ module.exports = {
   getById: async (req, res) => {
     const { id } = req.params;
 
-    const auth = checkRefeshToken(req.cookies['refreshToken']);
-
-    if (!auth) {
-      return res.status(401).json({
-        data: null,
-        message: '권한이 없는 요청입니다.',
-      });
-    }
+    const auth = isAuthorized(req, res);
 
     const post = await Post.findOne({
       where: { id },
@@ -76,14 +62,7 @@ module.exports = {
     const answer = req.files.file.name.replace(/ /g, '');
     const image = req.files.file;
 
-    const auth = checkRefeshToken(req.cookies['refreshToken']);
-
-    if (!auth) {
-      return res.status(401).json({
-        data: null,
-        message: '권한이 없는 요청입니다.',
-      });
-    }
+    const auth = isAuthorized(req, res);
 
     if (!(image && answer)) {
       return res.status(404).json({ message: '모든 항목을 입력해주세요' });
@@ -108,14 +87,7 @@ module.exports = {
   delete: async (req, res) => {
     const { id } = req.params;
 
-    const auth = checkRefeshToken(req.cookies['refreshToken']);
-
-    if (!auth) {
-      return res.status(401).json({
-        data: null,
-        message: '권한이 없는 요청입니다.',
-      });
-    }
+    const auth = isAuthorized(req, res);
 
     const post = await Post.findOne({ where: { id, userId: auth.id } });
 
