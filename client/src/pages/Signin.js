@@ -20,7 +20,6 @@ function Signin({ setIsOpen, isOpen, scrollStop, setToken }) {
   const openHandlerSignup = () => {
     setIsOpenSignup(!isOpenSignup);
     scrollStopSignup();
-    // history.push('/Signup')
   };
 
   const scrollStopSignup = () => {
@@ -35,8 +34,6 @@ function Signin({ setIsOpen, isOpen, scrollStop, setToken }) {
   const handleInputValue = (key) => (e) => {
     setLogin({ ...login, [key]: e.target.value });
   };
-
-  console.log(setToken);
 
   const handleLogin = (e) => {
     e.preventDefault();
