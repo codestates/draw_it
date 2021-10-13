@@ -26,7 +26,7 @@ function App() {
       {isLoading ? <Loading /> : null}
       <Switch>
         <Route exact path="/">
-          <Main setToken={setToken}/>
+          <Main setToken={setToken} />
         </Route>
         <Route exact path="/home">
           <Home token={token} setToken={setToken} />

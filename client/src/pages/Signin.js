@@ -36,6 +36,8 @@ function Signin({ setIsOpen, isOpen, scrollStop, setToken }) {
     setLogin({ ...login, [key]: e.target.value });
   };
 
+  console.log(setToken);
+
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -61,7 +63,7 @@ function Signin({ setIsOpen, isOpen, scrollStop, setToken }) {
         .then((res) => {
           const { accessToken } = res.data.data;
           localStorage.setItem('token', accessToken);
-          setToken(accessToken)
+          setToken(accessToken);
           history.push('/home');
           
         })
