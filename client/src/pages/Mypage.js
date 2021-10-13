@@ -1,13 +1,12 @@
 import React, { useRef } from 'react';
 import axios from 'axios';
-import Header from "../components/Header";
-import "../styles/Mypage.css"
+import Header from '../components/Header';
+import '../styles/Mypage.css';
 
 axios.defaults.withCredentials = true;
 
-function Mypage(props, {setIsOpenMypage, isOpenMypage, scrollStopMypage}) {
-
-  const {email, nickname } = props;
+function Mypage(props, { setIsOpenMypage, isOpenMypage, scrollStopMypage }) {
+  const { email, nickname } = props;
 
   const backgroundEl = useRef(null);
 
@@ -17,16 +16,17 @@ function Mypage(props, {setIsOpenMypage, isOpenMypage, scrollStopMypage}) {
       scrollStopMypage();
     }
   };
-    return (
-        <div 
-        onClick={(e) => backgroundClick(e)}
-        ref={backgroundEl} 
-        className="MypageContainer">
-          <div className="MypageContainer_in">
-          <Header />
-          <p className="Mypage-Header-name">Draw it</p>
-        <form >
-        <div>
+  return (
+    <div
+      onClick={(e) => backgroundClick(e)}
+      ref={backgroundEl}
+      className='MypageContainer'
+    >
+      <div className='MypageContainer_in'>
+        <Header />
+        <p className='Mypage-Header-name'>Draw it</p>
+        <form>
+          <div>
             <span>nickname</span>
             <input type='text' />
           </div>
@@ -38,13 +38,12 @@ function Mypage(props, {setIsOpenMypage, isOpenMypage, scrollStopMypage}) {
             <span>password 확인</span>
             <input type='password' />
           </div>
-          <button className='modify' type='submit' >
-             수정
+          <button className='modify' type='submit'>
+            수정
           </button>
         </form>
-           
-          </div>
-        </div>
-    )
+      </div>
+    </div>
+  );
 }
 export default Mypage;

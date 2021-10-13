@@ -3,14 +3,15 @@ import axios from 'axios';
 import Palette from '../components/Palette';
 import '../styles/Drawit.css';
 import Quizheader from '../components/Quizheader';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation, useParams } from 'react-router';
 import { URL } from '../Url';
 import Message from '../components/Message';
+import Comment from '../components/Comment';
 
 const canvasWidth = 900;
 const canvasHeight = 600;
 
-const Drawit = () => {
+const Quiz = () => {
   const canvasRef = useRef();
   const ctxRef = useRef();
   const brushRef = useRef();
@@ -24,76 +25,30 @@ const Drawit = () => {
   const [brush, setBrush] = useState();
   const [isDrawing, setIsDrawing] = useState(false);
   const [answer, setAnswer] = useState();
-
+  const postId = useParams()
+  const [detailId, setDetailId] = useState(postId)
+  const [image, setImage] = useState()
+  const [value, setValue] = useState()
+  const [comment, setComment] = useState();
+  
   useEffect(() => {
-    // if (!token?.state?.state) {
-    //   history.push('/');
-    // }
-    const canvas = canvasRef.current;
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
-
-    const context = canvas.getContext('2d');
-    context.fillStyle = 'white';
-    context.fillRect(0, 0, canvasWidth, canvasHeight);
-    context.strokeStyle = 'black';
-    context.lineWidth = 1;
-    context.lineJoin = 'round';
-    context.lineCap = 'round';
-    ctxRef.current = context;
-
-    brushRef.current.style.pointerEvents = 'none';
-    brushRef.current.style.backgroundColor = 'black';
-
-    setCtx(context);
-    setBrush(brushRef.current);
+    axios.get(`${URL}/post/${detailId.postId}`,{
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }).then((res)=>{
+      // console.log(res.data.data.post)
+      const detailData = res.data.data.post
+      setAnswer(detailData.answer)
+      setImage(detailData.image)
+    })
+    
+        // To Do PostId 변경하기
+    axios.get(`${URL}/comment/${1}`).then((result) => {
+      setComment(result.data.data);
+    });
   }, []);
-
-  const startPainting = () => {
-    setIsDrawing(true);
-  };
-
-  const stopPainting = () => {
-    setIsDrawing(false);
-  };
-
-  const onDrawing = ({ nativeEvent }) => {
-    const x = nativeEvent.offsetX;
-    const y = nativeEvent.offsetY;
-
-    brush.style.top = nativeEvent.clientY - ctx.lineWidth / 2 + 'px';
-    brush.style.left = nativeEvent.clientX - ctx.lineWidth / 2 + 'px';
-    if (ctx) {
-      if (!isDrawing) {
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-      } else {
-        ctx.lineTo(x, y);
-        ctx.stroke();
-      }
-    }
-  };
-
-  const changeLineWidth = (event) => {
-    ctx.lineWidth = event.target.value;
-    brush.style.padding = event.target.value / 2 + 'px';
-  };
-
-  const getColor = (ele) => {
-    return getComputedStyle(ele).backgroundColor;
-  };
-
-  const changeBrushColor = ({ nativeEvent }) => {
-    const color = getColor(nativeEvent.target);
-    ctx.strokeStyle = color;
-    brush.style.backgroundColor = color;
-  };
-
-  const fillCanvas = () => {
-    ctx.fillStyle = brush.style.backgroundColor;
-    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-  };
-
+   
   const uploadImage = () => {
     if (!answer || answer.length < 2) {
       setError('정답은 2글자 이상이어야 합니다.');
@@ -141,7 +96,18 @@ const Drawit = () => {
       setError('정답은 8글자 이하로 입력해주세요!');
       return;
     }
-    setAnswer(value.replace(/ /g, ''));
+    // setAnswer(value.replace(/ /g, ''));
+  };
+
+  const uploadComment = (text) => {
+    // To Do PostId 변경하기
+    // axios.post(`${URL}/comment/${1}`,{text},{
+    //   headers: {
+    //     authorization: `Bearer ${token}`,
+    //   }
+    // }).then((result) => {
+    //   result
+    // })
   };
 
   return (
@@ -151,14 +117,7 @@ const Drawit = () => {
       <div id="main">
         <div id="canvas">
           <div ref={brushRef} id="brush" />
-          <canvas
-            ref={canvasRef}
-            className="canvas"
-            onMouseDown={startPainting}
-            onMouseUp={stopPainting}
-            onMouseMove={onDrawing}
-            onMouseLeave={stopPainting}
-          />
+          <img src ={image} />
         </div>
       </div>
       <div className="answer_input_form">
@@ -166,14 +125,15 @@ const Drawit = () => {
           className="input"
           placeholder="문제의 정답을 입력해주세요!"
           onChange={changeAnswer}
-          value={answer}
+          // value={answer}
         />
         <div className="upload_button" onClick={uploadImage}>
           정답확인
         </div>
       </div>
+      {comment && <Comment comments={comment} uploadComment={uploadComment} />}
     </div>
   );
 };
 
-export default Drawit;
+export default Quiz;

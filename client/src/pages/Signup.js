@@ -1,4 +1,4 @@
-import React,{useRef, useState} from "react"
+import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import Header from "../components/Header";
 import Signin from "./Signin";
@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { URL } from '../Url';
 
 function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
-  const [user, setuser] =useState({
+  const [user, setuser] = useState({
     email: '',
     nickname: '',
     password: '',
@@ -30,6 +30,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
     scrollStopSignin();
     // history.push('/Signin')
   }
+
 
   const scrollStopSignin = () => {
     if (isOpenSignin === false) {
@@ -140,7 +141,6 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
     }
   };
   return (
-      
       <div 
         onClick={(e) => backgroundClick(e)}
         ref={backgroundEl}
@@ -182,6 +182,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
           </form>
         </div>
         )}
+        
         {isOpenSignin ? (
       <Signin
         scrollStop={scrollStopSignin}
@@ -189,8 +190,9 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
         isOpen={isOpenSignin}
       />
       ) : null}
-      
+    
       </div>
-  )
+    </div>
+  );
 }
 export default Signup;

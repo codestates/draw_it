@@ -40,7 +40,7 @@ function App() {
           <Route exact path="/quiz">
             <Drawit />
           </Route>
-          <Route exact path="/postQuiz">
+          <Route exact path="/postQuiz/:postId">
             <Quiz />
           </Route>
         </Switch>

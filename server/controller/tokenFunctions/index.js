@@ -4,7 +4,7 @@ const { User } = require('../../models');
 
 module.exports = {
   generateAccessToken: (data) => {
-    return sign(data, process.env.ACCESS_SECRET, { expiresIn: '10s' });
+    return sign(data, process.env.ACCESS_SECRET, { expiresIn: '5h' });
   },
   generateRefreshToken: (data) => {
     return sign(data, process.env.REFRESH_SECRET, { expiresIn: '1d' });

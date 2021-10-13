@@ -27,9 +27,6 @@ const Drawit = () => {
   const [answer, setAnswer] = useState();
 
   useEffect(() => {
-    if (!token) {
-      history.push('/home');
-    }
     const canvas = canvasRef.current;
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
@@ -145,7 +142,7 @@ const Drawit = () => {
   return (
     <div id="container">
       {error && <Message message={error} setError={setError} />}
-      <Quizheader length={answer?.length} />
+      <Quizheader length={answer?.length || 0} />
       <div id="main">
         <div id="canvas">
           <div ref={brushRef} id="brush" />
@@ -165,15 +162,19 @@ const Drawit = () => {
         />
       </div>
       <div className="answer_input_form">
-        <input
-          className="input"
-          placeholder="문제의 정답을 입력해주세요!"
-          onChange={changeAnswer}
-          value={answer || ''}
-        />
-        <div className="upload_button" onClick={uploadImage}>
-          제출
-        </div>
+        {token && (
+          <>
+            <input
+              className="input"
+              placeholder="문제의 정답을 입력해주세요!"
+              onChange={changeAnswer}
+              value={answer || ''}
+            />
+            <div className="upload_button" onClick={uploadImage}>
+              제출
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
