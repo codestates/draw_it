@@ -36,55 +36,27 @@ module.exports = {
     }
   },
 
-  edit: (req, res) => {
+  edit: async (req, res) => {
     const auth = isAuthorized(req, res);
+    const { nickname } = req.body;
 
-    if (!auth) {
-      res.status(400).send({
-        data: null,
-        message: '마이페이지 조회 권한이 없습니다.',
+    try {
+      const count = await user_post_passed.count({
+        where: { userId: auth.id },
       });
-    } else {
-      User.update(
-        {
-          nickname: req.body.nickname,
-        },
-        {
-          where: {
-            id: auth.id,
-          },
-        }
-      )
-        .then((data) => {
-          //? "id": PK,
-          //?  "nickname": "nickname",
-          //?  "passedPosts": "1",
-          //?  "updatedAt": "created time",
-          //?  "createdAt": "updated time"
-          user_post_passed
-            .findAndCountAll({
-              where: {
-                id: auth.id,
-              },
-            })
-            .then((data) => {
-              res.status(200).send({
-                data: {
-                  id: auth.id,
-                  nickname: req.body.nickname,
-                  passedPosts: data.count,
-                  updatedAt: auth.updatedAt,
-                  createdAt: auth.createdAt,
-                },
-              });
-            })
-            .catch((err) => {
-              throw err;
-            });
-        })
-        .catch((err) => {
-          throw err;
-        });
+
+      await User.update({ nickname }, { where: { id: auth.id } });
+
+      const user = await User.findOne({ where: { id: auth.id } });
+
+      res.status(200).json({
+        data: { id: user.id, nickname: user.nickname, passedPosts: count },
+        message: '마이페이지 변경 성공하였습니다.',
+      });
+    } catch (err) {
+      res
+        .status(500)
+        .json({ data: null, message: '마이페이지 변경 실패하였습니다.' });
     }
   },
 };

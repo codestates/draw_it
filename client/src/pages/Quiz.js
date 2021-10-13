@@ -15,6 +15,7 @@ const Quiz = ({ token }) => {
   const [data, setData] = useState();
   const [comment, setComment] = useState();
   const [value, setValue] = useState();
+  const [isDisplay, setIsDisplay] = useState(false);
 
   useEffect(() => {
     axios
@@ -26,23 +27,6 @@ const Quiz = ({ token }) => {
       .then((res) => {
         const detailData = res.data.data;
         setData(detailData);
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`${URL}/comment/${postId.postId}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      })
-      .then((result) => {
-        const { data: comment } = result.data;
-        setComment(comment);
-
-        if (comment) {
-          containerRef.current.style.overflowY = 'scroll';
-        }
       });
   }, []);
 
@@ -101,6 +85,27 @@ const Quiz = ({ token }) => {
       });
   };
 
+  const toggleComment = () => {
+    if (!isDisplay) {
+      axios
+        .get(`${URL}/comment/${postId.postId}`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        })
+        .then((result) => {
+          const { data: comment } = result.data;
+          setComment(comment);
+          setIsDisplay(true);
+          if (comment) {
+            containerRef.current.style.overflowY = 'scroll';
+          }
+        });
+    } else {
+      setIsDisplay(false);
+    }
+  };
+
   return (
     <div id="container" ref={containerRef}>
       {error && <Message message={error} setError={setError} />}
@@ -118,10 +123,13 @@ const Quiz = ({ token }) => {
           value={value}
         />
         <div className="upload_button" onClick={answerCheck}>
-          정답확인
+          정답 확인
         </div>
       </div>
-      {comment && data?.isPassed && (
+      <div className="upload_button" onClick={toggleComment}>
+        {isDisplay ? '댓글 닫기' : '댓글 보기'}
+      </div>
+      {comment && isDisplay && (
         <Comment comments={comment} uploadComment={uploadComment} />
       )}
     </div>
