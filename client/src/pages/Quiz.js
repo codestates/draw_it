@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext,useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import '../styles/Drawit.css';
+import '../styles/Quiz.css';
 import Quizheader from '../components/Quizheader';
-import { useHistory, useLocation, useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { URL } from '../Url';
 import Message from '../components/Message';
 import Comment from '../components/Comment';
+import UserContext from './Context';
 
 const Quiz = () => {
   const history = useHistory();
 
-  const [token, setToken] = useState(useLocation());
+  const { token, setToken } = useContext(UserContext);
   const [error, setError] = useState();
 
   const [answer, setAnswer] = useState();
@@ -45,47 +46,7 @@ const Quiz = () => {
         setComment(result.data.data);
       });
   }, []);
-
-  const uploadImage = () => {
-    if (!answer || answer.length < 2) {
-      setError('정답은 2글자 이상이어야 합니다.');
-      return;
-    }
-    /*
-    const image = canvasRef.current.toDataURL('image/png');
-    const blob = atob(image.split(',')[1]);
-
-    const array = [];
-
-    for (let i = 0; i < blob.length; i++) {
-      array.push(blob.charCodeAt(i));
-    }
-
-    const file = new Blob([new Uint8Array(array)], { type: 'image' });
-    const formdata = new FormData();
-    formdata.append('file', file, answer);
-    formdata.append('answer', answer);
-
-    axios
-      .post(`${URL}/post`, formdata, {
-        headers: {
-          authorization: `Bearer ${token.state.state}`,
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then((result) => {
-        // 이미지 업로드 성공 메인 화면으로 이동
-        history.push({
-          pathname: '/home',
-          state: token.state.state,
-        });
-      })
-      .catch((error) => {
-        // 이미지 업로드 실패
-        setError('정답을 입력해주세요!');
-      });
-      */
-  };
+   
 
   const changeAnswer = (e) => {
     const { value } = e.target;
@@ -122,7 +83,7 @@ const Quiz = () => {
       <Quizheader length={answer?.length} />
       <div id="main">
         <div id="canvas">
-          <img src={image} />
+          <img className="canvas-img" src ={image} />
         </div>
       </div>
       <div className="answer_input_form">
@@ -132,7 +93,7 @@ const Quiz = () => {
           onChange={changeAnswer}
           // value={answer}
         />
-        <div className="upload_button" onClick={uploadImage}>
+        <div className="upload_button">
           정답확인
         </div>
       </div>

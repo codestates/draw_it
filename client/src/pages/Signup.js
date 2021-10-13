@@ -217,7 +217,9 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
           isOpen={isOpenSignin}
         />
       ) : null}
-    </div>
+    
+      </div>
+    
   );
 }
 export default Signup;
