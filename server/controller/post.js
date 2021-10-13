@@ -130,7 +130,11 @@ module.exports = {
     if (isPassed) {
       return res
         .status(200)
-        .json({ data: null, message: '이미 정답을 맞힌 문제입니다.' });
+        .json({
+          data: null,
+          message: '이미 정답을 맞힌 문제입니다.',
+          passed: 2,
+        });
     }
 
     // post의 값과 전달받은 answer가 일치한지 확인
@@ -142,7 +146,9 @@ module.exports = {
           userId: auth.id,
           postId: id,
         });
-        return res.status(201).json({ data: created, message: '정답입니다.' });
+        return res
+          .status(201)
+          .json({ data: created, message: '정답입니다.', passed: 0 });
       } catch (error) {
         console.log(error);
         return res
@@ -151,6 +157,6 @@ module.exports = {
       }
     }
 
-    res.status(200).json({ data: null, message: '정답이 아닙니다' });
+    res.status(200).json({ data: null, message: '정답이 아닙니다', passed: 1 });
   },
 };
