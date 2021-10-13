@@ -15,7 +15,7 @@ const Home = () => {
   const { token, setToken } = useContext(UserContext);
   const [answer, setAnswer] = useState();
   const [imageUrl, setImageUrl] = useState();
-
+  console.log("@@@@@@@@@@@@",localStorage.getItem('token'))
   useEffect(() => {
     setToken(localStorage.getItem('token'));
     allQuizs();
