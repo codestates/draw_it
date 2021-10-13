@@ -8,6 +8,7 @@ module.exports = {
     try {
       const comments = await Comment.findAll({
         where: { postId: id },
+        include: [{ model: User, attributes: ['nickname'] }],
       });
 
       res
@@ -52,7 +53,6 @@ module.exports = {
 
     const created = await Comment.create({
       text,
-      nickname: user.nickname,
       userId: user.id,
       postId: post.id,
     });

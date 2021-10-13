@@ -30,7 +30,7 @@ const Comment = ({ comments, uploadComment }) => {
         {comments?.map((comment) => {
           return (
             <li key={comment.id} className="comment">
-              <span className="nickname">{comment.nickname}</span>
+              <span className="nickname">{comment.User.nickname}</span>
               <span>{comment.text}</span>
             </li>
           );
