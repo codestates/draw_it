@@ -2,15 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import '../styles/Quiz.css';
 import Quizheader from '../components/Quizheader';
-import { useHistory, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { URL } from '../Url';
 import Message from '../components/Message';
 import Comment from '../components/Comment';
 
 const Quiz = ({ token }) => {
-  const history = useHistory();
   const containerRef = useRef();
-  const [answer, setAnswer] = useState();
   const [error, setError] = useState();
   const postId = useParams();
   const [detailId, setDetailId] = useState(postId);
@@ -29,8 +27,9 @@ const Quiz = ({ token }) => {
         const detailData = res.data.data;
         setData(detailData);
       });
+  }, []);
 
-    // To Do PostId 변경하기
+  useEffect(() => {
     axios
       .get(`${URL}/comment/${postId.postId}`, {
         headers: {
@@ -38,10 +37,14 @@ const Quiz = ({ token }) => {
         },
       })
       .then((result) => {
-        setComment(result.data.data);
-        // containerRef.current.style.overflowY = '';
+        const { data: comment } = result.data;
+        setComment(comment);
+
+        if (comment) {
+          containerRef.current.style.overflowY = 'scroll';
+        }
       });
-  }, [data]);
+  }, []);
 
   const changeAnswer = (e) => {
     setValue(e.target.value);
@@ -85,7 +88,7 @@ const Quiz = ({ token }) => {
       .then((result) => {
         if (result.data.passed === 0) {
           setError('정답입니다 ~ !');
-          setData({ ...data });
+          setData({ ...data, isPassed: true });
         } else if (result.data.passed === 2) {
           setError('이미 정답을 맞힌 문제입니다.');
         } else {
@@ -99,22 +102,22 @@ const Quiz = ({ token }) => {
   };
 
   return (
-    <div id='container' ref={containerRef}>
+    <div id="container" ref={containerRef}>
       {error && <Message message={error} setError={setError} />}
       <Quizheader length={data?.post.answer?.length} />
-      <div id='main'>
-        <div id='canvas'>
-          <img className='canvas-img' src={data?.post.image} />
+      <div id="main">
+        <div id="canvas">
+          <img className="canvas-img" src={data?.post.image} />
         </div>
       </div>
-      <div className='answer_input_form'>
+      <div className="answer_input_form">
         <input
-          className='input'
-          placeholder='문제의 정답을 입력해주세요!'
+          className="input"
+          placeholder="문제의 정답을 입력해주세요!"
           onChange={changeAnswer}
           value={value}
         />
-        <div className='upload_button' onClick={answerCheck}>
+        <div className="upload_button" onClick={answerCheck}>
           정답확인
         </div>
       </div>
