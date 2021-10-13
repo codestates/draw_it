@@ -1,4 +1,4 @@
-const { isAuthorized, checkRefeshToken } = require('../tokenFunctions');
+const { isAuthorized } = require('../tokenFunctions');
 const { user_post_passed } = require('../../models');
 const { User } = require('../../models');
 
@@ -26,12 +26,19 @@ module.exports = {
           where: {
             userId: auth.id,
           },
+          include: [
+            {
+              model: User,
+              attributes: ['nickname'],
+            },
+          ],
         })
         .then((data) => {
+          console.log(data.rows);
           res.status(201).send({
             data: {
               id: auth.id,
-              nickname: auth.nickname,
+              nickname: data.rows,
               passedPosts: data.count,
               updatedAt: auth.updatedAt,
               createdAt: auth.createdAt,
@@ -46,7 +53,6 @@ module.exports = {
   },
 
   edit: (req, res) => {
-    console.log(req.body);
     const auth = isAuthorized(req, res);
 
     if (!auth) {
@@ -78,7 +84,6 @@ module.exports = {
               },
             })
             .then((data) => {
-              console.log('성공');
               res.status(200).send({
                 data: {
                   id: auth.id,
