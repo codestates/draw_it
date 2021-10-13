@@ -136,7 +136,7 @@ const Drawit = ({ token }) => {
     }
     setAnswer(value.replace(/ /g, ''));
   };
-
+  console.log(token)
   return (
     <div id="container">
       {error && <Message message={error} setError={setError} />}

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Signin from './Signin';
 import "../styles/Main.css"
 import { URL } from '../Url';
-function Main() {
+function Main({setToken}) {
   console.log(URL)
   const [isOpen, setIsOpen] = useState(false);
 
@@ -46,6 +46,7 @@ function Main() {
           scrollStop={scrollStop}
           setIsOpen={setIsOpen}
           isOpen={isOpen}
+          setToken={setToken}
         />
       ) : null}
       </div>
