@@ -16,6 +16,7 @@ const Home = () => {
   const history = useHistory();
   const { token, setToken } = useContext(UserContext);
   const [answer, setAnswer] = useState();
+  const [imageUrl, setImageUrl] = useState();
   
   useEffect(() => {
     allQuizs()
@@ -104,12 +105,14 @@ const Home = () => {
     }).then((res)=>{
       const quizData = res.data.data
       setAnswer(quizData.post.answer)
-      history.push('/postQuiz');
+      setImageUrl(quizData.post.image)
+      history.push({
+        pathname :`/postQuiz/${index}`
+      });
     }).catch((err)=>{
       console.log(err)
     })
   }
-  
   return (
     <div className='HomeContainer'>
       <header>
