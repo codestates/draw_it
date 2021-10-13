@@ -24,8 +24,6 @@ const Drawit = ({ token }) => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [answer, setAnswer] = useState();
 
-  console.log(token);
-
   useEffect(() => {
     const canvas = canvasRef.current;
     canvas.width = canvasWidth;
