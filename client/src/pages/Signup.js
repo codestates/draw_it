@@ -19,6 +19,7 @@ function Signup({ setIsOpensignup, isOpensignup, scrollStopsignup }) {
     setuser({ ...user, [key]: e.target.value });
   };
 
+
   const handleSignup = (e) => {
     e.preventDefault();
 
@@ -95,12 +96,12 @@ function Signup({ setIsOpensignup, isOpensignup, scrollStopsignup }) {
             />
           </div>
           <div className='Signup-form'>
-            <div>password 확인</div>
+            <div>password check</div>
             <input
               className='Signup-password-check'
               type='password'
               onChange={handleInputValue('passwordcheck')}
-              placeholder='password 확인'
+              placeholder='password check'
             />
           </div>
           <div className='Signup-form'>
