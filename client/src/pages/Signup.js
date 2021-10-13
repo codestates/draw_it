@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
-import Header from "../components/Header";
-import Signin from "./Signin";
-import "../styles/Signup.css"
-import { useHistory } from "react-router-dom";
+import Header from '../components/Header';
+import Signin from './Signin';
+import '../styles/Signup.css';
+import { useHistory } from 'react-router-dom';
 import { URL } from '../Url';
 
 function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
@@ -11,31 +11,30 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
     email: '',
     nickname: '',
     password: '',
-    passwordCheck: ''
+    passwordCheck: '',
   });
   const [isOpenSignin, setIsOpenSignin] = useState(false);
   const [nickMessage, setNickMessage] = useState('');
-  const [passWordMessage, setPassWordMessage] =useState('');
+  const [passWordMessage, setPassWordMessage] = useState('');
   const [emailMessage, setEmailMessage] = useState('');
-  const [isSignup, setIsSignup] =useState(false);
+  const [isSignup, setIsSignup] = useState(false);
   const history = useHistory();
 
   const handleInputValue = (key) => (e) => {
     setuser({ ...user, [key]: e.target.value });
   };
 
-  const openHandlerSignin =() =>{
+  const openHandlerSignin = () => {
     setIsOpenSignin(!isOpenSignin);
     scrollStopSignin();
   };
 
-
   const scrollStopSignin = () => {
     if (isOpenSignin === false) {
-    document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     }
     if (isOpenSignin === true) {
-    document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     }
   };
 
@@ -78,7 +77,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
     const max = 20;
     const regPassword = /^[0-9a-z-_.!?*]+$/;
 
-    if ( password !== passwordCheck) {
+    if (password !== passwordCheck) {
       setPassWordMessage('동일한 비밀번호를 입력해 주세요');
       return false;
     }
@@ -99,33 +98,35 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
     }
   };
 
-  const handleSignup =(e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
-    const { email, nickname, password , passwordCheck } =user;
+    const { email, nickname, password, passwordCheck } = user;
 
     const validNickname = validateNickname(nickname);
     const validEmail = validateEmail(email);
     const validPassword = validatePassword(password, passwordCheck);
-    
 
-    if ( validNickname & validEmail & validPassword ) 
-    {
-      axios.post(`${URL}/user/signup`, {
-        email: email,
-        nickname: nickname,
-        password: password
-      },
-      { withCredentials: true}
-      )
-      .then((res) =>{
-        setIsSignup(true); 
-        setTimeout(() => {
-          history.push('/signin');
-        }, 1000);
-      }).catch((err)=>{
-        setEmailMessage("이메일이 중복됩니다");
-      });
-    } 
+    if (validNickname & validEmail & validPassword) {
+      axios
+        .post(
+          `${URL}/user/signup`,
+          {
+            email: email,
+            nickname: nickname,
+            password: password,
+          },
+          { withCredentials: true }
+        )
+        .then((res) => {
+          setIsSignup(true);
+          setTimeout(() => {
+            history.push('/');
+          }, 1000);
+        })
+        .catch((err) => {
+          setEmailMessage('이메일이 중복됩니다');
+        });
+    }
   };
 
   const backgroundEl = useRef(null);
@@ -137,56 +138,82 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
     }
   };
   return (
-      <div 
-        onClick={(e) => backgroundClick(e)}
-        ref={backgroundEl}
-        className="SignupContainer"
-      >
-        {isSignup ? (
-          <div className="Signup-success">회원가입에 성공했습니다!</div>)
-          :(
-        <div className="SignupContainer_in">
+    <div
+      onClick={(e) => backgroundClick(e)}
+      ref={backgroundEl}
+      className='SignupContainer'
+    >
+      {isSignup ? (
+        <div className='Signup-success'>회원가입에 성공했습니다!</div>
+      ) : (
+        <div className='SignupContainer_in'>
           <Header />
-          <p className="Header-name">Draw it</p>
-          <form >
+          <p className='Header-name'>Draw it</p>
+          <form>
             <div className='Signup-form'>
               <div>email</div>
-                <input className="Signup-email" type='email' onChange={handleInputValue('email')} placeholder="email"/>
+              <input
+                className='Signup-email'
+                type='email'
+                onChange={handleInputValue('email')}
+                placeholder='email'
+              />
             </div>
             <div className='Signup-email-alert-box'>{emailMessage}</div>
             <div className='Signup-form'>
               <div>nickname</div>
-                <input className="Signup-nickname" type='text' onChange={handleInputValue('nickname')} placeholder="nickname"/>
+              <input
+                className='Signup-nickname'
+                type='text'
+                onChange={handleInputValue('nickname')}
+                placeholder='nickname'
+              />
             </div>
             <div className='Signup-nickname-alert-box'>{nickMessage}</div>
             <div className='Signup-form'>
               <div>password</div>
-                <input className="Signup-password" type='password' onChange={handleInputValue('password')} placeholder="password"/>
+              <input
+                className='Signup-password'
+                type='password'
+                onChange={handleInputValue('password')}
+                placeholder='password'
+              />
             </div>
             <div className='Signup-password-alert-box'>{passWordMessage}</div>
             <div className='Signup-form'>
               <div>password check</div>
-                <input className="Signup-password-check" type='password' onChange={handleInputValue('passwordCheck')} placeholder="password 확인"/>
+              <input
+                className='Signup-password-check'
+                type='password'
+                onChange={handleInputValue('passwordCheck')}
+                placeholder='password 확인'
+              />
             </div>
             <div className='Signup-form'>
-              <button className="Signup-btn" type='submit' onClick={handleSignup} >
+              <button
+                className='Signup-btn'
+                type='submit'
+                onClick={handleSignup}
+              >
                 회원가입
               </button>
             </div>
-            
-            <span className="Signup-span" onClick={openHandlerSignin} >로그인</span>
+
+            <span className='Signup-span' onClick={openHandlerSignin}>
+              로그인
+            </span>
           </form>
         </div>
-        )}
-        
-        {isOpenSignin ? (
-      <Signin
-        scrollStop={scrollStopSignin}
-        setIsOpen={setIsOpenSignin}
-        isOpen={isOpenSignin}
-      />
+      )}
+
+      {isOpenSignin ? (
+        <Signin
+          scrollStop={scrollStopSignin}
+          setIsOpen={setIsOpenSignin}
+          isOpen={isOpenSignin}
+        />
       ) : null}
-      </div>
+    </div>
   );
 }
 export default Signup;

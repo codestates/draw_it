@@ -1,13 +1,11 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import '../styles/Useredit.css';
 import axios from 'axios';
 import { URL } from '../Url';
 
-
 function Useredit({ setIsOpen, isOpen, scrollStop, token }) {
-
   const history = useHistory();
   const [message, setMessage] = useState('');
   const [edit, setEdit] = useState({
@@ -30,7 +28,6 @@ function Useredit({ setIsOpen, isOpen, scrollStop, token }) {
   };
 
   const handleSubmit = (e) => {
-
     const { nickname } = edit;
 
     axios
@@ -46,12 +43,8 @@ function Useredit({ setIsOpen, isOpen, scrollStop, token }) {
           },
         }
       )
-      .then((res) => {
-        
-      })
-      .catch((err) => {
-        
-      });
+      .then((res) => {})
+      .catch((err) => {});
   };
 
   return (
@@ -64,11 +57,11 @@ function Useredit({ setIsOpen, isOpen, scrollStop, token }) {
         <Header />
         <p className='Header-name'>Draw it</p>
         <form>
-          <div className="Useredit-form">
+          <div className='Useredit-form'>
             <div>nickname</div>
             <input
-              className="Useredit-email"
-              type="nickname"
+              className='Useredit-email'
+              type='nickname'
               onChange={handleInputValue('nickname')}
               placeholder='nickname'
             />
@@ -92,16 +85,16 @@ function Useredit({ setIsOpen, isOpen, scrollStop, token }) {
             />
           </div>
 
-          <div className="Useredit-form">
+          <div className='Useredit-form'>
             <button
-              className="Useredit-btn"
-              type="submit"
+              className='Useredit-btn'
+              type='submit'
               onClick={handleSubmit}
             >
               수정 완료
             </button>
           </div>
-          <div className="Useredit-alert-box-red">{message}</div>
+          <div className='Useredit-alert-box-red'>{message}</div>
         </form>
       </div>
     </div>
