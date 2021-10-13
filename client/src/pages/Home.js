@@ -13,10 +13,12 @@ const Home = ({ token, setToken }) => {
   const history = useHistory();
   const [answer, setAnswer] = useState();
   const [imageUrl, setImageUrl] = useState();
-
+  console.log("@@@@@@@@@@@@",localStorage.getItem('token'))
+  
   useEffect(() => {
     allQuizs();
   }, []); //userid
+
   useEffect(() => {
     axios
       .get(`${URL}/user/mypage`, {
