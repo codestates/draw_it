@@ -14,9 +14,9 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
     passwordCheck: '',
   });
   const [isOpenSignin, setIsOpenSignin] = useState(false);
-  const [nickMessage, setNickMessage] = useState('');
-  const [passWordMessage, setPassWordMessage] = useState('');
-  const [emailMessage, setEmailMessage] = useState('');
+  const [nickMessage, setNickMessage] = useState();
+  const [passWordMessage, setPassWordMessage] = useState();
+  const [emailMessage, setEmailMessage] = useState();
   const [isSignup, setIsSignup] = useState(false);
   const history = useHistory();
 
@@ -53,7 +53,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
       setNickMessage('한글 / 영문 소문자 / 숫자만 허용합니다');
       return false;
     } else {
-      setNickMessage('');
+      setNickMessage();
       return true;
     }
   };
@@ -67,7 +67,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
       setEmailMessage('특수문자(-_.) 또는 이메일형식(@) 필요합니다');
       return false;
     } else {
-      setEmailMessage('');
+      setEmailMessage();
       return true;
     }
   };
@@ -137,6 +137,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
       scrollStopSignup();
     }
   };
+  console.log(emailMessage)
   return (
     <div
       onClick={(e) => backgroundClick(e)}
@@ -153,7 +154,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
             <div className='Signup-form'>
               <div>email</div>
               <input
-                className='Signup-email'
+                className={emailMessage ? "change-email" : "Signup-email"}
                 type='email'
                 onChange={handleInputValue('email')}
                 placeholder='email'
@@ -163,7 +164,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
             <div className='Signup-form'>
               <div>nickname</div>
               <input
-                className='Signup-nickname'
+                className={nickMessage ? "change-nickname" :"Signup-nickname"}
                 type='text'
                 onChange={handleInputValue('nickname')}
                 placeholder='nickname'
@@ -173,7 +174,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
             <div className='Signup-form'>
               <div>password</div>
               <input
-                className='Signup-password'
+                className={passWordMessage ? "change-password":"Signup-password"}
                 type='password'
                 onChange={handleInputValue('password')}
                 placeholder='password'
@@ -183,7 +184,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
             <div className='Signup-form'>
               <div>password check</div>
               <input
-                className='Signup-password-check'
+                className={passWordMessage ? "change-password" : "Signup-password-check"}
                 type='password'
                 onChange={handleInputValue('passwordCheck')}
                 placeholder='password 확인'
