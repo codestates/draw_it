@@ -14,6 +14,7 @@ const Home = () => {
   const history = useHistory();
   const { token, setToken } = useContext(UserContext);
   const [answer, setAnswer] = useState();
+  const [imageUrl, setImageUrl] = useState();
 
   useEffect(() => {
     allQuizs();
@@ -103,22 +104,22 @@ const Home = () => {
     }
   };
 
-  const detailQuizHandler = (index) => {
-    axios
-      .get(`${URL}/post/${index}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        const quizData = res.data.data;
-        setAnswer(quizData.post.answer);
-        history.push('/postQuiz');
-      })
-      .catch((err) => {
-        console.log(err);
+  const detailQuizHandler = (index) =>{
+    axios.get(`${URL}/post/${index}`,{
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }).then((res)=>{
+      const quizData = res.data.data
+      setAnswer(quizData.post.answer)
+      setImageUrl(quizData.post.image)
+      history.push({
+        pathname :`/postQuiz/${index}`
       });
-  };
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
 
   return (
     <div className="HomeContainer">

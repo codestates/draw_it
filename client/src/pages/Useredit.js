@@ -35,7 +35,7 @@ function Useredit({ setIsOpen, isOpen, scrollStop }) {
     // e.preventDefault();
 
     const { nickname } = edit;
-
+    
     axios
       .put(
         `${URL}/user/mypage`,
