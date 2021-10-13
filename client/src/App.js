@@ -8,14 +8,13 @@ import Home from './pages/Home';
 import Drawit from './pages/Drawit';
 import Loading from './components/Loading';
 import Quiz from './pages/Quiz';
-import { UserProvider } from './pages/Context';
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
 
 function App() {
-  // const [Login, setLogin] = useState(false);
-  // const [user, setUser] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token'));
+
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -23,31 +22,29 @@ function App() {
     }, 2000);
   }, []);
   return (
-    <UserProvider>
-      <BrowserRouter>
-        {isLoading ? <Loading /> : null}
-        <Switch>
-          <Route exact path="/">
-            <Main />
-          </Route>
-          <Route exact path="/Signin">
-            <Signin />
-          </Route>
-          <Route exact path="/Signup">
-            <Signup />
-          </Route>
-          <Route exact path="/home">
-            <Home />
-          </Route>
-          <Route exact path="/quiz">
-            <Drawit />
-          </Route>
-          <Route exact path="/postQuiz/:postId">
-            <Quiz />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </UserProvider>
+    <BrowserRouter>
+      {isLoading ? <Loading /> : null}
+      <Switch>
+        <Route exact path="/">
+          <Main />
+        </Route>
+        <Route exact path="/Signin">
+          <Signin setToken={setToken} />
+        </Route>
+        <Route exact path="/Signup">
+          <Signup />
+        </Route>
+        <Route exact path="/home">
+          <Home token={token} setToken={setToken} />
+        </Route>
+        <Route exact path="/quiz">
+          <Drawit token={token} />
+        </Route>
+        <Route exact path="/postQuiz/:postId">
+          <Quiz token={token} />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

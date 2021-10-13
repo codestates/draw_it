@@ -8,13 +8,11 @@ import Message from '../components/Message';
 import Comment from '../components/Comment';
 import UserContext from './Context';
 
-const Quiz = () => {
+const Quiz = ({ token }) => {
   const history = useHistory();
 
-  const { token, setToken } = useContext(UserContext);
-  const [error, setError] = useState();
-
   const [answer, setAnswer] = useState();
+  const [error, setError] = useState();
   const postId = useParams();
   const [detailId, setDetailId] = useState(postId);
   const [image, setImage] = useState();
