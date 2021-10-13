@@ -120,7 +120,7 @@ const Home = () => {
       console.log(err)
     })
   }
-
+  console.log("test")
   return (
     <div className="HomeContainer">
       <header>
