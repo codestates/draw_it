@@ -8,7 +8,6 @@ import Message from '../components/Message';
 import Comment from '../components/Comment';
 import UserContext from './Context';
 
-
 const Quiz = () => {
   const history = useHistory();
 
@@ -16,28 +15,36 @@ const Quiz = () => {
   const [error, setError] = useState();
 
   const [answer, setAnswer] = useState();
-  const postId = useParams()
-  const [detailId, setDetailId] = useState(postId)
-  const [image, setImage] = useState()
-  const [value, setValue] = useState()
+  const postId = useParams();
+  const [detailId, setDetailId] = useState(postId);
+  const [image, setImage] = useState();
+  const [value, setValue] = useState();
   const [comment, setComment] = useState();
-  
+
   useEffect(() => {
-    axios.get(`${URL}/post/${detailId.postId}`,{
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    }).then((res)=>{
-      // console.log(res.data.data.post)
-      const detailData = res.data.data.post
-      setAnswer(detailData.answer)
-      setImage(detailData.image)
-    })
-    
-        // To Do PostId 변경하기
-    axios.get(`${URL}/comment/${1}`).then((result) => {
-      setComment(result.data.data);
-    });
+    axios
+      .get(`${URL}/post/${detailId.postId}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        // console.log(res.data.data.post)
+        const detailData = res.data.data.post;
+        setAnswer(detailData.answer);
+        setImage(detailData.image);
+      });
+
+    // To Do PostId 변경하기
+    axios
+      .get(`${URL}/comment/${postId.postId}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        setComment(result.data.data);
+      });
   }, []);
    
 
@@ -52,15 +59,23 @@ const Quiz = () => {
   };
 
   const uploadComment = (text) => {
-    // To Do PostId 변경하기
-    // axios.post(`${URL}/comment/${1}`,{text},{
-    //   headers: {
-    //     authorization: `Bearer ${token}`,
-    //   }
-    // }).then((result) => {
-    //   result
-    // })
+    const { postId } = postId;
+    axios
+      .post(
+        `${URL}/comment/${postId}`,
+        { text },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((result) => {
+        console.log(result);
+      });
   };
+
+  console.log(image);
 
   return (
     <div id="container">

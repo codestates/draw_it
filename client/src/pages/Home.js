@@ -17,6 +17,7 @@ const Home = () => {
   const [imageUrl, setImageUrl] = useState();
 
   useEffect(() => {
+    setToken(localStorage.getItem('token'));
     allQuizs();
   }, []); //userid
 
@@ -104,23 +105,26 @@ const Home = () => {
     }
   };
 
-  const detailQuizHandler = (index) =>{
-    axios.get(`${URL}/post/${index}`,{
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    }).then((res)=>{
-      const quizData = res.data.data
-      setAnswer(quizData.post.answer)
-      setImageUrl(quizData.post.image)
-      history.push({
-        pathname :`/postQuiz/${index}`
+  const detailQuizHandler = (index) => {
+    axios
+      .get(`${URL}/post/${index}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        const quizData = res.data.data;
+        setAnswer(quizData.post.answer);
+        setImageUrl(quizData.post.image);
+        history.push({
+          pathname: `/postQuiz/${index}`,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    }).catch((err)=>{
-      console.log(err)
-    })
-  }
-  console.log("test")
+  };
+
   return (
     <div className="HomeContainer">
       <header>
@@ -130,7 +134,7 @@ const Home = () => {
         <section className="Post">
           <div className="Post_Header">
             <p>Community</p>
-            <div className='Post-button'>
+            <div className="Post-button">
               <button onClick={myQuizs}>내가 낸 문제</button>
               <button onClick={allQuizs}>전체 문제</button>
             </div>
@@ -138,7 +142,6 @@ const Home = () => {
           <div className="Post_Main">
             {quizs?.map((data) => {
               return (
-
                 <div key={data.id} className="QuizContainer">
                   <div className="Post-img">
                     <img
