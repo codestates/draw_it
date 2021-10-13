@@ -105,10 +105,54 @@
   top: 2px;
 }
 
+.Signup-span {
+  font-size: 20px;
+  color: rgb(8, 129, 163);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Signup-span:hover {
+  cursor: pointer;
+  color: blue;
+}
+
 .alert-box {
   display: flex;
   justify-content: center;
   align-items: center;
   color:red;
-  font-size: 20px;
+  font-size: 15px;
+}
+
+.Signup-nickname-alert-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:red;
+  font-size: 15px;
+}
+
+.Signup-password-alert-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:red;
+  font-size: 15px;
+}
+
+.Signup-success {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:blue;
+  font-size: 40px;
+}
+.Signup-email-alert-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:red;
+  font-size: 15px;
 }
