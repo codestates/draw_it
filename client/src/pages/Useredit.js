@@ -32,10 +32,10 @@ function Useredit({ setIsOpen, isOpen, scrollStop }) {
   const handleSubmit = (e) => {
     console.log('hello world');
 
-    // e.preventDefault();
+    e.preventDefault();
 
     const { nickname } = edit;
-    
+
     axios
       .put(
         `${URL}/user/mypage`,
@@ -63,11 +63,11 @@ function Useredit({ setIsOpen, isOpen, scrollStop }) {
     <div
       onClick={(e) => backgroundClick(e)}
       ref={backgroundEl}
-      className="UsereditContainer"
+      className='UsereditContainer'
     >
-      <div className="UsereditContainer_in">
+      <div className='UsereditContainer_in'>
         <Header />
-        <p className="Header-name">Draw it</p>
+        <p className='Header-name'>Draw it</p>
         <form>
           <div className='Useredit-form'>
             <div>nickname</div>
@@ -75,25 +75,25 @@ function Useredit({ setIsOpen, isOpen, scrollStop }) {
               className='Useredit-email'
               type='nickname'
               onChange={handleInputValue('nickname')}
-              placeholder="nickname"
+              placeholder='nickname'
             />
           </div>
-          <div className="Useredit-form">
+          <div className='Useredit-form'>
             <div>password</div>
             <input
-              className="Useredit-password"
-              type="password"
+              className='Useredit-password'
+              type='password'
               onChange={handleInputValue('password')}
-              placeholder="password"
+              placeholder='password'
             />
           </div>
-          <div className="Useredit-form">
+          <div className='Useredit-form'>
             <div>password check</div>
             <input
-              className="Useredit-password"
-              type="password"
+              className='Useredit-password'
+              type='password'
               onChange={handleInputValue('password check')}
-              placeholder="password check"
+              placeholder='password check'
             />
           </div>
 
