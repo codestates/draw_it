@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
-import Header from '../components/Header';
-import Signin from './Signin';
-import '../styles/Signup.css';
-import { useHistory } from 'react-router-dom';
+import Header from "../components/Header";
+import Signin from "./Signin";
+import "../styles/Signup.css"
+import { useHistory } from "react-router-dom";
 import { URL } from '../Url';
 
 function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
@@ -11,30 +11,31 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
     email: '',
     nickname: '',
     password: '',
-    passwordCheck: '',
+    passwordCheck: ''
   });
   const [isOpenSignin, setIsOpenSignin] = useState(false);
   const [nickMessage, setNickMessage] = useState('');
-  const [passWordMessage, setPassWordMessage] = useState('');
+  const [passWordMessage, setPassWordMessage] =useState('');
   const [emailMessage, setEmailMessage] = useState('');
-  const [isSignup, setIsSignup] = useState(false);
+  const [isSignup, setIsSignup] =useState(false);
   const history = useHistory();
 
   const handleInputValue = (key) => (e) => {
     setuser({ ...user, [key]: e.target.value });
   };
 
-  const openHandlerSignin = () => {
+  const openHandlerSignin =() =>{
     setIsOpenSignin(!isOpenSignin);
     scrollStopSignin();
   };
 
+
   const scrollStopSignin = () => {
     if (isOpenSignin === false) {
-      document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
     }
     if (isOpenSignin === true) {
-      document.body.style.overflow = 'unset';
+    document.body.style.overflow = "unset";
     }
   };
 
@@ -44,13 +45,13 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
 
     // 이름 길이 확인
     if (nickname.length < min) {
-      setNickMessage('1자 이상 입력');
+      setNickMessage('1자 이상 입력해주세요');
       return false;
     }
 
     // 이름 정규식 확인
     if (!regNickname.test(nickname)) {
-      setNickMessage('한글 / 영문 소문자 / 숫자만 허용');
+      setNickMessage('한글 / 영문 소문자 / 숫자만 허용합니다');
       return false;
     } else {
       setNickMessage('');
@@ -62,9 +63,9 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
     const regEmail = /^[0-9a-z-_.]+@[0-9a-z]+\.[0-9a-z]+$/;
 
     if (email.length === 0) {
-      setEmailMessage('1자 이상 입력');
+      setEmailMessage('1자 이상 입력해주세요');
     } else if (!regEmail.test(email)) {
-      setEmailMessage('특수문자(-_.)만 허용/이메일형식(@) 필요');
+      setEmailMessage('특수문자(-_.) 또는 이메일형식(@) 필요합니다');
       return false;
     } else {
       setEmailMessage('');
@@ -84,13 +85,13 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
 
     // 비밀번호 길이 확인
     if (password.length < min || password.length > max) {
-      setPassWordMessage('비밀번호 4~20자 입력');
+      setPassWordMessage('비밀번호 4~20자 입니다');
       return false;
     }
 
     // 비밀번호 정규식 확인
     if (!regPassword.test(password)) {
-      setPassWordMessage('영문 소문자/숫자/특수문자(-_.!?*)만 허용');
+      setPassWordMessage('영문 소문자/숫자/특수문자(-_.!?*)만 허용합니다');
       return false;
     } else {
       setPassWordMessage('');
@@ -98,35 +99,33 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
     }
   };
 
-  const handleSignup = (e) => {
+  const handleSignup =(e) => {
     e.preventDefault();
-    const { email, nickname, password, passwordCheck } = user;
+    const { email, nickname, password , passwordCheck } =user;
 
     const validNickname = validateNickname(nickname);
     const validEmail = validateEmail(email);
     const validPassword = validatePassword(password, passwordCheck);
+    
 
-    if (validNickname & validEmail & validPassword) {
-      axios
-        .post(
-          `${URL}/user/signup`,
-          {
-            email: email,
-            nickname: nickname,
-            password: password,
-          },
-          { withCredentials: true }
-        )
-        .then((res) => {
-          setIsSignup(true);
-          setTimeout(() => {
-            history.push('/signin');
-          }, 1000);
-        })
-        .catch((err) => {
-          setEmailMessage('이메일이 중복됩니다');
-        });
-    }
+    if ( validNickname & validEmail & validPassword ) 
+    {
+      axios.post(`${URL}/user/signup`, {
+        email: email,
+        nickname: nickname,
+        password: password
+      },
+      { withCredentials: true}
+      )
+      .then((res) =>{
+        setIsSignup(true); 
+        setTimeout(() => {
+          history.push('/signin');
+        }, 1000);
+      }).catch((err)=>{
+        setEmailMessage("이메일이 중복됩니다");
+      });
+    } 
   };
 
   const backgroundEl = useRef(null);
@@ -138,12 +137,12 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
     }
   };
   return (
-    <div
-      onClick={(e) => backgroundClick(e)}
-      ref={backgroundEl}
-      className="SignupContainer"
-    >
-      {isSignup ? (
+      <div 
+        onClick={(e) => backgroundClick(e)}
+        ref={backgroundEl}
+        className="SignupContainer"
+      >
+        {isSignup ? (
           <div className="Signup-success">회원가입에 성공했습니다!</div>)
           :(
         <div className="SignupContainer_in">
