@@ -1,9 +1,14 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import '../styles/Message.css';
 
-const Message = ({ message, setError }) => {
-  const closeModal = (e) => {
+const Message = ({ message, setError, testmode }) => {
+  const history = useHistory();
+  const closeModal = () => {
     setError();
+    if (testmode) {
+      history.push('/');
+    }
   };
   return (
     <section onClick={closeModal} className="modal_background">
