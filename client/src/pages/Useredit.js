@@ -5,17 +5,20 @@ import '../styles/Useredit.css';
 import axios from 'axios';
 import { URL } from '../Url';
 
-function Useredit({ setIsOpen, isOpen, scrollStop, token }) {
+function Useredit({
+  userInfo,
+  setUserInfo,
+  setIsOpen,
+  isOpen,
+  scrollStop,
+  token,
+}) {
   const history = useHistory();
-  const [message, setMessage] = useState('');
-  const [edit, setEdit] = useState({
-    nickname: '',
-    password: '',
-    passwordcheck: '',
-  });
+  const [editMessage, setEditMessage] = useState('');
+  const [nicknameValue, setNicknameValue] = useState('');
 
   const handleInputValue = (key) => (e) => {
-    setEdit({ ...edit, [key]: e.target.value });
+    setNicknameValue(e.target.value);
   };
 
   const backgroundEl = useRef(null);
@@ -28,13 +31,17 @@ function Useredit({ setIsOpen, isOpen, scrollStop, token }) {
   };
 
   const handleSubmit = (e) => {
-    const { nickname } = edit;
+    console.log('버튼 눌렀을때');
 
+    if (!nicknameValue) {
+      e.preventDefault();
+      return setEditMessage('변경할 닉네임을 입력하세요.');
+    }
     axios
       .put(
         `${URL}/user/mypage`,
         {
-          nickname: nickname,
+          nickname: nicknameValue,
         },
         {
           headers: {
@@ -43,8 +50,16 @@ function Useredit({ setIsOpen, isOpen, scrollStop, token }) {
           },
         }
       )
-      .then((res) => {})
-      .catch((err) => {});
+      .then((res) => {
+        console.log('axios 성공');
+        console.log(res.data.data.nickname);
+        setUserInfo({ ...userInfo, nickname: res.data.data.nickname });
+        setIsOpen(!isOpen);
+      })
+      .catch((err) => {
+        console.log('axios 실패');
+        console.log(err);
+      });
   };
 
   return (
@@ -60,41 +75,23 @@ function Useredit({ setIsOpen, isOpen, scrollStop, token }) {
           <div className='Useredit-form'>
             <div>nickname</div>
             <input
-              className='Useredit-email'
+              className='Useredit-nickname'
               type='nickname'
               onChange={handleInputValue('nickname')}
               placeholder='nickname'
+              value={nicknameValue}
             />
           </div>
-          <div className='Useredit-form'>
-            <div>password</div>
-            <input
-              className='Useredit-password'
-              type='password'
-              onChange={handleInputValue('password')}
-              placeholder='password'
-            />
-          </div>
-          <div className='Useredit-form'>
-            <div>password check</div>
-            <input
-              className='Useredit-password'
-              type='password'
-              onChange={handleInputValue('password check')}
-              placeholder='password check'
-            />
-          </div>
-
           <div className='Useredit-form'>
             <button
               className='Useredit-btn'
-              type='submit'
+              // type='submit'
               onClick={handleSubmit}
             >
-              수정 완료
+              변경 완료
             </button>
           </div>
-          <div className='Useredit-alert-box-red'>{message}</div>
+          <div className='Useredit-alert-box-red'>{editMessage}</div>
         </form>
       </div>
     </div>

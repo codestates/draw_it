@@ -6,9 +6,8 @@ import '../styles/Home.css';
 import { URL } from '../Url';
 import Useredit from './Useredit';
 
-const Home = ({ token, setToken }) => {
+const Home = ({ token, setToken, userInfo, setUserInfo }) => {
   const [quizs, setQuizs] = useState();
-  const [userinfo, setUserInfo] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
   const [answer, setAnswer] = useState();
@@ -65,7 +64,7 @@ const Home = ({ token, setToken }) => {
   };
   const myQuizs = () => {
     axios
-      .get(`${URL}/post?userid=${userinfo.id}`, {
+      .get(`${URL}/post?userid=${userInfo.id}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -150,7 +149,7 @@ const Home = ({ token, setToken }) => {
                   </div>
                   <div className='QuizContainer_bottom'>
                     <p>{data.User?.nickname}님의 문제</p>
-                    {data.userId === userinfo?.id ? (
+                    {data.userId === userInfo?.id ? (
                       <div onClick={() => imgDelete(data.id)}>X</div>
                     ) : null}
                   </div>
@@ -163,10 +162,10 @@ const Home = ({ token, setToken }) => {
           <div className='Mypage'>
             <h2>My Page</h2>
             <div>
-              {userinfo?.nickname}의 정답 개수 : {userinfo?.passedPosts}
+              {userInfo?.nickname}의 정답 개수 : {userInfo?.passedPosts}
             </div>
             <div className='Mypage_button'>
-              <button onClick={openHandler}>회원 정보 수정</button>
+              <button onClick={openHandler}>닉네임 변경</button>
               <button onClick={logoutHandler}>로그아웃</button>
             </div>
           </div>
@@ -178,6 +177,8 @@ const Home = ({ token, setToken }) => {
 
       {isOpen ? (
         <Useredit
+          userInfo={userInfo}
+          setUserInfo={setUserInfo}
           scrollStop={scrollStop}
           setIsOpen={setIsOpen}
           isOpen={isOpen}

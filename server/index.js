@@ -25,5 +25,5 @@ app.get('/', (req, res) => {
 const HTTP_PORT = process.env.HTTP_PORT || 4000;
 
 app.listen(HTTP_PORT, () => {
-  console.log(`server is running on ${HTTP_PORT}`);
+  console.log(`Server is running on ${HTTP_PORT}`);
 });
