@@ -28,7 +28,6 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
   const openHandlerSignin =() =>{
     setIsOpenSignin(!isOpenSignin);
     scrollStopSignin();
-    // history.push('/Signin')
   }
 
 
@@ -76,13 +75,6 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
   };
 
   const validatePassword = (password, passwordCheck) => {
-    if (passwordCheck.length === 0) {
-      setPassWordMessage('동일한 비밀번호를 입력해 주세요');
-    } else if (password !== passwordCheck) {
-      setPassWordMessage('동일한 비밀번호를 입력해 주세요');
-      return false;
-    }
-
     const min = 8;
     const max = 20;
     const regPassword = /^[0-9a-z-_.!?*]+$/;
@@ -90,6 +82,11 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
     // 비밀번호 길이 확인
     if (password.length < min || password.length > max) {
       setPassWordMessage('8~20자 입력');
+      return false;
+    }
+
+    if (password !== passwordCheck) {
+      setPassWordMessage('동일한 비밀번호를 입력해 주세요');
       return false;
     }
 
@@ -190,9 +187,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
         isOpen={isOpenSignin}
       />
       ) : null}
-    
       </div>
-    </div>
   );
 }
 export default Signup;
