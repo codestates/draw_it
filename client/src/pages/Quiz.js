@@ -55,10 +55,9 @@ const Quiz = ({ token }) => {
   };
 
   const uploadComment = (text) => {
-    const { postId } = postId;
     axios
       .post(
-        `${URL}/comment/${postId}`,
+        `${URL}/comment/${postId.postId}`,
         { text },
         {
           headers: {
@@ -67,7 +66,8 @@ const Quiz = ({ token }) => {
         }
       )
       .then((result) => {
-        console.log(result);
+        const { data } = result.data;
+        setComment([...comment, data]);
       });
   };
 
