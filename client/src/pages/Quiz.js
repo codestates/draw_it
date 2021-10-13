@@ -14,11 +14,9 @@ const Quiz = ({ token }) => {
   const [error, setError] = useState();
   const postId = useParams();
   const [detailId, setDetailId] = useState(postId);
-  const [data, setData] = useState()
+  const [data, setData] = useState();
   const [comment, setComment] = useState();
   const [value, setValue] = useState();
-  
-
 
   useEffect(() => {
     axios
@@ -29,7 +27,7 @@ const Quiz = ({ token }) => {
       })
       .then((res) => {
         const detailData = res.data.data;
-        setData(detailData)
+        setData(detailData);
       });
 
     // To Do PostId 변경하기
@@ -43,10 +41,10 @@ const Quiz = ({ token }) => {
         setComment(result.data.data);
         // containerRef.current.style.overflowY = '';
       });
-  }, []);
+  }, [data]);
 
   const changeAnswer = (e) => {
-    setValue(e.target.value)
+    setValue(e.target.value);
 
     if (value && value.length > 8) {
       setError('정답은 8글자 이하로 입력해주세요!');
@@ -74,54 +72,54 @@ const Quiz = ({ token }) => {
   const answerCheck = () => {
     axios
       .post(
-        `${URL}/post/${postId.postId}`,{
-          answer : value
-        },{
+        `${URL}/post/${postId.postId}`,
+        {
+          answer: value,
+        },
+        {
           headers: {
             authorization: `Bearer ${token}`,
           },
         }
       )
       .then((result) => {
-        if(result.data.passed === 0 ){
+        if (result.data.passed === 0) {
           setError('정답입니다 ~ !');
-          setData({...data})
-        }else if(result.data.passed === 2){
+          setData({ ...data });
+        } else if (result.data.passed === 2) {
           setError('이미 정답을 맞힌 문제입니다.');
-        }else{
-          setError('틀렸습니다~!')
+        } else {
+          setError('틀렸습니다~!');
         }
-        setValue('')
-        setComment(true)
+        setValue('');
       })
-      .catch(err =>{
-        console.log(err)
-      })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
-    <div id="container" ref={containerRef}>
+    <div id='container' ref={containerRef}>
       {error && <Message message={error} setError={setError} />}
       <Quizheader length={data?.post.answer?.length} />
-      <div id="main">
-        <div id="canvas">
-          <img className="canvas-img" src={data?.post.image} />
+      <div id='main'>
+        <div id='canvas'>
+          <img className='canvas-img' src={data?.post.image} />
         </div>
       </div>
-      <div className="answer_input_form">
+      <div className='answer_input_form'>
         <input
-          className="input"
-          placeholder="문제의 정답을 입력해주세요!"
+          className='input'
+          placeholder='문제의 정답을 입력해주세요!'
           onChange={changeAnswer}
           value={value}
         />
-        <div className="upload_button" onClick={answerCheck}>정답확인</div>
+        <div className='upload_button' onClick={answerCheck}>
+          정답확인
+        </div>
       </div>
-      {comment && (
-        data.isPassed && <Comment
-          comments={comment}
-          uploadComment={uploadComment}
-        />
+      {comment && data?.isPassed && (
+        <Comment comments={comment} uploadComment={uploadComment} />
       )}
     </div>
   );
