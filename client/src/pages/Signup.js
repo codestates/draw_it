@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Signin from './Signin';
 import '../styles/Signup.css';
 import { useHistory } from 'react-router-dom';
+import Message from '../components/Message';
 import { URL } from '../Url';
 
 function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
@@ -18,6 +19,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
   const [passWordMessage, setPassWordMessage] = useState();
   const [emailMessage, setEmailMessage] = useState();
   const [isSignup, setIsSignup] = useState(false);
+  const [error, setError] = useState();
   const history = useHistory();
 
   const handleInputValue = (key) => (e) => {
@@ -119,6 +121,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
         )
         .then((res) => {
           setIsSignup(true);
+          setError('회원가입에 성공했습니다!')
           setTimeout(() => {
             history.push('/');
           }, 1000);
@@ -137,16 +140,17 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
       scrollStopSignup();
     }
   };
-  console.log(emailMessage)
+
   return (
     <div
       onClick={(e) => backgroundClick(e)}
       ref={backgroundEl}
       className='SignupContainer'
     >
-      {isSignup ? (
-        <div className='Signup-success'>회원가입에 성공했습니다!</div>
-      ) : (
+      
+      {isSignup ? 
+        error && <Message message={error} setError={setError} />
+       : (
         <div className='SignupContainer_in'>
           <Header />
           <p className='Header-name'>Draw it</p>
@@ -207,13 +211,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
         </div>
       )}
 
-      {isOpenSignin ? (
-        <Signin
-          scrollStop={scrollStopSignin}
-          setIsOpen={setIsOpenSignin}
-          isOpen={isOpenSignin}
-        />
-      ) : null}
+      
     </div>
   );
 }
