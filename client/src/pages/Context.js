@@ -8,10 +8,13 @@ const UserContext = createContext({
 const UserProvider = ({ children }) => {
   const [token, setToken] = useState();
 
-  const value = useMemo(() => ({
-    token,
-    setToken,
-  }));
+  const value = useMemo(
+    () => ({
+      token,
+      setToken,
+    }),
+    []
+  );
 
   useEffect(() => {
     setToken(localStorage.getItem('token'));

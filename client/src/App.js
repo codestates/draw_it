@@ -9,6 +9,9 @@ import Drawit from './pages/Drawit';
 import Loading from './components/Loading';
 import Quiz from './pages/Quiz';
 import { UserProvider } from './pages/Context';
+import axios from 'axios';
+
+axios.defaults.withCredentials = true;
 
 function App() {
   // const [Login, setLogin] = useState(false);
