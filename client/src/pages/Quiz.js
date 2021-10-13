@@ -6,6 +6,7 @@ import Quizheader from '../components/Quizheader';
 import { useHistory, useLocation, useParams } from 'react-router';
 import { URL } from '../Url';
 import Message from '../components/Message';
+import Comment from '../components/Comment';
 
 const canvasWidth = 900;
 const canvasHeight = 600;
@@ -28,6 +29,8 @@ const Quiz = () => {
   const [detailId, setDetailId] = useState(postId)
   const [image, setImage] = useState()
   const [value, setValue] = useState()
+  const [comment, setComment] = useState();
+  
   useEffect(() => {
     axios.get(`${URL}/post/${detailId.postId}`,{
       headers: {
@@ -40,9 +43,12 @@ const Quiz = () => {
       setImage(detailData.image)
     })
     
-    
+        // To Do PostId 변경하기
+    axios.get(`${URL}/comment/${1}`).then((result) => {
+      setComment(result.data.data);
+    });
   }, []);
-
+   
   const uploadImage = () => {
     if (!answer || answer.length < 2) {
       setError('정답은 2글자 이상이어야 합니다.');
@@ -93,6 +99,17 @@ const Quiz = () => {
     // setAnswer(value.replace(/ /g, ''));
   };
 
+  const uploadComment = (text) => {
+    // To Do PostId 변경하기
+    // axios.post(`${URL}/comment/${1}`,{text},{
+    //   headers: {
+    //     authorization: `Bearer ${token}`,
+    //   }
+    // }).then((result) => {
+    //   result
+    // })
+  };
+
   return (
     <div id="container">
       {error && <Message message={error} setError={setError} />}
@@ -114,6 +131,7 @@ const Quiz = () => {
           정답확인
         </div>
       </div>
+      {comment && <Comment comments={comment} uploadComment={uploadComment} />}
     </div>
   );
 };
