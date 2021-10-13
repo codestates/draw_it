@@ -23,6 +23,7 @@ function Signin({ setIsOpen, isOpen, scrollStop }) {
   const openHandlerSignup = () => {
     setIsOpenSignup(!isOpenSignup);
     scrollStopSignup();
+    // history.push('/Signup')
     };
 
   const scrollStopSignup = () => {
@@ -43,13 +44,23 @@ function Signin({ setIsOpen, isOpen, scrollStop }) {
     e.preventDefault();
     
     const { email, password } = login;
-    // console.log(email, password);
-    if (email.length > 0 && password.length > 0) {
+    
+    //email 또는 password 가 쓰여지지 않는경우
+    if ( !email && !password ) {
+      return setMessage('이메일과 비밀번호를 입력하세요.');
+    } else if ( !password ) {
+      return setMessage('비밀번호를 입력하세요.');
+    } else if (!email  ) {
+      return setMessage('이메일을 입력하세요');
+    }
+    
+    // email 과 password 가 모두 입력된 경우
+    if ( email && password ) {
       axios
         .post(
           `${URL}/user/signin`,
           { email: email, password: password },
-          { withCredentials: true }
+          { withCredentials: true },
         )
         .then((res) => {
         
@@ -60,10 +71,10 @@ function Signin({ setIsOpen, isOpen, scrollStop }) {
           history.push('/home');
         })
         .catch((err) => {
-          console.log(err);
+          setMessage('이메일이나 비밀번호가 틀렸습니다');
         });
     } else {
-      setMessage('이메일과 비밀번호가 틀렸습니다');
+      setMessage('이메일이나 비밀번호가 틀렸습니다');
     }
   };
 
@@ -77,7 +88,7 @@ function Signin({ setIsOpen, isOpen, scrollStop }) {
   };
   
   return (
-    <div
+    <div 
       onClick={(e) => backgroundClick(e)}
       ref={backgroundEl}
       className='SigninContainer'
@@ -115,9 +126,9 @@ function Signin({ setIsOpen, isOpen, scrollStop }) {
       </div>
       {isOpenSignup ? (
       <Signup
-        scrollStopsignup={scrollStopSignup}
-        setIsOpensignup={setIsOpenSignup}
-        isOpensignup={isOpenSignup}
+        scrollStopSignup={scrollStopSignup}
+        setIsOpenSignup={setIsOpenSignup}
+        isOpenSignup={isOpenSignup}
       />
 ) : null}
     </div>
