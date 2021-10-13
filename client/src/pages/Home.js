@@ -13,7 +13,7 @@ const Home = ({ token, setToken }) => {
   const history = useHistory();
   const [answer, setAnswer] = useState();
   const [imageUrl, setImageUrl] = useState();
-  console.log("@@@@@@@@@@@@",localStorage.getItem('token'))
+  
   
   useEffect(() => {
     allQuizs();
@@ -27,7 +27,7 @@ const Home = ({ token, setToken }) => {
         },
       })
       .then((res) => {
-        console.log(res);
+        
         setUserInfo(res.data.data);
       });
   }, []); //state.id

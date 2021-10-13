@@ -14,9 +14,11 @@ const Quiz = ({ token }) => {
   const [error, setError] = useState();
   const postId = useParams();
   const [detailId, setDetailId] = useState(postId);
-  const [image, setImage] = useState();
-  const [value, setValue] = useState();
+  const [data, setData] = useState()
   const [comment, setComment] = useState();
+  const [value, setValue] = useState();
+  
+
 
   useEffect(() => {
     axios
@@ -26,10 +28,8 @@ const Quiz = ({ token }) => {
         },
       })
       .then((res) => {
-        // console.log(res.data.data.post)
-        const detailData = res.data.data.post;
-        setAnswer(detailData.answer);
-        setImage(detailData.image);
+        const detailData = res.data.data;
+        setData(detailData)
       });
 
     // To Do PostId 변경하기
@@ -46,13 +46,12 @@ const Quiz = ({ token }) => {
   }, []);
 
   const changeAnswer = (e) => {
-    const { value } = e.target;
+    setValue(e.target.value)
 
     if (value && value.length > 8) {
       setError('정답은 8글자 이하로 입력해주세요!');
       return;
     }
-    // setAnswer(value.replace(/ /g, ''));
   };
 
   const uploadComment = (text) => {
@@ -72,13 +71,41 @@ const Quiz = ({ token }) => {
       });
   };
 
+  const answerCheck = () => {
+    axios
+      .post(
+        `${URL}/post/${postId.postId}`,{
+          answer : value
+        },{
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((result) => {
+        if(result.data.passed === 0 ){
+          setError('정답입니다 ~ !');
+          setData({...data})
+        }else if(result.data.passed === 2){
+          setError('이미 정답을 맞힌 문제입니다.');
+        }else{
+          setError('틀렸습니다~!')
+        }
+        setValue('')
+        setComment(true)
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+  }
+
   return (
     <div id="container" ref={containerRef}>
       {error && <Message message={error} setError={setError} />}
-      <Quizheader length={answer?.length} />
+      <Quizheader length={data?.post.answer?.length} />
       <div id="main">
         <div id="canvas">
-          <img className="canvas-img" src={image} />
+          <img className="canvas-img" src={data?.post.image} />
         </div>
       </div>
       <div className="answer_input_form">
@@ -86,12 +113,12 @@ const Quiz = ({ token }) => {
           className="input"
           placeholder="문제의 정답을 입력해주세요!"
           onChange={changeAnswer}
-          // value={answer}
+          value={value}
         />
-        <div className="upload_button">정답확인</div>
+        <div className="upload_button" onClick={answerCheck}>정답확인</div>
       </div>
       {comment && (
-        /*data.ispassed &&*/ <Comment
+        data.isPassed && <Comment
           comments={comment}
           uploadComment={uploadComment}
         />

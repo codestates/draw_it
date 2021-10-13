@@ -59,10 +59,10 @@ function Signin({ setIsOpen, isOpen, scrollStop, setToken }) {
         )
         .then((res) => {
           const { accessToken } = res.data.data;
-
           localStorage.setItem('token', accessToken);
           setToken(accessToken);
           history.push('/home');
+          
         })
         .catch((err) => {
           console.log(err);

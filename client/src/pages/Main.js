@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import Signin from './Signin';
 import "../styles/Main.css"
 import { URL } from '../Url';
-function Main( { setToken}) {
-  console.log(URL)
+
+function Main({ setToken }) {
   const [isOpen, setIsOpen] = useState(false);
 
 
