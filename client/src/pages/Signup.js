@@ -14,7 +14,6 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
     passwordCheck: ''
   });
   const [isOpenSignin, setIsOpenSignin] = useState(false);
-  const [message , setMessage] = useState('');
   const [nickMessage, setNickMessage] = useState('');
   const [passWordMessage, setPassWordMessage] =useState('');
   const [emailMessage, setEmailMessage] = useState('');
@@ -66,7 +65,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
     if (email.length === 0) {
       setEmailMessage('1자 이상 입력');
     } else if (!regEmail.test(email)) {
-      setEmailMessage('영문 소문자 / 숫자 / 특수문자(-_.)만 허용');
+      setEmailMessage('특수문자(-_.)만 허용/이메일형식(@) 필요');
       return false;
     } else {
       setEmailMessage('');
@@ -75,24 +74,24 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
   };
 
   const validatePassword = (password, passwordCheck) => {
-    const min = 8;
+    const min = 4;
     const max = 20;
     const regPassword = /^[0-9a-z-_.!?*]+$/;
 
-    // 비밀번호 길이 확인
-    if (password.length < min || password.length > max) {
-      setPassWordMessage('8~20자 입력');
+    if ( password !== passwordCheck) {
+      setPassWordMessage('동일한 비밀번호를 입력해 주세요');
       return false;
     }
 
-    if (password !== passwordCheck) {
-      setPassWordMessage('동일한 비밀번호를 입력해 주세요');
+    // 비밀번호 길이 확인
+    if (password.length < min || password.length > max) {
+      setPassWordMessage('비밀번호 4~20자 입력');
       return false;
     }
 
     // 비밀번호 정규식 확인
     if (!regPassword.test(password)) {
-      setPassWordMessage('영문 소문자 / 숫자 / 특수문자(-_.!?*)만 허용');
+      setPassWordMessage('영문 소문자/숫자/특수문자(-_.!?*)만 허용');
       return false;
     } else {
       setPassWordMessage('');
@@ -164,11 +163,11 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
               <div>password</div>
                 <input className="Signup-password" type='password' onChange={handleInputValue('password')} placeholder="password"/>
             </div>
+            <div className='Signup-password-alert-box'>{passWordMessage}</div>
             <div className='Signup-form'>
               <div>password check</div>
-                <input className="Signup-password-check" type='password' onChange={handleInputValue('passwordcheck')} placeholder="password 확인"/>
+                <input className="Signup-password-check" type='password' onChange={handleInputValue('passwordCheck')} placeholder="password 확인"/>
             </div>
-            <div className='Signup-password-alert-box'>{passWordMessage}</div>
             <div className='Signup-form'>
               <button className="Signup-btn" type='submit' onClick={handleSignup} >
                 회원가입
