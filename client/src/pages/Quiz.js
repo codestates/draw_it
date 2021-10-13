@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import '../styles/Quiz.css';
 import Quizheader from '../components/Quizheader';
@@ -9,7 +9,7 @@ import Comment from '../components/Comment';
 
 const Quiz = ({ token }) => {
   const history = useHistory();
-
+  const containerRef = useRef();
   const [answer, setAnswer] = useState();
   const [error, setError] = useState();
   const postId = useParams();
@@ -41,6 +41,7 @@ const Quiz = ({ token }) => {
       })
       .then((result) => {
         setComment(result.data.data);
+        // containerRef.current.style.overflowY = '';
       });
   }, []);
 
@@ -71,10 +72,8 @@ const Quiz = ({ token }) => {
       });
   };
 
-  console.log(image);
-
   return (
-    <div id="container">
+    <div id="container" ref={containerRef}>
       {error && <Message message={error} setError={setError} />}
       <Quizheader length={answer?.length} />
       <div id="main">
@@ -91,7 +90,12 @@ const Quiz = ({ token }) => {
         />
         <div className="upload_button">정답확인</div>
       </div>
-      {comment && <Comment comments={comment} uploadComment={uploadComment} />}
+      {comment && (
+        /*data.ispassed &&*/ <Comment
+          comments={comment}
+          uploadComment={uploadComment}
+        />
+      )}
     </div>
   );
 };
