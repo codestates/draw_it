@@ -4,7 +4,6 @@ import Signin from './Signin';
 import '../styles/Main.css';
 import { URL } from '../Url';
 function Main({ setToken }) {
-  console.log(URL);
   const [isOpen, setIsOpen] = useState(false);
 
   const openHandler = () => {

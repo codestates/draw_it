@@ -36,7 +36,7 @@ function Signin({ setIsOpen, isOpen, scrollStop, setToken }) {
     setLogin({ ...login, [key]: e.target.value });
   };
 
-  console.log(setToken);
+
 
   const handleLogin = (e) => {
     e.preventDefault();

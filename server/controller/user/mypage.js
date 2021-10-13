@@ -46,7 +46,6 @@ module.exports = {
   },
 
   edit: (req, res) => {
-    console.log(req.body);
     const auth = isAuthorized(req, res);
 
     if (!auth) {
@@ -78,7 +77,6 @@ module.exports = {
               },
             })
             .then((data) => {
-              console.log('성공');
               res.status(200).send({
                 data: {
                   id: auth.id,

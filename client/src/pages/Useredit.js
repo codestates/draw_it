@@ -30,9 +30,6 @@ function Useredit({ setIsOpen, isOpen, scrollStop, token }) {
   };
 
   const handleSubmit = (e) => {
-    console.log('hello world');
-
-    // e.preventDefault();
 
     const { nickname } = edit;
 
@@ -50,12 +47,10 @@ function Useredit({ setIsOpen, isOpen, scrollStop, token }) {
         }
       )
       .then((res) => {
-        console.log('성공');
-        console.log(res.data.data);
+        
       })
       .catch((err) => {
-        console.log('실패');
-        console.log(err);
+        
       });
   };
 

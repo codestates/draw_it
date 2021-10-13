@@ -24,8 +24,6 @@ const Drawit = ({ token }) => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [answer, setAnswer] = useState();
 
-  console.log(token);
-
   useEffect(() => {
     const canvas = canvasRef.current;
     canvas.width = canvasWidth;
@@ -138,7 +136,7 @@ const Drawit = ({ token }) => {
     }
     setAnswer(value.replace(/ /g, ''));
   };
-  console.log(token)
+  
   return (
     <div id="container">
       {error && <Message message={error} setError={setError} />}

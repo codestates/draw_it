@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import '../styles/Quiz.css';
 import Quizheader from '../components/Quizheader';
@@ -9,7 +9,7 @@ import Comment from '../components/Comment';
 
 const Quiz = ({ token }) => {
   const history = useHistory();
-
+  const containerRef = useRef();
   const [answer, setAnswer] = useState();
   const [error, setError] = useState();
   const postId = useParams();
@@ -28,10 +28,7 @@ const Quiz = ({ token }) => {
         },
       })
       .then((res) => {
-        // console.log(res.data.data.post)
         const detailData = res.data.data;
-        // setAnswer(detailData.answer);
-        // setImage(detailData.image);
         setData(detailData)
       });
 
@@ -44,6 +41,7 @@ const Quiz = ({ token }) => {
       })
       .then((result) => {
         setComment(result.data.data);
+        // containerRef.current.style.overflowY = '';
       });
   }, []);
 
@@ -85,13 +83,13 @@ const Quiz = ({ token }) => {
         }
       )
       .then((result) => {
-        console.log(result.status)
-        if(result.data.data.passed === 0 ){
+        if(result.data.passed === 0 ){
           setError('정답입니다 ~ !');
-        }else if(result.data.data.passed === 2){
+          setData({...data})
+        }else if(result.data.passed === 2){
           setError('이미 정답을 맞힌 문제입니다.');
         }else{
-          setError('땡~!')
+          setError('틀렸습니다~!')
         }
         setValue('')
         setComment(true)
@@ -101,9 +99,8 @@ const Quiz = ({ token }) => {
       })
   }
 
-
   return (
-    <div id="container">
+    <div id="container" ref={containerRef}>
       {error && <Message message={error} setError={setError} />}
       <Quizheader length={data?.post.answer?.length} />
       <div id="main">
@@ -120,7 +117,12 @@ const Quiz = ({ token }) => {
         />
         <div className="upload_button" onClick={answerCheck}>정답확인</div>
       </div>
-        {comment && <Comment comments={comment} uploadComment={uploadComment} />}
+      {comment && (
+        data.isPassed && <Comment
+          comments={comment}
+          uploadComment={uploadComment}
+        />
+      )}
     </div>
   );
 };
