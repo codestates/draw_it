@@ -26,13 +26,7 @@ function App() {
       {isLoading ? <Loading /> : null}
       <Switch>
         <Route exact path="/">
-          <Main />
-        </Route>
-        <Route exact path="/Signin">
-          <Signin setToken={setToken} />
-        </Route>
-        <Route exact path="/Signup">
-          <Signup />
+          <Main setToken={setToken} />
         </Route>
         <Route exact path="/home">
           <Home token={token} setToken={setToken} />
