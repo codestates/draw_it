@@ -33,8 +33,8 @@
 
 |  이름  |   직책   |   역할    |                                                                                                  Github                                                                                                   |
 | :----: | :------: | :-------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| 박세희 | **팀장** | Full-Stack  |        <a href="https://github.com/Sehee-Park-93"><img src="https://img.shields.io/badge/Se hee-526712?style=for-the-badge&logo=github&logoColor=black&link=https://github.com/Sehee-Park-93"></a>        |
-| 박상천 |   팀원   | Back-End | <a href="https://github.com/3000-2"><img src="https://img.shields.io/badge/sang chn-FF74A3?style=for-the-badge&logo=github&logoColor=black&link=https://github.com/3000-2"></a>        |
+| 박세희 | **팀장** | Back-End |        <a href="https://github.com/Sehee-Park-93"><img src="https://img.shields.io/badge/Se hee-526712?style=for-the-badge&logo=github&logoColor=black&link=https://github.com/Sehee-Park-93"></a>        |
+| 박상천 |   팀원   | Full-Stack | <a href="https://github.com/3000-2"><img src="https://img.shields.io/badge/sang chn-FF74A3?style=for-the-badge&logo=github&logoColor=black&link=https://github.com/3000-2"></a>        |
 | 임정명 |   팀원   | Front-End |    <a href="https://github.com/wjdaud107"><img src="https://img.shields.io/badge/jung myeong-5DECA3?style=for-the-badge&logo=github&logoColor=black&link=https://github.com/3000-2"></a>        |
 | 한은태 |   팀원   | Front-End  |            <a href="https://github.com/Hans160"><img src="https://img.shields.io/badge/Eun Tae-A358FF?style=for-the-badge&logo=github&logoColor=black&link=https://github.com/3000-2"></a>        |
 
