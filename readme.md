@@ -16,7 +16,15 @@
   
  🎨 [Draw it](http://draw-it.s3-website.ap-northeast-2.amazonaws.com)
   
+# Demo
   
+  ![체험](https://drawit.s3.ap-northeast-2.amazonaws.com/drawit/1234.gif)
+  
+  > Drawit의 회원이 아니신 분들도 `Drawit`의 핵심 기능을 간단히 체험할 수 있습니다. 아래 `인풋`창에 문제의 정답을 입력해보세요!
+  
+  ![댓글2](https://drawit.s3.ap-northeast-2.amazonaws.com/drawit/6.gif)
+
+  > 댓글 란에서 다른 사용자의 댓글을 확인하거나 댓글을 남길 수도 있습니다.
 # 👯‍♀️ Team member 👯‍♀️
 
 👏2주 간 열심히 프로젝트를 수행한 저희 팀원들입니다!👏
