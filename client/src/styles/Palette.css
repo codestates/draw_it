@@ -1,0 +1,118 @@
+#palette {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px;
+  color: #333;
+  background-color: rgba(230, 230, 230, 0.3);
+  border-radius: 8px;
+  box-shadow: 0px 0px 6px 3px rgba(0, 0, 0, 0.3);
+  align-items: center;
+}
+
+.input_range {
+  text-align: center;
+}
+
+.input_range input {
+  cursor: grab;
+}
+
+.text {
+  font-size: 20px;
+  margin: 20px 0;
+  font-weight: 500;
+}
+
+.palette_color_picker {
+  display: flex;
+  max-width: 200px;
+  font-size: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.palette_color {
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.25) inset;
+  transition: 0.25s;
+}
+
+.palette_color:hover {
+  cursor: grab;
+}
+
+.palette_color:focus {
+  transform: scale(1.1);
+}
+
+.palette_color:nth-child(1) {
+  background-color: black;
+  box-shadow: 0px 0px 4px 3px rgba(255, 255, 255, 0.35) inset;
+}
+
+.palette_color:nth-child(2) {
+  background-color: gray;
+}
+
+.palette_color:nth-child(3) {
+  background-color: white;
+}
+
+.palette_color:nth-child(4) {
+  background-color: red;
+}
+
+.palette_color:nth-child(5) {
+  background-color: violet;
+}
+
+.palette_color:nth-child(6) {
+  background-color: orange;
+}
+
+.palette_color:nth-child(7) {
+  background-color: yellow;
+}
+
+.palette_color:nth-child(8) {
+  background-color: yellowgreen;
+}
+
+.palette_color:nth-child(9) {
+  background-color: green;
+}
+
+.palette_color:nth-child(10) {
+  background-color: royalblue;
+}
+
+.palette_color:nth-child(11) {
+  background-color: blue;
+}
+
+.palette_color:nth-child(12) {
+  background-color: tomato;
+}
+
+.palette_fill {
+  width: 100px;
+  height: 50px;
+  padding: 13px;
+  margin: 20px auto;
+  font-size: 24px;
+  color: white;
+  background-color: tomato;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.palette_fill:hover {
+  cursor: pointer;
+}
+
+.palette_fill:active {
+  transform: scale(1.02);
+}

@@ -1,0 +1,179 @@
+@font-face {
+  font-family: "GongGothicMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.SignupContainer {
+  font-family: "GongGothicMedium";
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  top: 0px;
+  right: 0px;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Header-name {
+  font-size: 35px;
+  color: rgb(8, 129, 163);
+}
+
+.SignupContainer_in {
+  width: 350px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid #c3b9a7;
+  border-radius: 6px;
+  background-color: #e2d6c3;
+}
+
+.Signup-form {
+  font-family: "GongGothicMedium";
+  width: 100%;
+  height: 45px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(48, 48, 48);
+  transition-duration: 0.5s;
+  margin-bottom: 10px;
+}
+.Signup-form div {
+  width: 30%;
+  text-align: center;
+  padding-right: 50px;
+  padding-left: 10px;
+  margin-right: 20px;
+}
+.Signup-email,
+.Signup-nickname,
+.Signup-password,
+.Signup-password-check {
+  width: 70%;
+  height: 35px;
+  border-radius: 25px;
+  padding-left: 12px;
+  border-radius: 6px;
+  border: 1px solid rgb(189, 189, 189);
+  outline: none;
+  transition: 0.5s;
+  font-family: "GongGothicMedium";
+  max-width: 150px;
+}
+
+.change-email,
+.change-nickname,
+.change-password {
+  width: 70%;
+  height: 35px;
+  border-radius: 25px;
+  padding-left: 12px;
+  border-radius: 6px;
+  border: 1px solid rgb(189, 189, 189);
+  outline: none;
+  transition: 0.5s;
+  font-family: "GongGothicMedium";
+  max-width: 150px;
+  box-shadow: 0 0 0 2px rgb(184, 1, 1);
+  outline: none;
+  animation: shake 0.2s ease-in-out 0s 2;
+}
+
+.Signup-email:focus {
+  box-shadow: 0 0 0 2px rgb(211, 149, 14);
+  border: 1px solid rgba(189, 189, 189, 0);
+}
+
+.Signup-nickname:focus {
+  box-shadow: 0 0 0 2px rgb(211, 149, 14);
+  border: 1px solid rgba(189, 189, 189, 0);
+}
+
+.Signup-password:focus {
+  box-shadow: 0 0 0 2px rgb(211, 149, 14);
+  border: 1px solid rgba(189, 189, 189, 0);
+}
+
+.Signup-password-check:focus {
+  box-shadow: 0 0 0 2px rgb(211, 149, 14);
+  border: 1px solid rgba(189, 189, 189, 0);
+}
+
+.Signup-btn {
+  font-family: "GongGothicMedium";
+  width: 90%;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.Signup-btn:hover {
+  width: 90%;
+  height: 40px;
+}
+
+.Signup-btn:active {
+  box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
+  top: 2px;
+}
+
+.Signup-span {
+  font-size: 20px;
+  color: rgb(8, 129, 163);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Signup-span:hover {
+  cursor: pointer;
+  color: blue;
+}
+
+.alert-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  font-size: 15px;
+}
+
+.Signup-nickname-alert-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  font-size: 15px;
+}
+
+.Signup-password-alert-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  font-size: 15px;
+}
+
+.Signup-success {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: blue;
+  font-size: 40px;
+}
+.Signup-email-alert-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  font-size: 15px;
+}
