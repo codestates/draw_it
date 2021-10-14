@@ -16,7 +16,7 @@ const Quiz = ({ token }) => {
   const [comment, setComment] = useState();
   const [value, setValue] = useState();
   const [isDisplay, setIsDisplay] = useState(false);
-
+  
   useEffect(() => {
     axios
       .get(`${URL}/post/${detailId.postId}`, {

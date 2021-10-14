@@ -111,12 +111,11 @@ const Home = ({ token, setToken, userInfo, setUserInfo }) => {
         },
       })
       .then((res) => {
-        const quizData = res.data.data;
-        setAnswer(quizData.post.answer);
-        setImageUrl(quizData.post.image);
-        history.push({
-          pathname: `/postQuiz/${index}`,
-        });
+        window.location.replace(`/postQuiz/${index}`)
+        // history.push({
+          
+        //   pathname: `/postQuiz/${index}`,
+        // });
       })
       .catch((err) => {
         console.log(err);
