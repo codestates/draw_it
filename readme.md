@@ -45,6 +45,24 @@
 ![아키텍쳐](https://drawit.s3.ap-northeast-2.amazonaws.com/drawit/undefined+(1).png)
 
 # 📚 Wiki 📚
+  
+###  [홈](https://github.com/codestates/drawit/wiki)
+
+###  팀
+  [Worklog](https://github.com/codestates/drawit/wiki/%E2%9C%8F%EF%B8%8F-%ED%8C%80%EC%9B%90-%EC%86%8C%EA%B0%9C) <br />
+  [Team Rule](https://github.com/codestates/drawit/wiki/%F0%9F%9B%A0-%ED%8C%80-%EA%B7%9C%EC%B9%99)
+### 기획
+  [Requirements](https://github.com/codestates/drawit/wiki/Requirements) <br />
+  [Wireframe](https://github.com/codestates/drawit/wiki/WireFrame) <br />
+  [DB schema](https://github.com/codestates/drawit/wiki/DB-Schema) <br />
+  [API Documents](https://github.com/codestates/drawit/wiki/API-Documents) <br />
+  [Flow Chart](https://github.com/codestates/drawit/wiki/Flow-Chart) <br />
+  [System Architecture](https://github.com/codestates/draw_it/wiki/System-Architecture) <br />
+  [Prototype](https://github.com/codestates/drawit/wiki/Prototype) <br />
+  [UI Design](https://github.com/codestates/drawit/wiki/UI-Design)
+ 
+### 레퍼런스
+  [Tech References](https://github.com/codestates/drawit/wiki/References)
 
 
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=170&section=footer&reversal=true&fontSize=26&fontAlign=85&animation=twinkling&fontAlignY=70&text=또%20오세요!)
