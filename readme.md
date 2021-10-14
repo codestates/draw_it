@@ -25,7 +25,7 @@
   ![댓글2](https://drawit.s3.ap-northeast-2.amazonaws.com/drawit/6.gif)
 
   > 댓글 란에서 다른 사용자의 댓글을 확인하거나 댓글을 남길 수도 있습니다.
-# 👯‍♀️ Team member 👯‍♀️
+# 👩‍👩‍👧‍👦👩‍👩‍👧‍👦 Team member 👩‍👩‍👧‍👦👩‍👩‍👧‍👦
 
 👏2주 간 열심히 프로젝트를 수행한 저희 팀원들입니다!👏
   
@@ -41,12 +41,15 @@
 ## 🔧 사용 기술 🔧
   
 ### 스택
-
+> Front-end
+  
   <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/>
   <img src="https://img.shields.io/badge/React Router-CA4245?style=flat-square&logo=React Router&logoColor=white"/>
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/>
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"/>
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/><br />
+  
+> Back-end  
   <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=Node.js&logoColor=white"/>
   <img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=Express&logoColor=white"/>
   <img src="https://img.shields.io/badge/S3-569A31?style=flat-square&logo=Amazon S3&logoColor=white"/>
