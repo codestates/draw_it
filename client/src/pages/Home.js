@@ -183,6 +183,7 @@ const Home = ({ token, setToken, userInfo, setUserInfo }) => {
           scrollStop={scrollStop}
           setIsOpen={setIsOpen}
           isOpen={isOpen}
+          token={token}
         />
       ) : null}
     </div>
