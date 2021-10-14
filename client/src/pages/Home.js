@@ -148,9 +148,9 @@ const Home = ({ token, setToken, userInfo, setUserInfo }) => {
                     ></img>
                   </div>
                   <div className='QuizContainer_bottom'>
-                    <p>{data.User?.nickname}님의 문제</p>
+                    <div className="QuizContainer_bottom-nickname"><p>{data.User?.nickname}</p>의 문제</div>
                     {data.userId === userInfo?.id ? (
-                      <div onClick={() => imgDelete(data.id)}>X</div>
+                      <div className="QuizContainer_bottom-button" onClick={() => imgDelete(data.id)}>X</div>
                     ) : null}
                   </div>
                 </div>
@@ -161,9 +161,11 @@ const Home = ({ token, setToken, userInfo, setUserInfo }) => {
         <aside>
           <div className='Mypage'>
             <h2>My Page</h2>
-            <div>
-              {userInfo?.nickname}의 정답 개수 : {userInfo?.passedPosts}
+            <div className="Mypage-nickname">
+             {userInfo?.nickname} 
             </div>
+            정답 개수
+            <div className="passedPosts">{userInfo?.passedPosts}</div>
             <div className='Mypage_button'>
               <button onClick={openHandler}>닉네임 변경</button>
               <button onClick={logoutHandler}>로그아웃</button>

@@ -28,6 +28,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
 
   const openHandlerSignin = () => {
     setIsOpenSignin(!isOpenSignin);
+    setIsOpenSignup(!isOpenSignup);
     scrollStopSignin();
   };
 
@@ -211,7 +212,13 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
         </div>
       )}
 
-      
+      {isOpenSignin ? (
+        <Signin
+          scrollStop={scrollStopSignin}
+          setIsOpen={setIsOpenSignin}
+          isOpen={isOpenSignin}
+        />
+      ) : null}
     </div>
   );
 }
