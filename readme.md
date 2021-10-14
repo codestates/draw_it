@@ -17,7 +17,7 @@
 |  이름  |   직책   |   역할    |                                                                                                  Github                                                                                                   |
 | :----: | :------: | :-------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | 박세희 | **팀장** | Back-End  |        <a href="https://github.com/minjman2659"><img src="https://img.shields.io/badge/minjman2659-181717?style=flat-square&logo=github&logoColor=white&link=https://github.com/minjman2659"/></a>        |
-| 박상천 |   팀원   | Back-End | <a href="https://github.com/Youngseo-kangg"><img src="https://img.shields.io/badge/Youngseo%2D%2Dkangg-EA4AAA?style=flat-square&logo=github&logoColor=white&link=https://github.com/Youngseo-kangg"/></a> |
+| 박상천 |   팀원   | Back-End | <a href="https://github.com/3000-2"><img src="https://img.shields.io/badge/Youngseo%2D%2Dkangg-EA4AAA?style=flat-square&logo=github&logoColor=white&link=https://github.com/SangChun-Park"/></a> |
 | 임정명 |   팀원   | Front-End |    <a href="https://github.com/Lee-Na-eun"><img src="https://img.shields.io/badge/Lee%2D%2DNa%2D%2Deun-F5792A?style=flat-square&logo=github&logoColor=white&link=https://github.com/Lee-Na-eun"/></a>     |
 | 한은태 |   팀원   | Front-End  |            <a href="https://github.com/mniYUNSU"><img src="https://img.shields.io/badge/mniYUNSU-512BD4?style=flat-square&logo=github&logoColor=white&link=https://github.com/mniYUNSU"/></a>             |
 
@@ -28,13 +28,7 @@
 
 # 📚 Wiki 📚
 
-[**Wiki Home**](https://github.com/codestates/Jurimma/wiki)
 
-[**Wireframe**](https://github.com/codestates/Jurimma/wiki/Wireframe)
-
-[**FlowChart**](https://github.com/codestates/Jurimma/wiki/FlowChart)
-
-[**API Docs**](https://github.com/codestates/Jurimma/wiki/API-Docs)
 
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=170&section=footer&reversal=true&fontSize=26&fontAlign=85&animation=twinkling&fontAlignY=70&text=또%20오세요!)
 
