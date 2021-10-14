@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Signin from './Signin';
 import '../styles/Signup.css';
 import { useHistory } from 'react-router-dom';
+import Message from '../components/Message';
 import { URL } from '../Url';
 
 function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
@@ -14,10 +15,11 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
     passwordCheck: '',
   });
   const [isOpenSignin, setIsOpenSignin] = useState(false);
-  const [nickMessage, setNickMessage] = useState('');
-  const [passWordMessage, setPassWordMessage] = useState('');
-  const [emailMessage, setEmailMessage] = useState('');
+  const [nickMessage, setNickMessage] = useState();
+  const [passWordMessage, setPassWordMessage] = useState();
+  const [emailMessage, setEmailMessage] = useState();
   const [isSignup, setIsSignup] = useState(false);
+  const [error, setError] = useState();
   const history = useHistory();
 
   const handleInputValue = (key) => (e) => {
@@ -26,6 +28,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
 
   const openHandlerSignin = () => {
     setIsOpenSignin(!isOpenSignin);
+    setIsOpenSignup(!isOpenSignup);
     scrollStopSignin();
   };
 
@@ -53,7 +56,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
       setNickMessage('한글 / 영문 소문자 / 숫자만 허용합니다');
       return false;
     } else {
-      setNickMessage('');
+      setNickMessage();
       return true;
     }
   };
@@ -67,7 +70,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
       setEmailMessage('특수문자(-_.) 또는 이메일형식(@) 필요합니다');
       return false;
     } else {
-      setEmailMessage('');
+      setEmailMessage();
       return true;
     }
   };
@@ -119,6 +122,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
         )
         .then((res) => {
           setIsSignup(true);
+          setError('회원가입에 성공했습니다!')
           setTimeout(() => {
             history.push('/');
           }, 1000);
@@ -137,15 +141,17 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
       scrollStopSignup();
     }
   };
+
   return (
     <div
       onClick={(e) => backgroundClick(e)}
       ref={backgroundEl}
       className='SignupContainer'
     >
-      {isSignup ? (
-        <div className='Signup-success'>회원가입에 성공했습니다!</div>
-      ) : (
+      
+      {isSignup ? 
+        error && <Message message={error} setError={setError} />
+       : (
         <div className='SignupContainer_in'>
           <Header />
           <p className='Header-name'>Draw it</p>
@@ -153,7 +159,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
             <div className='Signup-form'>
               <div>email</div>
               <input
-                className='Signup-email'
+                className={emailMessage ? "change-email" : "Signup-email"}
                 type='email'
                 onChange={handleInputValue('email')}
                 placeholder='email'
@@ -163,7 +169,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
             <div className='Signup-form'>
               <div>nickname</div>
               <input
-                className='Signup-nickname'
+                className={nickMessage ? "change-nickname" :"Signup-nickname"}
                 type='text'
                 onChange={handleInputValue('nickname')}
                 placeholder='nickname'
@@ -173,7 +179,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
             <div className='Signup-form'>
               <div>password</div>
               <input
-                className='Signup-password'
+                className={passWordMessage ? "change-password":"Signup-password"}
                 type='password'
                 onChange={handleInputValue('password')}
                 placeholder='password'
@@ -183,7 +189,7 @@ function Signup({ setIsOpenSignup, isOpenSignup, scrollStopSignup }) {
             <div className='Signup-form'>
               <div>password check</div>
               <input
-                className='Signup-password-check'
+                className={passWordMessage ? "change-password" : "Signup-password-check"}
                 type='password'
                 onChange={handleInputValue('passwordCheck')}
                 placeholder='password 확인'
