@@ -17,7 +17,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .Header-name {
@@ -27,7 +26,7 @@
 
 .SignupContainer_in {
   width: 350px;
-  height: 500px;
+  height: 550px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -52,6 +51,9 @@
 .Signup-form div {
   width: 30%;
   text-align: center;
+  padding-right: 50px;
+  padding-left: 10px;
+  margin-right: 20px;
 }
 .Signup-email,
 .Signup-nickname,
@@ -66,6 +68,25 @@
   outline: none;
   transition: 0.5s;
   font-family: "GongGothicMedium";
+  max-width: 150px;
+}
+
+.change-email,
+.change-nickname,
+.change-password {
+  width: 70%;
+  height: 35px;
+  border-radius: 25px;
+  padding-left: 12px;
+  border-radius: 6px;
+  border: 1px solid rgb(189, 189, 189);
+  outline: none;
+  transition: 0.5s;
+  font-family: "GongGothicMedium";
+  max-width: 150px;
+  box-shadow: 0 0 0 2px rgb(184, 1, 1);
+  outline: none;
+  animation: shake 0.2s ease-in-out 0s 2;
 }
 
 .Signup-email:focus {
@@ -122,23 +143,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color:red;
+  color: red;
   font-size: 15px;
 }
 
-.Signup-nickname-alert-box{
+.Signup-nickname-alert-box {
   display: flex;
   justify-content: center;
   align-items: center;
-  color:red;
+  color: red;
   font-size: 15px;
 }
 
-.Signup-password-alert-box{
+.Signup-password-alert-box {
   display: flex;
   justify-content: center;
   align-items: center;
-  color:red;
+  color: red;
   font-size: 15px;
 }
 
@@ -146,13 +167,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color:blue;
+  color: blue;
   font-size: 40px;
 }
 .Signup-email-alert-box {
   display: flex;
   justify-content: center;
   align-items: center;
-  color:red;
+  color: red;
   font-size: 15px;
 }

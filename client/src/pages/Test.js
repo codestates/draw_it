@@ -23,7 +23,7 @@ const Test = () => {
       case 1:
         if (value === '딸기') {
           setCurrent(2);
-          setModal('정답입니다! 로그인 페이지로 이동!');
+          setModal('정답입니다! 로그인 후 이용해주세요~!');
         } else {
           setModal('아쉽지만 틀렸네요 다시 생각해보세요!');
         }

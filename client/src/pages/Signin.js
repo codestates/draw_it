@@ -13,6 +13,7 @@ function Signin({ setIsOpen, isOpen, scrollStop, setToken }) {
   });
 
   const [isOpenSignup, setIsOpenSignup] = useState(false);
+  const [loginErr,setLoginErr] = useState(false);
 
   const [message, setMessage] = useState('');
   const history = useHistory();
@@ -42,11 +43,14 @@ function Signin({ setIsOpen, isOpen, scrollStop, setToken }) {
 
     //email 또는 password 가 쓰여지지 않는경우
     if (!email && !password) {
-      return setMessage('이메일과 비밀번호를 입력하세요.');
+      return setMessage('이메일과 비밀번호를 입력하세요.'),
+      setLoginErr(true)
     } else if (!password) {
-      return setMessage('비밀번호를 입력하세요.');
+      return setMessage('비밀번호를 입력하세요.'),
+      setLoginErr(true)
     } else if (!email) {
-      return setMessage('이메일을 입력하세요');
+      return setMessage('이메일을 입력하세요'),
+      setLoginErr(true)
     }
 
     // email 과 password 가 모두 입력된 경우
@@ -67,9 +71,11 @@ function Signin({ setIsOpen, isOpen, scrollStop, setToken }) {
         .catch((err) => {
           console.log(err);
           setMessage('이메일이나 비밀번호가 틀렸습니다');
+          setLoginErr(true);
         });
     } else {
       setMessage('이메일이나 비밀번호가 틀렸습니다');
+      setLoginErr(true);
     }
   };
 
@@ -95,7 +101,7 @@ function Signin({ setIsOpen, isOpen, scrollStop, setToken }) {
           <div className="Signin-form">
             <div>email</div>
             <input
-              className="Signin-email"
+              className={loginErr ?"input_change": "Signin-email"  }
               type="email"
               onChange={handleInputValue('email')}
               placeholder="email"
@@ -104,7 +110,7 @@ function Signin({ setIsOpen, isOpen, scrollStop, setToken }) {
           <div className="Signin-form">
             <div>password</div>
             <input
-              className="Signin-password"
+              className={loginErr ? "input_change":"Signin-password"}
               type="password"
               onChange={handleInputValue('password')}
               placeholder="password"

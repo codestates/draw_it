@@ -82,16 +82,21 @@ section {
   justify-content: space-between;
   align-items: center;
 }
-
-.QuizContainer_bottom p {
+.QuizContainer_bottom-nickname {
+  display: flex;
   margin-top: 5px;
   font-size: 20px;
+  color: black;
 }
 
-.QuizContainer_bottom div {
+.QuizContainer_bottom-nickname p {
+  color: #e18060;
+}
+
+.QuizContainer_bottom-button {
   width: auto;
   height: auto;
-  font-family: 'GongGothicMedium';
+  font-family: "GongGothicMedium";
   border: 1px solid black;
   border-radius: 6px;
   transition-duration: 0.5s;
@@ -101,13 +106,14 @@ section {
   margin-top: 5px;
 }
 
-.QuizContainer_bottom div:hover {
+.QuizContainer_bottom-button:hover {
   color: rgb(8, 129, 163);
   border: 1px solid rgb(8, 129, 163);
   cursor: pointer;
 }
 
 aside {
+  margin-top: 63px;
   width: 30%;
   height: 100%;
 }
@@ -122,8 +128,17 @@ aside {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  font-size: 30px;
 }
 
+.Mypage-nickname {
+  color: #e18060;
+}
+
+.passedPosts {
+  font-size: 60px;
+  color: tomato;
+}
 .Mypage_button {
   margin: 0px 10px;
 }
@@ -137,7 +152,7 @@ aside {
 
 .Post_Draw {
   width: 100%;
-  height: 30%;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
