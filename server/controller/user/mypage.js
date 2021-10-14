@@ -24,7 +24,7 @@ module.exports = {
         },
       });
 
-      res.status(200).send({
+      res.status(200).json({
         data: {
           id: userInfo.id,
           nickname: userInfo.nickname,
@@ -41,16 +41,22 @@ module.exports = {
     const { nickname } = req.body;
 
     try {
+      await User.update({ nickname }, { where: { id: auth.id } });
+
       const count = await user_post_passed.count({
         where: { userId: auth.id },
       });
 
-      await User.update({ nickname }, { where: { id: auth.id } });
-
       const user = await User.findOne({ where: { id: auth.id } });
 
       res.status(200).json({
-        data: { id: user.id, nickname: user.nickname, passedPosts: count },
+        data: {
+          id: user.id,
+          nickname: user.nickname,
+          passedPosts: count,
+          updatedAt: user.updatedAt,
+          createdAt: user.createdAt,
+        },
         message: '마이페이지 변경 성공하였습니다.',
       });
     } catch (err) {

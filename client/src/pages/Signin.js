@@ -66,7 +66,6 @@ function Signin({ setIsOpen, isOpen, scrollStop, setToken }) {
           localStorage.setItem('token', accessToken);
           setToken(accessToken);
           history.push('/home');
-          
         })
         .catch((err) => {
           console.log(err);
@@ -92,40 +91,40 @@ function Signin({ setIsOpen, isOpen, scrollStop, setToken }) {
     <div
       onClick={(e) => backgroundClick(e)}
       ref={backgroundEl}
-      className="SigninContainer"
+      className='SigninContainer'
     >
-      <div className="SigninContainer_in">
+      <div className='SigninContainer_in'>
         <Header />
-        <p className="Header-name">Draw it</p>
+        <p className='Header-name'>Draw it</p>
         <form>
-          <div className="Signin-form">
+          <div className='Signin-form'>
             <div>email</div>
             <input
               className={loginErr ?"input_change": "Signin-email"  }
               type="email"
               onChange={handleInputValue('email')}
-              placeholder="email"
+              placeholder='email'
             />
           </div>
-          <div className="Signin-form">
+          <div className='Signin-form'>
             <div>password</div>
             <input
               className={loginErr ? "input_change":"Signin-password"}
               type="password"
               onChange={handleInputValue('password')}
-              placeholder="password"
+              placeholder='password'
             />
           </div>
-          <div className="Signin-form">
-            <button className="Signin-btn" type="submit" onClick={handleLogin}>
+          <div className='Signin-form'>
+            <button className='Signin-btn' type='submit' onClick={handleLogin}>
               로그인
             </button>
           </div>
-          <span className="Signin-span" onClick={openHandlerSignup}>
+          <span className='Signin-span' onClick={openHandlerSignup}>
             회원가입
           </span>
         </form>
-        <div className="Signin-alert-box">{message}</div>
+        <div className='Signin-alert-box'>{message}</div>
       </div>
       {isOpenSignup ? (
         <Signup

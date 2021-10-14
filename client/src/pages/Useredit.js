@@ -31,35 +31,31 @@ function Useredit({
   };
 
   const handleSubmit = (e) => {
-    console.log('버튼 눌렀을때');
-
     if (!nicknameValue) {
       e.preventDefault();
       return setEditMessage('변경할 닉네임을 입력하세요.');
-    }
-    axios
-      .put(
-        `${URL}/user/mypage`,
-        {
-          nickname: nicknameValue,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-            withCredentials: true,
+    } else {
+      axios
+        .patch(
+          `${URL}/user/mypage`,
+          {
+            nickname: nicknameValue,
           },
-        }
-      )
-      .then((res) => {
-        console.log('axios 성공');
-        console.log(res.data.data.nickname);
-        setUserInfo({ ...userInfo, nickname: res.data.data.nickname });
-        setIsOpen(!isOpen);
-      })
-      .catch((err) => {
-        console.log('axios 실패');
-        console.log(err);
-      });
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+              withCredentials: true,
+            },
+          }
+        )
+        .then((res) => {
+          setUserInfo({ ...userInfo, nickname: res.data.data.nickname });
+          // setIsOpen(!isOpen);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
