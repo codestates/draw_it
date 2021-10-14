@@ -24,12 +24,27 @@
 | 한은태 |   팀원   | Front-End  |            <a href="https://github.com/3000-2"><img src="https://img.shields.io/badge/3002-123563?style=for-the-badge&logo=github&logoColor=black&link=https://github.com/3000-2"></a>        |
 
 ## 🔧 사용 기술 🔧
+  
+### 스택
 
-
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/>
+  <img src="https://img.shields.io/badge/React Router-CA4245?style=flat-square&logo=React Router&logoColor=white"/>
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/>
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/><br />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=Node.js&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=Express&logoColor=white"/>
+  <img src="https://img.shields.io/badge/S3-569A31?style=flat-square&logo=Amazon S3&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JSONWebTokens-000000?style=flat-square&logo=JSON Web Tokens&logoColor=white"/>
+  <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=flat-square&logo=Sequelize&logoColor=white"/>
+  
+  
+### 시스템 아키텍쳐
+  
 ![아키텍쳐](https://drawit.s3.ap-northeast-2.amazonaws.com/drawit/undefined+(1).png)
 
 # 📚 Wiki 📚
-
 
 
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=170&section=footer&reversal=true&fontSize=26&fontAlign=85&animation=twinkling&fontAlignY=70&text=또%20오세요!)
