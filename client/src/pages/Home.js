@@ -124,33 +124,40 @@ const Home = ({ token, setToken, userInfo, setUserInfo }) => {
   };
 
   return (
-    <div className='HomeContainer'>
+    <div className="HomeContainer">
       <header>
         <Header />
       </header>
       <section>
-        <section className='Post'>
-          <div className='Post_Header'>
+        <section className="Post">
+          <div className="Post_Header">
             <p>Community</p>
-            <div className='Post-button'>
+            <div className="Post-button">
               <button onClick={myQuizs}>내가 낸 문제</button>
               <button onClick={allQuizs}>전체 문제</button>
             </div>
           </div>
-          <div className='Post_Main'>
+          <div className="Post_Main">
             {quizs?.map((data) => {
               return (
-                <div key={data.id} className='QuizContainer'>
-                  <div className='Post-img'>
+                <div key={data.id} className="QuizContainer">
+                  <div className="Post-img">
                     <img
                       src={data.image}
                       onClick={() => detailQuizHandler(data.id)}
                     ></img>
                   </div>
-                  <div className='QuizContainer_bottom'>
-                    <div className="QuizContainer_bottom-nickname"><p>{data.User?.nickname}</p>의 문제</div>
+                  <div className="QuizContainer_bottom">
+                    <div className="QuizContainer_bottom-nickname">
+                      <p>{data.User?.nickname}</p>의 문제
+                    </div>
                     {data.userId === userInfo?.id ? (
-                      <div className="QuizContainer_bottom-button" onClick={() => imgDelete(data.id)}>X</div>
+                      <div
+                        className="QuizContainer_bottom-button"
+                        onClick={() => imgDelete(data.id)}
+                      >
+                        X
+                      </div>
                     ) : null}
                   </div>
                 </div>
@@ -159,19 +166,17 @@ const Home = ({ token, setToken, userInfo, setUserInfo }) => {
           </div>
         </section>
         <aside>
-          <div className='Mypage'>
+          <div className="Mypage">
             <h2>My Page</h2>
-            <div className="Mypage-nickname">
-             {userInfo?.nickname} 
-            </div>
+            <div className="Mypage-nickname">{userInfo?.nickname}</div>
             정답 개수
             <div className="passedPosts">{userInfo?.passedPosts}</div>
-            <div className='Mypage_button'>
+            <div className="Mypage_button">
               <button onClick={openHandler}>닉네임 변경</button>
               <button onClick={logoutHandler}>로그아웃</button>
             </div>
           </div>
-          <div className='Post_Draw'>
+          <div className="Post_Draw">
             <button onClick={draw}>Draw it</button>
           </div>
         </aside>
@@ -184,6 +189,7 @@ const Home = ({ token, setToken, userInfo, setUserInfo }) => {
           scrollStop={scrollStop}
           setIsOpen={setIsOpen}
           isOpen={isOpen}
+          token={token}
         />
       ) : null}
     </div>
