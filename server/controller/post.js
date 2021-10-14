@@ -1,5 +1,5 @@
 const { User, Post, user_post_passed } = require('../models');
-const { isAuthorized, checkRefeshToken } = require('./tokenFunctions');
+const { isAuthorized } = require('./tokenFunctions');
 const { uploadImage } = require('./uploadImage');
 
 module.exports = {
@@ -128,13 +128,11 @@ module.exports = {
     });
 
     if (isPassed) {
-      return res
-        .status(200)
-        .json({
-          data: null,
-          message: '이미 정답을 맞힌 문제입니다.',
-          passed: 2,
-        });
+      return res.status(200).json({
+        data: null,
+        message: '이미 정답을 맞힌 문제입니다.',
+        passed: 2,
+      });
     }
 
     // post의 값과 전달받은 answer가 일치한지 확인

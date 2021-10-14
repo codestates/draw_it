@@ -1,5 +1,5 @@
 const { Comment, Post, User } = require('../../models');
-const { checkRefeshToken } = require('../tokenFunctions');
+const { isAuthorized } = require('../tokenFunctions');
 
 module.exports = {
   getComment: async (req, res) => {
@@ -25,7 +25,7 @@ module.exports = {
     const { id } = req.params;
     const { text } = req.body;
 
-    const auth = checkRefeshToken(req.cookies['refreshToken']);
+    const auth = isAuthorized(req, res);
 
     if (!auth) {
       return res.status(401).json({
