@@ -25,9 +25,9 @@
   ![댓글2](https://drawit.s3.ap-northeast-2.amazonaws.com/drawit/6.gif)
 
   > 회원가입을한 사용자 분들은 댓글 란에서 다른 사용자의 댓글을 확인하거나 댓글을 남길 수도 있습니다.
-# 👩‍👩‍👧‍👦👩‍👩‍👧‍👦 Team member 👩‍👩‍👧‍👦👩‍👩‍👧‍👦
+#  Team member
 
-👏2주 간 열심히 프로젝트를 수행한 저희 팀원들입니다!👏
+👏2주 간 열심히 프로젝트를 수행한 팀원들을 소개합니다!👏
   
  
 
@@ -69,7 +69,7 @@
 ###  [홈](https://github.com/codestates/drawit/wiki)
 
 ###  팀
-  [Worklog](https://github.com/codestates/drawit/wiki/%E2%9C%8F%EF%B8%8F-%ED%8C%80%EC%9B%90-%EC%86%8C%EA%B0%9C) <br />
+  [Team Introduction](https://github.com/codestates/draw_it/wiki/%F0%9F%91%A9%E2%80%8D%F0%9F%92%BBTeam-Introduction) <br />
   [Team Rule](https://github.com/codestates/drawit/wiki/%F0%9F%9B%A0-%ED%8C%80-%EA%B7%9C%EC%B9%99)
 ### 기획
   [Requirements](https://github.com/codestates/drawit/wiki/Requirements) <br />
