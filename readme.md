@@ -2,17 +2,17 @@
   
 
 
-# ✏️ Project 1 : BERA31 🖌
+# TEAM - BERA31🍧
   
   
 
 <img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/cf63015f-6039-4d44-9711-2154533b5b9a/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-10-08_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_11.23.58.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211014%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211014T012615Z&X-Amz-Expires=86400&X-Amz-Signature=da9e197952af71fa660bae8f4f3064c2f8cd54d68f8a849075181bca37d830cb&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA%25202021-10-08%2520%25E1%2584%258B%25E1%2585%25A9%25E1%2584%258C%25E1%2585%25A5%25E1%2586%25AB%252011.23.58.png%22" width=250 height=320>
 
- 당신의 **창의력**을 보여주세요
+ 당신의 **창의력**을 보여주세요 !
   
- 숨겨왔던 실력을 저희 **draw it**에 보여주세요
+ 숨겨왔던 그림 실력을 **draw it**에서 뽐내보세요 !
   
- 다양한 사람들과 당신의 그림으로 **의사소통**을 나누어보세요
+ 서로의 그림으로 커뮤니티에서 **커뮤니케이션** 해보세요 !
   
  🎨 [Draw it](http://draw-it.s3-website.ap-northeast-2.amazonaws.com)
   
