@@ -71,7 +71,7 @@ function Useredit({
           <div className='Useredit-form'>
             <div>nickname</div>
             <input
-              className='Useredit-nickname'
+              className={'Useredit-nickname'}
               type='nickname'
               onChange={handleInputValue('nickname')}
               placeholder='nickname'
